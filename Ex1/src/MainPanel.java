@@ -24,7 +24,7 @@ public class MainPanel extends JPanel implements ActionListener{
 	private JSpinner spinGrav, spinEla, spinIni;
 	private String trans = "";
 	private BallPanel t;
-	private String Path = "C:\\Users\\User\\workspace\\Ex1\\build\\classes\\";
+	private String Path = "C:\\Users\\Itai\\workspace\\Games-in-Java\\Ex1\\src\\";
 	SpinnerModel  spinnerModel = new SpinnerNumberModel(5, 1, 50, 1);
 	private Timer timer;
 	private Ball ball;
@@ -46,7 +46,7 @@ public class MainPanel extends JPanel implements ActionListener{
 		cmdStart = new JButton("Start");
 		timer = new Timer(100,this);
 		timer.start();
-		ball = new Ball(getWidth()/2, getHeight()*(3/4), ballSize, 10, 9.8);
+		ball = new Ball(getWidth()/2, 500, ballSize, 1, 9.8);
 		System.out.println("Height: " +getHeight());
 		wallcombo.addActionListener(new ActionListener() {
 			@Override
