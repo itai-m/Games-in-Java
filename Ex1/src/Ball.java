@@ -8,6 +8,7 @@ public class Ball {
 	private boolean up;
 	private double cor;
 	
+	///Default constructor
 	public Ball(){
 		x = 0;
 		y = 0;
@@ -18,6 +19,7 @@ public class Ball {
 		cor = 0;
 	}
 	
+	///Constructor
 	public Ball(double _x, double _y, double _size, double vel, double gra, double _cor){
 		x = _x;
 		y = _y;
@@ -28,6 +30,7 @@ public class Ball {
 		cor = _cor;
 	}
 	
+	///do one step of the ball
 	public void step(){
 		if (up){
 			v = v - g/2;
@@ -37,9 +40,10 @@ public class Ball {
 			v = v + g/2;
 			y = y - v;
 		}
-		if (y - size < 0){
+		if (y - size <= 0){
 			up = true;
 			y = size;
+			v = v*cor;
 		}
 		if (v < 0){
 			up = false;
@@ -47,23 +51,27 @@ public class Ball {
 		
 	}
 	
-	public void changeInv(double _cor, double gra){
+	//change the environment 
+	public void changeEnv(double _cor, double gra){
 		cor = _cor;
 		g = gra;
 	}
 	
-	
+	///get x
 	public double getX(){
 		return x;
 	}
 	
+	///get y
 	public double getY(){
 		return y;
 	}
 	
-	public void setY(int _y){ 
+	///set y and the ball to fall down
+	public void restart(double hight){ 
 		up = false;
-		y = _y;
+		y = hight;
+		v = 0;
 	}
 	
 	public double getSize(){

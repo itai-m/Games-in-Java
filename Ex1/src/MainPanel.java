@@ -18,6 +18,8 @@ import javax.swing.Timer;
 
 
 public class MainPanel extends JPanel implements ActionListener{
+	
+	///constant Variables
 	private final int ballSize = 40;
 	private final String Path = "C:\\Users\\Itai\\workspace\\Games-in-Java\\Ex1\\src\\";
 	private final double defaultGravConst = 9.8;
@@ -26,25 +28,33 @@ public class MainPanel extends JPanel implements ActionListener{
 	private final double marsGravConst = 3.8;
 	private final double otherGravConst = 5;
 	private final double defaultCOR = 0.8;
+	private final double defaltBallHight = 10;
+	private final double defaltBallWight = 325;
+	private final int timeForInterval = 50;
 	
-	private JComboBox<String> wallcombo;
+	///define all the objects
+	private JComboBox<String> galaxiescombo;
 	private JButton cmdStart, cmdReset;
 	private JLabel lblEnvironment, lblGrev, lblEla, lblIni;
 	private JSpinner spinGrav, spinEla, spinIni;
 	private String trans = "";
 	private BallPanel t;
-	private SpinnerModel  graSpinnerModel = new SpinnerNumberModel(9.8, 0, 50, 0.2);
-	private SpinnerModel  elaSpinnerModel = new SpinnerNumberModel(0.8, 0, 1, 0.1);
-	private SpinnerModel  iniSpinnerModel = new SpinnerNumberModel(50, 1, 500, 1);
 	private Timer timer;
 	private Ball ball;
+	
+	///define and restart the spinner Models 
+	private SpinnerModel  graSpinnerModel = new SpinnerNumberModel(defaultGravConst, 0, 50, 0.2);
+	private SpinnerModel  elaSpinnerModel = new SpinnerNumberModel(defaultCOR, 0, 1, 0.1);
+	private SpinnerModel  iniSpinnerModel = new SpinnerNumberModel(defaltBallHight, 1, 100, 10);
 	
 	
 	
 	public MainPanel(){
+		
+		///initializing the all the object 
 		lblEnvironment = new JLabel("Environment:");
-		String[] s = {"Default", "Earth", "Moon", "Mars", "Other"};
-		wallcombo = new JComboBox<>(s);
+		String[] galaxies = {"Default", "Earth", "Moon", "Mars", "Other"};
+		galaxiescombo = new JComboBox<>(galaxies);
 		lblGrev = new JLabel("Gravitational constant:");
 		spinGrav = new JSpinner(graSpinnerModel);
 		lblEla = new JLabel("Elastic constant:");
@@ -53,60 +63,65 @@ public class MainPanel extends JPanel implements ActionListener{
 		spinIni = new JSpinner(iniSpinnerModel);
 		cmdReset = new JButton("Reset");
 		cmdStart = new JButton("Start");
-		timer = new Timer(20,this);
+		timer = new Timer(timeForInterval,this);
 		timer.start();
-		ball = new Ball(200, 500, ballSize, 0, defaultGravConst, defaultCOR);
-		System.out.println("Height: " +getHeight());
-		wallcombo.addActionListener(new ActionListener() {
+		ball = new Ball(defaltBallWight, defaltBallHight*6, ballSize, 0, defaultGravConst, defaultCOR);
+		
+		///Listener to the galaxies comboBox and change in accordance with ball and the spinners 
+		galaxiescombo.addActionListener(new ActionListener() {
 			@Override
             public void actionPerformed(ActionEvent e) {
-                trans = (String)wallcombo.getSelectedItem();
+                trans = (String)galaxiescombo.getSelectedItem();
                 if (trans.equals("Earth")){
                 	spinGrav.setValue(earthGravConst);
-                	ball.changeInv((double)spinEla.getValue(), (double)spinGrav.getValue());
+                	ball.changeEnv((double)spinEla.getValue(), earthGravConst);
     	        }
     	        else if (trans.equals("Moon")){
     	        	spinGrav.setValue(moonGravConst);
-    	        	ball.changeInv((double)spinEla.getValue(), (double)spinGrav.getValue());
+    	        	ball.changeEnv((double)spinEla.getValue(), moonGravConst);
     	        }
     	        else if (trans.equals("Mars")){
     	        	spinGrav.setValue(marsGravConst);
-    	        	ball.changeInv((double)spinEla.getValue(), (double)spinGrav.getValue());
+    	        	ball.changeEnv((double)spinEla.getValue(), marsGravConst);
     	        }
     	        else if (trans.equals("Other")){
     	        	spinGrav.setValue(otherGravConst);
-    	        	ball.changeInv((double)spinEla.getValue(), (double)spinGrav.getValue());
+    	        	ball.changeEnv((double)spinEla.getValue(), otherGravConst);
     	        }
     	        else{
-    		        
+    	        	spinGrav.setValue(defaultGravConst);
+    	        	ball.changeEnv((double)spinEla.getValue(), defaultGravConst);
     	        }
                 t.repaint();
             }
         });
 		
+		///Listener to the reset button
 		cmdReset.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-            	ball.setY((int)spinIni.getValue());
+            	ball.restart((((double)spinIni.getValue())/100)*(getHeight()-50));
             	timer.stop();
                 t.repaint();
             }
         });
 		
+		///Listener to the start button
 		cmdStart.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-            	ball.changeInv((double)spinEla.getValue(), (double)spinGrav.getValue());
+            	ball.restart((((double)spinIni.getValue())/100)*(getHeight()-50));
+            	ball.changeEnv((double)spinEla.getValue(), (double)spinGrav.getValue());
             	timer.start();
                 t.repaint();
             }
         });
 		
-		
+		///set all the objects in the panel
         setLayout(new BorderLayout());
         JPanel pNorth = new JPanel();
         pNorth.add(lblEnvironment);
-        pNorth.add(wallcombo);
+        pNorth.add(galaxiescombo);
         pNorth.add(lblGrev);
         pNorth.add(spinGrav);
         pNorth.add(lblEla);
@@ -125,6 +140,8 @@ public class MainPanel extends JPanel implements ActionListener{
 		public void paintComponent(Graphics g){
 			super.paintComponent(g);
 	        Graphics2D g2d = (Graphics2D) g;
+	        
+	        ///change the Background in accordance to the galaxy
 	        if (trans.equals("Earth")){
 		        Image img = Toolkit.getDefaultToolkit().getImage(Path + "earth.jpg");
 		        g2d.drawImage(img, 0, 0, this);
@@ -143,14 +160,18 @@ public class MainPanel extends JPanel implements ActionListener{
 	        }
 	        else{
 		        Image img = Toolkit.getDefaultToolkit().getImage(Path + "default.jpg");
+		        //Image temp = img.getScaledInstance(800, 250, Image.SCALE_SMOOTH);
+		        /////////NEED TO DO
 		        g2d.drawImage(img, 0, 0, this);
 	        }
+	        
+	        ///paint the ball
 	        g2d.setColor(new Color(255, 255, 255, 200));
 	        g2d.fillOval( (int)ball.getX(), (int)(getHeight()-ball.getY()), (int)ball.getSize(), (int)ball.getSize());
 		}
 	}
 
-
+	//repaint and to one step of the ball in every click of the timer
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		repaint();
