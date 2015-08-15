@@ -144,30 +144,28 @@ public class MainPanel extends JPanel implements ActionListener{
 	        ///change the Background in accordance to the galaxy
 	        if (trans.equals("Earth")){
 		        Image img = Toolkit.getDefaultToolkit().getImage(Path + "earth.jpg");
-		        g2d.drawImage(img, 0, 0, this);
+		        g2d.drawImage(img,0,0,getWidth(),getHeight(),this);
 	        }
 	        else if (trans.equals("Moon")){
 		        Image img = Toolkit.getDefaultToolkit().getImage(Path + "moon.jpg");
-		        g2d.drawImage(img, 0, 0, this);
+		        g2d.drawImage(img,0,0,getWidth(),getHeight(),this);
 	        }
 	        else if (trans.equals("Mars")){
 		        Image img = Toolkit.getDefaultToolkit().getImage(Path + "mars.jpg");
-		        g2d.drawImage(img, 0, 0, this);
+		        g2d.drawImage(img,0,0,getWidth(),getHeight(),this);
 	        }
 	        else if (trans.equals("Other")){
 		        Image img = Toolkit.getDefaultToolkit().getImage(Path + "other.jpg");
-		        g2d.drawImage(img, 0, 0, this);
+		        g2d.drawImage(img,0,0,getWidth(),getHeight(),this);
 	        }
 	        else{
 		        Image img = Toolkit.getDefaultToolkit().getImage(Path + "default.jpg");
-		        //Image temp = img.getScaledInstance(800, 250, Image.SCALE_SMOOTH);
-		        /////////NEED TO DO
-		        g2d.drawImage(img, 0, 0, this);
+		        g2d.drawImage(img,0,0,getWidth(),getHeight(),this);
 	        }
 	        
 	        ///paint the ball
 	        g2d.setColor(new Color(255, 255, 255, 200));
-	        g2d.fillOval( (int)ball.getX(), (int)(getHeight()-ball.getY()), (int)ball.getSize(), (int)ball.getSize());
+	        g2d.fillOval( (int) ((getWidth()/2)-(ball.getSize()/2)), (int)(getHeight()-ball.getY()), (int)ball.getSize(), (int)ball.getSize());
 		}
 	}
 
