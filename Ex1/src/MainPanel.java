@@ -21,7 +21,7 @@ public class MainPanel extends JPanel implements ActionListener{
 	
 	///constant Variables
 	private final int ballSize = 40;
-	private final String Path = "C:\\Users\\Itai\\workspace\\Games-in-Java\\Ex1\\src\\";
+	private final String Path = "C:\\Users\\User\\workspace\\Ex1\\src\\";
 	private final double defaultGravConst = 9.8;
 	private final double earthGravConst = 9.8;
 	private final double moonGravConst = 1.6;
@@ -164,7 +164,7 @@ public class MainPanel extends JPanel implements ActionListener{
 	        }
 	        
 	        ///paint the ball
-	        g2d.setColor(new Color(255, 255, 255, 200));
+	        g2d.setColor(new Color(255, 255, 255, 255));
 	        g2d.fillOval( (int) ((getWidth()/2)-(ball.getSize()/2)), (int)(getHeight()-ball.getY()), (int)ball.getSize(), (int)ball.getSize());
 		}
 	}
