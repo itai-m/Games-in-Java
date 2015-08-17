@@ -119,13 +119,13 @@ public class MainPanel extends JPanel implements ActionListener {
 				board.moveAllLeft();
 				break;
 			case KeyEvent.VK_RIGHT:
-				
+				board.moveAllRight();
 				break;
 			case KeyEvent.VK_DOWN:
-				
+				board.moveAllDown();
 				break;
 			case KeyEvent.VK_UP:
-				
+				board.moveAllUp();
 				break;
 			}
 			repaint();

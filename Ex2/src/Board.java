@@ -62,34 +62,148 @@ public class Board {
 		return (tiles[i][j].getNumber());
 	}
 	
-	///Move one tile all the way to the left
-	private void moveLeft(int i, int j){
+	///Move one tile all the way to the left, return true if the tile moved otherwise false 
+	private boolean moveLeft(int i, int j){
+		boolean findMove = false;
+		if (tiles[i][j].isEmpty())
+			return false;
 		while (j != 0){
 			if (tiles[i][j-1].isEmpty()){
 				tiles[i][j].moveTo(tiles[i][j-1]);
+				findMove = true;
 			}
 			else if (tiles[i][j].equal(tiles[i][j-1])){
 				tiles[i][j-1].upgrade();
 				tiles[i][j].reset();
+				findMove = true;
 			}
 			else{
-				return;
+				return findMove;
 			}
 			j--;
 		}
+		return findMove;
 	}
 	
 	///Move all the board to the left
 	public void moveAllLeft(){
+		boolean findMove = false;
 		for (int i = 0; i < size ; i++){
 			for (int j = 1; j < size ; j++){
-				moveLeft(i,j);
+				if (moveLeft(i,j))
+					findMove = true;
 			}
 		}
-		this.newRandomNum();
+		if (findMove)
+			this.newRandomNum();
 	}
 	
-	private void moveRight(int i, int j){
-		
+	///Move one tile all the way to the right, return true if the tile moved otherwise false
+	private boolean moveRight(int i, int j){
+		boolean findMove = false;
+		if (tiles[i][j].isEmpty())
+			return false;
+		while (j != size-1){
+			if (tiles[i][j+1].isEmpty()){
+				tiles[i][j].moveTo(tiles[i][j+1]);
+				findMove = true;
+			}
+			else if (tiles[i][j].equal(tiles[i][j+1])){
+				tiles[i][j+1].upgrade();
+				tiles[i][j].reset();
+				findMove = true;
+			}
+			else{
+				return findMove;
+			}
+			j++;
+		}
+		return findMove;
 	}
+	
+	///Move all the board to the right
+	public void moveAllRight(){
+		boolean findMove = false;
+		for (int i = 0; i < size ; i++){
+			for (int j = size-1; j >= 0 ; j--){
+				if (moveRight(i,j))
+					findMove = true;
+			}
+		}
+		if (findMove)
+			this.newRandomNum();
+	}
+	
+	///Move one tile all the way to the up, return true if the tile moved otherwise false
+	private boolean moveUp(int i, int j){
+		boolean findMove = false;
+		if (tiles[i][j].isEmpty())
+			return false;
+		while (i != 0){
+			if (tiles[i-1][j].isEmpty()){
+				tiles[i][j].moveTo(tiles[i-1][j]);
+				findMove = true;
+			}
+			else if (tiles[i][j].equal(tiles[i-1][j])){
+				tiles[i-1][j].upgrade();
+				tiles[i][j].reset();
+				findMove = true;
+			}
+			else{
+				return findMove;
+			}
+			i--;
+		}
+		return findMove;
+	}
+	
+	///Move all the board to the up
+	public void moveAllUp(){
+		boolean findMove = false;
+		for (int i = 0; i < size ; i++){
+			for (int j = 1; j < size ; j++){
+				if (moveUp(j,i))
+					findMove = true;
+			}
+		}
+		if (findMove)
+			this.newRandomNum();
+	}
+	
+	///Move one tile all the way to the up, return true if the tile moved otherwise false
+	private boolean moveDown(int i, int j){
+		boolean findMove = false;
+		if (tiles[i][j].isEmpty())
+			return false;
+		while (i != size-1){
+			if (tiles[i+1][j].isEmpty()){
+				tiles[i][j].moveTo(tiles[i+1][j]);
+				findMove = true;
+			}
+			else if (tiles[i][j].equal(tiles[i+1][j])){
+				tiles[i+1][j].upgrade();
+				tiles[i][j].reset();
+				findMove = true;
+			}
+			else{
+				return findMove;
+			}
+			i++;
+		}
+		return findMove;
+	}
+	
+	///Move all the board to the up
+	public void moveAllDown(){
+		boolean findMove = false;
+		for (int i = 0; i < size ; i++){
+			for (int j = size-1; j >= 0 ; j--){
+				if (moveDown(j,i))
+					findMove = true;
+			}
+		}
+		if (findMove)
+			this.newRandomNum();
+	}
+	
 }
