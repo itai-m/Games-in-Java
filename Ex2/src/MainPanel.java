@@ -17,18 +17,23 @@ import javax.swing.JPanel;
 
 public class MainPanel extends JPanel implements ActionListener {
 
+	///Constant variables
 	private final int boardSize = 4;
 	private final int spaceInBoard = 10;
-	private final String Path = "C:\\Users\\User\\workspace\\Ex2\\src\\";
+	private final String Path =  System.getProperty("user.dir") + "\\src\\";;
 	
+	///Define all the objects
 	private BoardPanel t;
 	private Board  board= new Board(boardSize);
 	
+	
 	public MainPanel(){
+		///Initializing the board
 		t = new BoardPanel();
 		setLayout(new BorderLayout());
 	    add(t, BorderLayout.CENTER);
 	    
+	    ///Initializing the listener
 	    addKeyListener(new Listener());
 	    setFocusable(true);
 	}
@@ -39,34 +44,56 @@ public class MainPanel extends JPanel implements ActionListener {
 		repaint();
 	}
 	
+	///The panel that the board draw on
 	private class BoardPanel extends JPanel {
 		public void paintComponent(Graphics g){
 			super.paintComponent(g);
 	        Graphics2D g2d = (Graphics2D) g;
 	        int boardSize = board.getSize();
-	        int row = (getWidth()/boardSize) - (spaceInBoard);
-	        int col = (getHeight()/boardSize) - (spaceInBoard);
+	        int row = (getWidth()/boardSize) - (spaceInBoard); ///save the size of the tile width
+	        int col = (getHeight()/boardSize) - (spaceInBoard); ///save the size of the tile height
 	        int x = 0;
 	        int y = 0;
 	        Image img = null;
-	        
+	        ///Fit every tile to the right image
 	        for (int i = 0; i < boardSize ; i++){
 	        	for (int j = 0; j < boardSize ; j++){
 	        		switch (board.getNumber(i, j)) { 
 	        		case 0:
-		        			img = Toolkit.getDefaultToolkit().getImage(Path + "number0.jpg");
+		        			img = Toolkit.getDefaultToolkit().getImage(Path + "0.png");
 		    		        break;
 	        		case 1:
-		        			img = Toolkit.getDefaultToolkit().getImage(Path + "number1.jpg");
+		        			img = Toolkit.getDefaultToolkit().getImage(Path + "2.png");
 		    		        break;
 	        		case 2:
-		        			img = Toolkit.getDefaultToolkit().getImage(Path + "number2.jpg");
+		        			img = Toolkit.getDefaultToolkit().getImage(Path + "4.png");
 		    		        break;
 	        		case 3:
-		        			img = Toolkit.getDefaultToolkit().getImage(Path + "number3.jpg");
+		        			img = Toolkit.getDefaultToolkit().getImage(Path + "8.png");
 		    		        break;
 	        		case 4:
-		        			img = Toolkit.getDefaultToolkit().getImage(Path + "number4.jpg");
+		        			img = Toolkit.getDefaultToolkit().getImage(Path + "16.png");
+		    		        break;
+	        		case 5:
+		        			img = Toolkit.getDefaultToolkit().getImage(Path + "32.png");
+		    		        break;
+	        		case 6:
+		        			img = Toolkit.getDefaultToolkit().getImage(Path + "64.png");
+		    		        break;
+	        		case 7:
+		        			img = Toolkit.getDefaultToolkit().getImage(Path + "128.png");
+		    		        break;
+	        		case 8:
+		        			img = Toolkit.getDefaultToolkit().getImage(Path + "256.png");
+		    		        break;
+	        		case 9:
+		        			img = Toolkit.getDefaultToolkit().getImage(Path + "512.png");
+		    		        break;
+	        		case 10:
+		        			img = Toolkit.getDefaultToolkit().getImage(Path + "1024.png");
+		    		        break;
+	        		case 11:
+		        			img = Toolkit.getDefaultToolkit().getImage(Path + "2048.png");
 		    		        break;
 	        		}
 	        		g2d.drawImage(img, x, y, row, col, this);
@@ -80,6 +107,7 @@ public class MainPanel extends JPanel implements ActionListener {
 		}
 	}
 	
+	///The listener class for listen to the keyboard
 	private class Listener extends KeyAdapter{
 
 		@Override
@@ -87,11 +115,20 @@ public class MainPanel extends JPanel implements ActionListener {
 			super.keyPressed(e);
 			int key = e.getKeyCode();
 			switch (key){
-			case (KeyEvent.VK_LEFT):
+			case KeyEvent.VK_LEFT:
 				board.moveAllLeft();
-				repaint();
+				break;
+			case KeyEvent.VK_RIGHT:
+				
+				break;
+			case KeyEvent.VK_DOWN:
+				
+				break;
+			case KeyEvent.VK_UP:
+				
 				break;
 			}
+			repaint();
 		}
 		
 	}

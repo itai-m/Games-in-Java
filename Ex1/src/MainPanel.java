@@ -21,7 +21,7 @@ public class MainPanel extends JPanel implements ActionListener{
 	
 	///constant Variables
 	private final int ballSize = 40;
-	private final String Path = "C:\\Users\\User\\workspace\\Ex1\\src\\";
+	private final String Path =  System.getProperty("user.dir") + "\\src\\";
 	private final double defaultGravConst = 9.8;
 	private final double earthGravConst = 9.8;
 	private final double moonGravConst = 1.6;
