@@ -88,6 +88,7 @@ public class Board {
 				tiles[i][j-1].upgrade();
 				tiles[i][j].reset();
 				findMove = true;
+				return findMove;
 			}
 			else{
 				return findMove;
@@ -124,6 +125,7 @@ public class Board {
 				tiles[i][j+1].upgrade();
 				tiles[i][j].reset();
 				findMove = true;
+				return findMove;
 			}
 			else{
 				return findMove;
@@ -160,6 +162,7 @@ public class Board {
 				tiles[i-1][j].upgrade();
 				tiles[i][j].reset();
 				findMove = true;
+				return findMove;
 			}
 			else{
 				return findMove;
@@ -196,6 +199,7 @@ public class Board {
 				tiles[i+1][j].upgrade();
 				tiles[i][j].reset();
 				findMove = true;
+				return findMove;
 			}
 			else{
 				return findMove;
