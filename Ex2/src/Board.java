@@ -32,6 +32,18 @@ public class Board {
 		}
 	}
 	
+	///Check if all the board is full
+	private boolean isFull(){
+		for (int i = 0; i < size ; i++){
+			for (int j = 0; j < size ; j++){
+				if (tiles[i][j].isEmpty()){
+					return false;
+				}
+			}
+		}
+		return true;
+	}
+	
 	//Add a random number to the board
 	private void newRandomNum(){
 		Random rand = new Random();
