@@ -1,5 +1,8 @@
 
 public class Tile {
+	
+	private final int fullNumber = 11;
+	
 	private int number; ///save the power of the real number
 	
 	///Default constructor
@@ -60,5 +63,12 @@ public class Tile {
 	///Set the tile to 2
 	public void setTo2(){
 		number = 2;
+	}
+	
+	///Check if the tile is full (win)
+	public boolean checkWin(){
+		if (number == fullNumber)
+			return true;
+		return false;
 	}
 }

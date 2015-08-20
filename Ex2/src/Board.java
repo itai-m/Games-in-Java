@@ -1,7 +1,15 @@
 import java.util.Random;
 
 public class Board {
-
+	
+	public final static int LEFT = 1;
+	public final static int RIGHT = 2;
+	public final static int DOWN = 3;
+	public final static int UP = 4;
+	public final static int WIN = 5;
+	public final static int LOSE = 6;
+	public final static int NOTHING = 7;
+	
 	private int size; ///Save the size of the board (the board is always square)
 	private Tile [][] tiles; //Save all the tiles
 	
@@ -99,7 +107,7 @@ public class Board {
 	}
 	
 	///Move all the board to the left
-	public void moveAllLeft(){
+	private boolean moveAllLeft(){
 		boolean findMove = false;
 		for (int i = 0; i < size ; i++){
 			for (int j = 1; j < size ; j++){
@@ -107,8 +115,7 @@ public class Board {
 					findMove = true;
 			}
 		}
-		if (findMove)
-			this.newRandomNum();
+		return findMove;
 	}
 	
 	///Move one tile all the way to the right, return true if the tile moved otherwise false
@@ -136,7 +143,7 @@ public class Board {
 	}
 	
 	///Move all the board to the right
-	public void moveAllRight(){
+	private boolean moveAllRight(){
 		boolean findMove = false;
 		for (int i = 0; i < size ; i++){
 			for (int j = size-1; j >= 0 ; j--){
@@ -144,8 +151,7 @@ public class Board {
 					findMove = true;
 			}
 		}
-		if (findMove)
-			this.newRandomNum();
+		return findMove;
 	}
 	
 	///Move one tile all the way to the up, return true if the tile moved otherwise false
@@ -173,7 +179,7 @@ public class Board {
 	}
 	
 	///Move all the board to the up
-	public void moveAllUp(){
+	private boolean moveAllUp(){
 		boolean findMove = false;
 		for (int i = 0; i < size ; i++){
 			for (int j = 1; j < size ; j++){
@@ -181,8 +187,7 @@ public class Board {
 					findMove = true;
 			}
 		}
-		if (findMove)
-			this.newRandomNum();
+		return findMove;
 	}
 	
 	///Move one tile all the way to the up, return true if the tile moved otherwise false
@@ -210,7 +215,7 @@ public class Board {
 	}
 	
 	///Move all the board to the up
-	public void moveAllDown(){
+	private boolean moveAllDown(){
 		boolean findMove = false;
 		for (int i = 0; i < size ; i++){
 			for (int j = size-1; j >= 0 ; j--){
@@ -218,8 +223,63 @@ public class Board {
 					findMove = true;
 			}
 		}
-		if (findMove)
-			this.newRandomNum();
+		return findMove;
 	}
 	
+	///Move the board to the direction, return WIN if the player win, LOSE if the player lose and NOTHING otherwise 
+	public int moveAllTo(int direction){
+		boolean findMove = false;
+		switch (direction){
+		case LEFT:
+			findMove = moveAllLeft();
+			break;
+		case RIGHT:
+			findMove = moveAllRight();
+			break;
+		case UP:
+			findMove = moveAllUp();
+			break;
+		case DOWN:
+			findMove = moveAllDown();
+			break;
+		}
+		if (this.checkWin()){
+			return WIN;
+		}
+		
+		if (findMove){
+			this.newRandomNum();
+		}
+		else if (this.isFull()){
+			if (!this.checkIfCanMove()){
+				return LOSE;
+			}
+		}
+		
+		return NOTHING;
+	}
+	
+	///Check if the player win the game, true for win and false for lose
+	private boolean checkWin(){
+		for (int i = 0; i < size ; i++){
+			for (int j = 0; j < size ; j++){
+				if (tiles[i][j].checkWin()){
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+	
+	///Check if there is a move to be done
+	private boolean checkIfCanMove(){
+		for (int i = 0 ; i < size-1 ; i++){
+			for (int j = 0 ; j < size-1 ; j++){
+				if ((tiles[i][j].equal(tiles[i+1][j]))||(tiles[i][j].equal(tiles[i][j+1]))){
+					return true;
+				}
+			}
+		}
+		return false;
+	}
 }

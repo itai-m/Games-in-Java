@@ -113,19 +113,28 @@ public class MainPanel extends JPanel implements ActionListener {
 		@Override
 		public void keyPressed(KeyEvent e) {
 			super.keyPressed(e);
+			int status = 0;
 			int key = e.getKeyCode();
 			switch (key){
 			case KeyEvent.VK_LEFT:
-				board.moveAllLeft();
+				status = board.moveAllTo(Board.LEFT);
 				break;
 			case KeyEvent.VK_RIGHT:
-				board.moveAllRight();
+				status = board.moveAllTo(Board.RIGHT);
 				break;
 			case KeyEvent.VK_DOWN:
-				board.moveAllDown();
+				status = board.moveAllTo(Board.DOWN);
 				break;
 			case KeyEvent.VK_UP:
-				board.moveAllUp();
+				status = board.moveAllTo(Board.UP);
+				break;
+			}
+			switch (status){
+			case Board.WIN:
+				System.out.println("Win");
+				break;
+			case Board.LOSE:
+				System.out.println("Lose");
 				break;
 			}
 			repaint();
