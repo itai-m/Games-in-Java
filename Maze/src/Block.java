@@ -19,4 +19,7 @@ public class Block {
 		return type;
 	}
 	
+	public void setType(int _type){
+		type = _type;
+	}
 }
