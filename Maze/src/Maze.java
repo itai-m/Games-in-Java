@@ -35,5 +35,5 @@ public class Maze {
 		}
 	}
 	
-	
+	public void set
 }
