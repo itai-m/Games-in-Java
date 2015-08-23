@@ -35,5 +35,7 @@ public class Maze {
 		}
 	}
 	
-	public void set
+	public void setBlock(int x, int y, int type){
+		
+	}
 }
