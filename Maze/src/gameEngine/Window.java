@@ -36,4 +36,8 @@ public class Window {
 	public static String getTitle(){
 		return Display.getTitle();
 	}
+	
+	public static void dispose(){
+		Display.destroy();
+	}
 }

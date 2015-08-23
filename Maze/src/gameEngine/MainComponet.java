@@ -12,15 +12,19 @@ public class MainComponet {
 	private Game game;
 	
 	public MainComponet(){
-		isRunning = true;
+		isRunning = false;
 		game = new Game();
 	}
 	
 	public void start(){
+		if (isRunning)
+			return;
 		run();
 	}
 	
 	public void stop(){
+		if (!isRunning)
+			return;
 		isRunning = false;
 	}
 	
@@ -42,12 +46,16 @@ public class MainComponet {
 			
 			unprocessdTime += passTime / (double)Time.SECOND;
 			frameCounter += passTime;
-			System.out.println(unprocessdTime);
+			
+			
 			while  (unprocessdTime > frameTime){
 				render = true;
+				//System.out.println(unprocessdTime);
 				unprocessdTime -= frameTime;
 				if (Window.isCloseRequested())
 					stop();
+				
+				Time.setDelta(frameCounter);
 				
 				game.input();
 				game.update();
@@ -86,7 +94,7 @@ public class MainComponet {
 	}
 	
 	private void cleanUp(){
-		
+		Window.dispose();
 	}
 	
 	public static void main(String[] args)
