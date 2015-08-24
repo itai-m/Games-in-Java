@@ -48,21 +48,26 @@ public class MainPanel extends JPanel implements ActionListener {
 
 	///The panel that the board draw on
 	private class BoardPanel extends JPanel {
+		final int FONT_SIZE = 48;
+		final String WINNER_ANNOUNCEMENT = "You Win";
+		final String LOSER_ANNOUNCEMENT = "You Lose";
 		public void paintComponent(Graphics g){
 			super.paintComponent(g);
 			Graphics2D g2d = (Graphics2D) g;
 			if (keyboard_listener.getState() == Board.WIN)
 			{
 				this.setBackground(Color.GRAY);
-				g.setFont(new Font("Courier New", Font.BOLD, 48));
-				g.drawString("You Win", getWidth()/4, getHeight()/4);
+				g.setColor(Color.GREEN);
+				
+				g.setFont(new Font("Courier New", Font.BOLD, FONT_SIZE));
+				g.drawString(WINNER_ANNOUNCEMENT, (getWidth()/2)-(FONT_SIZE*(WINNER_ANNOUNCEMENT.length()+1)/((int)Math.round((double)WINNER_ANNOUNCEMENT.length()/2))), getHeight()/2);
 				return;
 			}
 			if (keyboard_listener.getState() == Board.LOSE)
 			{
 				this.setBackground(Color.GRAY);
-				g.setFont(new Font("Courier New", Font.BOLD, 48));
-				g.drawString("You Lose", getWidth()/4, getHeight()/4);
+				g.setFont(new Font("Courier New", Font.BOLD, FONT_SIZE));
+				g.drawString(LOSER_ANNOUNCEMENT, (getWidth()/2)-(FONT_SIZE*(LOSER_ANNOUNCEMENT.length()+1)/((int)Math.round((double)LOSER_ANNOUNCEMENT.length()/2))), getHeight()/2);
 				return;
 			}
 			int boardSize = board.getSize();
