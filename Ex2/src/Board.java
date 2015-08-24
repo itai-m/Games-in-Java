@@ -250,7 +250,7 @@ public class Board {
 		if (findMove){
 			this.newRandomNum();
 		}
-		else if (this.isFull()){
+		if (this.isFull()){
 			if (!this.checkIfCanMove()){
 				return LOSE;
 			}
