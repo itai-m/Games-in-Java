@@ -58,7 +58,7 @@ public class MainComponet {
 				Time.setDelta(frameCounter);
 				
 				game.input();
-				game.update();
+				Input.Update();
 				
 				///FPS counter
 				if (frameCounter >= Time.SECOND){
