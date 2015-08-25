@@ -13,6 +13,7 @@ public class MainComponet {
 	
 	///Constructor
 	public MainComponet(){
+		RenderUtil.initGraphics();
 		isRunning = false;
 		game = new Game();
 	}
@@ -92,6 +93,7 @@ public class MainComponet {
 	
 	///render all the Components
 	private void render(){
+		RenderUtil.clearScreen();
 		Window.render();
 		game.render();
 	}

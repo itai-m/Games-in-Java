@@ -15,7 +15,7 @@ public class Quaternion {
 		this.w = w;
 	}
 	
-	///Return the length on the Quaternion
+	///Return the length on the quaternion
 	public float lenght(){
 		return (float)Math.sqrt(x * x + y * y + z * z + w * w);
 	}
