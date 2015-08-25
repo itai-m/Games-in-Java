@@ -31,7 +31,7 @@ public class MainComponet {
 		isRunning = false;
 	}
 	
-	///
+	///do the running of the game per frame
 	private void run(){
 		
 		final double frameTime = 1.0 / FRAME_CAP;
@@ -75,15 +75,13 @@ public class MainComponet {
 					render();
 					frames++;
 				}
-				/*
-				else{
+				else{///wait if there is no need to render
 					try {
 						Thread.sleep(1);
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}
 				}
-				*/
 			}
 			
 			
@@ -92,11 +90,13 @@ public class MainComponet {
 		cleanUp();
 	}
 	
+	///render all the Components
 	private void render(){
 		Window.render();
 		game.render();
 	}
 	
+	//clean up all the Components
 	private void cleanUp(){
 		Window.dispose();
 	}
