@@ -1,22 +1,24 @@
 package gameEngine;
 
-import org.lwjgl.input.Keyboard;
 
 public class Game {
 
+	///Constructor
 	public Game(){
 		
 	}
 	
+	///do the input of the game
 	public void input(){
-		if (Input.GetKeyDown(Keyboard.KEY_UP))
-			System.out.println("key down");
+		Input.Update();
 	}
 	
+	///update the game
 	public void update(){
 		
 	}
 	
+	///render all the game
 	public void render(){
 		
 	}

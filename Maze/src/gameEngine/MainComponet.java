@@ -11,23 +11,27 @@ public class MainComponet {
 	private boolean isRunning;
 	private Game game;
 	
+	///Constructor
 	public MainComponet(){
 		isRunning = false;
 		game = new Game();
 	}
 	
+	///make the game run if is not running yet
 	public void start(){
 		if (isRunning)
 			return;
 		run();
 	}
 	
+	///stop the game from running
 	public void stop(){
 		if (!isRunning)
 			return;
 		isRunning = false;
 	}
 	
+	///
 	private void run(){
 		
 		final double frameTime = 1.0 / FRAME_CAP;
@@ -58,7 +62,7 @@ public class MainComponet {
 				Time.setDelta(frameCounter);
 				
 				game.input();
-				Input.Update();
+				game.update();
 				
 				///FPS counter
 				if (frameCounter >= Time.SECOND){
