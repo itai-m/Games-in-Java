@@ -55,22 +55,22 @@ public class Shader {
 			System.exit(-1);
 		}
 		
-		glAttachShader(shader, program);
+		glAttachShader(program, shader);
 	}
 	
 	///Compile and check the completion
 	public void compileShader(){
 		glLinkProgram(program);
 		
-		if (glGetShader(program, GL_LINK_STATUS) == 0){
-			System.err.println(glGetShaderInfoLog(program, 1024));
+		if (glGetProgram(program, GL_LINK_STATUS) == 0){
+			System.err.println(glGetProgramInfoLog(program, 1024));
 			System.exit(-1);
 		}
 		
 		glValidateProgram(program);
 		
-		if (glGetShader(program, GL_VALIDATE_STATUS) == 0){
-			System.err.println(glGetShaderInfoLog(program, 1024));
+		if (glGetProgram(program, GL_VALIDATE_STATUS) == 0){
+			System.err.println(glGetProgramInfoLog(program, 1024));
 			System.exit(-1);
 		}
 		
