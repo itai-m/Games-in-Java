@@ -26,4 +26,7 @@ public class RenderUtil {
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	}
 
+	public static String getOpenGLVersion(){
+		return glGetString(GL_VERSION);
+	}
 }
