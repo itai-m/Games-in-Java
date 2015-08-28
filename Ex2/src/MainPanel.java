@@ -73,8 +73,8 @@ public class MainPanel extends JPanel implements ActionListener {
 			int boardSize = board.getSize();
 			int row = (getWidth()/boardSize) - (spaceInBoard); ///save the size of the tile width
 			int col = (getHeight()/boardSize) - (spaceInBoard); ///save the size of the tile height
-			int x = 0;
-			int y = 0;
+			int x = spaceInBoard/2;
+			int y = spaceInBoard/2;
 			Image img = null;
 			///Fit every tile to the right image
 			for (int i = 0; i < boardSize ; i++){
@@ -121,7 +121,7 @@ public class MainPanel extends JPanel implements ActionListener {
 					x += row + spaceInBoard;
 
 				}
-				x = 0;
+				x = spaceInBoard/2;
 				y += col + spaceInBoard;
 			}
 
