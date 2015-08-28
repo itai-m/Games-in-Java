@@ -24,7 +24,7 @@ public class MainPanel extends JPanel implements ActionListener {
 
 	///Define all the objects
 	private BoardPanel t;
-	private Board board = new Board(boardSize);
+	private GameEngine game = new GameEngine(boardSize);
 	private Listener keyboard_listener;
 
 
@@ -70,7 +70,7 @@ public class MainPanel extends JPanel implements ActionListener {
 				g.drawString(LOSER_ANNOUNCEMENT, (getWidth()/2)-(FONT_SIZE*(LOSER_ANNOUNCEMENT.length()+1)/((int)Math.round((double)LOSER_ANNOUNCEMENT.length()/2))), getHeight()/2);
 				return;
 			}
-			int boardSize = board.getSize();
+			int boardSize = game.getBoardSize();
 			int row = (getWidth()/boardSize) - (spaceInBoard); ///save the size of the tile width
 			int col = (getHeight()/boardSize) - (spaceInBoard); ///save the size of the tile height
 			int x = spaceInBoard/2;
@@ -79,7 +79,7 @@ public class MainPanel extends JPanel implements ActionListener {
 			///Fit every tile to the right image
 			for (int i = 0; i < boardSize ; i++){
 				for (int j = 0; j < boardSize ; j++){
-					switch (board.getNumber(i, j)) { 
+					switch (game.getTile(i, j)) { 
 					case 0:
 						img = Toolkit.getDefaultToolkit().getImage(Path + "0.png");
 						break;
@@ -149,16 +149,16 @@ public class MainPanel extends JPanel implements ActionListener {
 				int key = e.getKeyCode();
 				switch (key){
 				case KeyEvent.VK_LEFT:
-					status = board.moveAllTo(Board.LEFT);
+					status = game.moveLeft();
 					break;
 				case KeyEvent.VK_RIGHT:
-					status = board.moveAllTo(Board.RIGHT);
+					status = game.moveRight();
 					break;
 				case KeyEvent.VK_DOWN:
-					status = board.moveAllTo(Board.DOWN);
+					status = game.moveDown();
 					break;
 				case KeyEvent.VK_UP:
-					status = board.moveAllTo(Board.UP);
+					status = game.moveUp();
 					break;
 				}
 				switch (status){
