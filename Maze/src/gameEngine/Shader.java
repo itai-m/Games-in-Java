@@ -3,6 +3,8 @@ package gameEngine;
 import static org.lwjgl.opengl.GL20.*;
 import static org.lwjgl.opengl.GL32.*;
 
+import org.lwjgl.Sys;
+
 public class Shader {
 
 	private int program;
@@ -50,6 +52,7 @@ public class Shader {
 		glShaderSource(shader, text);
 		glCompileShader(shader);
 		
+		
 		if (glGetShader(shader, GL_COMPILE_STATUS) == 0){
 			System.err.println(glGetShaderInfoLog(shader, 1024));
 			System.exit(-1);
@@ -61,7 +64,6 @@ public class Shader {
 	///Compile and check the completion
 	public void compileShader(){
 		glLinkProgram(program);
-		
 		if (glGetProgram(program, GL_LINK_STATUS) == 0){
 			System.err.println(glGetProgramInfoLog(program, 1024));
 			System.exit(-1);

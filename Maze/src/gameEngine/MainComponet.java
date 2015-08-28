@@ -46,6 +46,8 @@ public class MainComponet {
 		isRunning = true;
 		
 		while (isRunning){
+			render = false;
+			
 			long startTime = Time.getTime();
 			long passTime  = startTime - lastTime;
 			lastTime = startTime;
@@ -95,8 +97,8 @@ public class MainComponet {
 	///render all the Components
 	private void render(){
 		RenderUtil.clearScreen();
-		Window.render();
 		game.render();
+		Window.render();
 	}
 	
 	//clean up all the Components
