@@ -95,8 +95,7 @@ public class Board {
 			else if (tiles[i][j].equal(tiles[i][j-1])){
 				tiles[i][j-1].upgrade();
 				tiles[i][j].reset();
-				findMove = true;
-				return findMove;
+				return true;
 			}
 			else{
 				return findMove;
@@ -131,8 +130,7 @@ public class Board {
 			else if (tiles[i][j].equal(tiles[i][j+1])){
 				tiles[i][j+1].upgrade();
 				tiles[i][j].reset();
-				findMove = true;
-				return findMove;
+				return true;
 			}
 			else{
 				return findMove;
@@ -167,8 +165,7 @@ public class Board {
 			else if (tiles[i][j].equal(tiles[i-1][j])){
 				tiles[i-1][j].upgrade();
 				tiles[i][j].reset();
-				findMove = true;
-				return findMove;
+				return true;
 			}
 			else{
 				return findMove;
@@ -203,8 +200,7 @@ public class Board {
 			else if (tiles[i][j].equal(tiles[i+1][j])){
 				tiles[i+1][j].upgrade();
 				tiles[i][j].reset();
-				findMove = true;
-				return findMove;
+				return true;
 			}
 			else{
 				return findMove;
