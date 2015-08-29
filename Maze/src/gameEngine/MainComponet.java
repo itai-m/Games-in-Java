@@ -37,16 +37,17 @@ public class MainComponet {
 	private void run(){
 		
 		final double frameTime = 1.0 / FRAME_CAP;
-		long lastTime = Time.getTime();
-		double unprocessdTime = 0;
-		boolean  render ;
+		
 		int frames = 0;
 		long frameCounter = 0;
 		
 		isRunning = true;
 		
+		double unprocessdTime = 0;
+		long lastTime = Time.getTime();
+		
 		while (isRunning){
-			render = false;
+			boolean render = false;
 			
 			long startTime = Time.getTime();
 			long passTime  = startTime - lastTime;
@@ -58,12 +59,11 @@ public class MainComponet {
 			
 			while  (unprocessdTime > frameTime){
 				render = true;
-				//System.out.println(unprocessdTime);
 				unprocessdTime -= frameTime;
 				if (Window.isCloseRequested())
 					stop();
 				
-				Time.setDelta(frameCounter);
+				Time.setDelta(frameTime);
 				
 				game.input();
 				game.update();
@@ -74,22 +74,18 @@ public class MainComponet {
 					frameCounter = 0;
 					frames = 0;
 				}
-				
-				if(render){
-					render();
-					frames++;
-				}
-				else{///wait if there is no need to render
-					try {
-						Thread.sleep(1);
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}
-				}
 			}
-			
-			
-			
+			if(render){
+				render();
+				frames++;
+			}
+			else{///wait if there is no need to render
+				try {
+					Thread.sleep(1);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			}	
 		}
 		cleanUp();
 	}
