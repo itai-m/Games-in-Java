@@ -19,6 +19,8 @@ public class Game {
 		shader.addVertexShader(ResourceLoader.loadShader("basicVertex.vs"));
 		shader.addFragmentShader(ResourceLoader.loadShader("basicFragment.fs"));
 		shader.compileShader();
+		
+		shader.addUniform("uniformFloat");
 		/////////////////////
 	}
 	
@@ -27,9 +29,15 @@ public class Game {
 		Input.Update();
 	}
 	
+	float temp = 0.0f;
+	
 	///update the game
 	public void update(){
 		
+		/////testing area////
+		temp += Time.getDelta();
+		shader.setUniform("uniformFloat", (float)Math.sin(temp));
+		/////////////////////
 	}
 	
 	///render all the game

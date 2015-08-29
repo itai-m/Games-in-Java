@@ -3,12 +3,13 @@ package gameEngine;
 import static org.lwjgl.opengl.GL20.*;
 import static org.lwjgl.opengl.GL32.*;
 
-import org.lwjgl.Sys;
+import java.util.HashMap;
+
 
 public class Shader {
 
 	private int program;
-	
+	private HashMap<String, Integer> uniforms;
 	///Constructor
 	public Shader(){
 		program =  glCreateProgram();
@@ -17,6 +18,8 @@ public class Shader {
 			System.err.println("Shader creation failed: in the Constructor");
 			System.exit(-1);
 		}
+		
+		uniforms = new HashMap<String, Integer>();
 	}
 	
 	///Bind the shader
@@ -76,5 +79,38 @@ public class Shader {
 			System.exit(-1);
 		}
 		
+	}
+	
+	///Add uniform to the shader
+	public void addUniform(String uniform){
+		int uniformLocation  = glGetUniformLocation(program, uniform);
+		
+		if (uniformLocation == -1){
+			System.err.println("Could not find uniform:" + uniform);
+			new Exception().printStackTrace();
+			System.exit(-1);
+		}
+		
+		uniforms.put(uniform, uniformLocation);
+	}
+	
+	///Set the uniform form an integer
+	public void setUniform(String uniformName, int value){
+		glUniform1i(uniforms.get(uniformName), value);
+	}
+	
+	///Set the uniform form an integer
+	public void setUniform(String uniformName, float value){
+		glUniform1f(uniforms.get(uniformName), value);
+	}
+	
+	///Set the uniform form an integer
+	public void setUniform(String uniformName, Vector3f value){
+		glUniform3f(uniforms.get(uniformName), value.getX(), value.getY(), value.getZ());;
+	}
+	
+	///Set the uniform form an integer
+	public void setUniform(String uniformName, Matrix4f value){
+		glUniformMatrix4(uniforms.get(uniformName), true, Util.createFlippedBuffer(value));
 	}
 }

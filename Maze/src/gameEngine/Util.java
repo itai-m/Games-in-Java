@@ -11,6 +11,7 @@ public class Util {
 		return BufferUtils.createFloatBuffer(size);
 	}
 	
+	///Create a float flipped buffer from vertex
 	public static FloatBuffer createFlippedBuffer(Vertex[] vertices){
 		FloatBuffer buffer = createFloatBuffer(vertices.length * Vertex.SIZE);
 		
@@ -19,6 +20,17 @@ public class Util {
 			buffer.put(vertices[i].getPos().getY());
 			buffer.put(vertices[i].getPos().getZ());
 		}
+		
+		buffer.flip();
+		return buffer;
+	}
+
+	///Create a float flipped buffer from matrix4f
+	public static FloatBuffer createFlippedBuffer(Matrix4f value){
+		FloatBuffer buffer = createFloatBuffer(4 * 4);
+		for (int i = 0 ; i < 4 ; i++)
+			for (int j = 0 ; j < 4 ; j++)
+				buffer.put(value.get(i, j));
 		
 		buffer.flip();
 		return buffer;
