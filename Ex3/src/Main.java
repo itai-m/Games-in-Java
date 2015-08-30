@@ -11,8 +11,8 @@ import javax.swing.JFrame;
  * @author user
  */
 public class Main {
-	public final static int initializedHight = 400;
-	public final static int initializedWidth = 400;
+	public static int initializedHight = 600;
+	public static int initializedWidth = 600;
 	
     public static void main(String[] args)
     {

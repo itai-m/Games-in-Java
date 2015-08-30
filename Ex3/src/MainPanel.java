@@ -3,8 +3,6 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.GraphicsConfiguration;
-import java.awt.Image;
-import java.awt.Toolkit;
 import java.awt.Transparency;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -25,7 +23,7 @@ public class MainPanel extends JPanel implements ActionListener {
 
 	private BoardPanel t;
 	private Listener keyboard_listener;
-	private GameEngine game = new GameEngine(Main.initializedHight/2,Main.initializedHight/2, 0, -1, 0);
+	private GameEngine game = new GameEngine(Main.initializedHight/2,Main.initializedHight/2, 0, 1, 5);
 	
 	public MainPanel(){
 		///Initializing the board
@@ -52,14 +50,14 @@ public class MainPanel extends JPanel implements ActionListener {
 			BufferedImage image = null;
 			this.setBackground(Color.BLACK);
 			Vector2f loc = game.getShipLocation();
-			//System.out.println(loc);
+			System.out.println(game.getShipAngle());
 			try {
 				image = ImageIO.read( new File( Path + "off.png" ) );
-			} catch (IOException e) {
+			}
+			catch (IOException e) {
 				e.printStackTrace();
 			}
-			System.out.println();
-			image = rotate(image,Math.toRadians(game.getShipAngle() + 90) );
+			image = rotate(image,Math.toRadians(game.getShipAngle())  );
 			g2d.drawImage(image, (int)(loc.getX()-SHIPSIZE/2), (int)(loc.getY()-SHIPSIZE/2), (int)(SHIPSIZE), (int)(SHIPSIZE), this);
 			game.update();
 		}
@@ -90,7 +88,7 @@ public class MainPanel extends JPanel implements ActionListener {
 		
 	}
 
-	public BufferedImage rotate(BufferedImage image, double angle) {
+	private BufferedImage rotate(BufferedImage image, double angle) {
 	    double sin = Math.abs(Math.sin(angle)), cos = Math.abs(Math.cos(angle));
 	    int w = image.getWidth(), h = image.getHeight();
 	    int neww = (int)Math.floor(w*cos+h*sin), newh = (int)Math.floor(h*cos+w*sin);

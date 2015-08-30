@@ -37,11 +37,11 @@ public class GameEngine {
 	
 	///Move ship to left
 	public void moveShipLeft(){
-		ship.rotateShip(-MOVMENT_ANGLE);
+		ship.rotate(-MOVMENT_ANGLE);
 	}
 	
 	///Move ship to right
 	public void moveShipRight(){
-		ship.rotateShip(MOVMENT_ANGLE);
+		ship.rotate(MOVMENT_ANGLE);
 	}
 }
