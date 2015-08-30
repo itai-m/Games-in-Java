@@ -96,4 +96,11 @@ public class Sprite {
 			position.setY(Main.initializedHight);
 		}
 	}
+	
+	///Check if the sprite stop
+	public boolean isStop(){
+		if (speed == 0)
+			return true;
+		return false;
+	}
 }

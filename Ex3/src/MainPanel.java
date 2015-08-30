@@ -23,7 +23,7 @@ public class MainPanel extends JPanel implements ActionListener {
 
 	private BoardPanel t;
 	private Listener keyboard_listener;
-	private GameEngine game = new GameEngine(Main.initializedHight/2,Main.initializedHight/2, 0, 1, 5);
+	private GameEngine game = new GameEngine(Main.initializedHight/2,Main.initializedHight/2, 0, -1, 5);
 	
 	public MainPanel(){
 		///Initializing the board
@@ -50,14 +50,13 @@ public class MainPanel extends JPanel implements ActionListener {
 			BufferedImage image = null;
 			this.setBackground(Color.BLACK);
 			Vector2f loc = game.getShipLocation();
-			System.out.println(game.getShipAngle());
 			try {
 				image = ImageIO.read( new File( Path + "off.png" ) );
 			}
 			catch (IOException e) {
 				e.printStackTrace();
 			}
-			image = rotate(image,Math.toRadians(game.getShipAngle())  );
+			image = rotate(image,Math.toRadians(game.getShipAngle() + 180) );
 			g2d.drawImage(image, (int)(loc.getX()-SHIPSIZE/2), (int)(loc.getY()-SHIPSIZE/2), (int)(SHIPSIZE), (int)(SHIPSIZE), this);
 			game.update();
 		}
