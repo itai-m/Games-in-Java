@@ -10,6 +10,7 @@ public class Shader {
 
 	private int program;
 	private HashMap<String, Integer> uniforms;
+	
 	///Constructor
 	public Shader(){
 		program =  glCreateProgram();

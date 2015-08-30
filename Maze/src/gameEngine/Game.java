@@ -36,7 +36,7 @@ public class Game {
 		
 		/////testing area////
 		temp += Time.getDelta();
-		shader.setUniform("uniformFloat", (float)Math.sin(temp));
+		shader.setUniform("uniformFloat", (float)Math.abs(Math.sin(temp)));
 		/////////////////////
 	}
 	
