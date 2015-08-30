@@ -22,9 +22,14 @@ public class Vector2f {
 		return (float)Math.sqrt( x * x + y * y);
 	}
 	
-	///Get the angle form (0,0)
+	///Get the angle form (0,1)
 	public double getAngle(){
-		return Math.toDegrees(Math.atan(y/x));
+		float temp = this.dot(new Vector2f(0, 1));
+		temp /= this.lenght();
+		if (this.getX() > 0)
+			return (360 - Math.toDegrees(Math.acos(temp)));
+		else
+			return  Math.toDegrees(Math.acos(temp));
 	}
 	
 	///Return the number of dot action result
