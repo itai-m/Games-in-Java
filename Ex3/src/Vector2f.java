@@ -22,6 +22,11 @@ public class Vector2f {
 		return (float)Math.sqrt( x * x + y * y);
 	}
 	
+	///Get the angle form (0,0)
+	public double getAngle(){
+		return Math.toDegrees(Math.atan(y/x));
+	}
+	
 	///Return the number of dot action result
 	public float dot(Vector2f v){
 		return (x * v.getX() + y * v.getY());

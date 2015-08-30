@@ -1,7 +1,7 @@
 
 public class Ship {
 	
-	private final float acceleration = 5;
+	private final float acceleration = 2;
 
 	private Vector2f position;
 	private Vector2f direction;
@@ -10,7 +10,7 @@ public class Ship {
 	///Default constructor
 	public Ship(){
 		position = new Vector2f(0, 0);
-		direction = new Vector2f(0, 0);
+		direction = new Vector2f(1, 1);
 		speed = 0;
 	}
 	
@@ -31,14 +31,16 @@ public class Ship {
 
 	///Rotate the ship
 	public void rotateShip(float angle){
-		direction.rotate(angle);
+		direction = direction.rotate(angle);
+		System.out.println(direction);
 	}
 	
 	///Move to the In the direction of the direction vector
 	public void move(){
 		Vector2f temp = new Vector2f(direction.getX(), direction.getY());
-		temp.mul(speed);
-		position.add(temp);
+		//temp = temp.mul(speed);
+		temp = temp.mul(acceleration);
+		position = position.add(temp);
 	}
 	
 	///Get the position
@@ -79,5 +81,10 @@ public class Ship {
 	///Subtract the speed the acceleration
 	public void speedDown(){
 		speed -= acceleration;
+	}
+	
+	///Get the ship angle
+	public double GetAngle(){
+		return direction.getAngle();
 	}
 }
