@@ -9,18 +9,14 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import javax.swing.Timer;
 
-import javax.imageio.ImageIO;
+import javax.swing.Timer;
 import javax.swing.JPanel;
 
 
 public class MainPanel extends JPanel implements ActionListener {
 	
-	private final float SHIPSIZE = 50;
-	private final String Path =  System.getProperty("user.dir") + "\\src\\";
+	
 	private final int timeForInterval = 50;
 
 	private BoardPanel t;
@@ -52,17 +48,8 @@ public class MainPanel extends JPanel implements ActionListener {
 		public void paintComponent(Graphics g){
 			super.paintComponent(g);
 			Graphics2D g2d = (Graphics2D) g;
-			BufferedImage image = null;
 			this.setBackground(Color.BLACK);
-			Vector2f loc = game.getShipLocation();
-			try {
-				image = ImageIO.read( new File( Path + "off.png" ) );
-			}
-			catch (IOException e) {
-				e.printStackTrace();
-			}
-			image = rotate(image,Math.toRadians(game.getShipAngle() + 180) );
-			g2d.drawImage(image, (int)(loc.getX()-SHIPSIZE/2), (int)(loc.getY()-SHIPSIZE/2), (int)(SHIPSIZE), (int)(SHIPSIZE), this);
+			game.draw(g2d, this);
 			game.update();
 		}
 	}
@@ -80,9 +67,6 @@ public class MainPanel extends JPanel implements ActionListener {
 			case KeyEvent.VK_RIGHT:
 				game.moveShipRight();
 				break;
-			case KeyEvent.VK_DOWN:
-				
-				break;
 			case KeyEvent.VK_UP:
 				game.speedUpShip();
 				break;
@@ -95,17 +79,4 @@ public class MainPanel extends JPanel implements ActionListener {
 		
 	}
 
-	private BufferedImage rotate(BufferedImage image, double angle) {
-	    double sin = Math.abs(Math.sin(angle)), cos = Math.abs(Math.cos(angle));
-	    int w = image.getWidth(), h = image.getHeight();
-	    int neww = (int)Math.floor(w*cos+h*sin), newh = (int)Math.floor(h*cos+w*sin);
-	    GraphicsConfiguration gc = getGraphicsConfiguration();
-	    BufferedImage result = gc.createCompatibleImage(neww, newh, Transparency.TRANSLUCENT);
-	    Graphics2D g = result.createGraphics();
-	    g.translate((neww-w)/2, (newh-h)/2);
-	    g.rotate(angle, w/2, h/2);
-	    g.drawRenderedImage(image, null);
-	    g.dispose();
-	    return result;
-	}
 }

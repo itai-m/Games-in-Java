@@ -1,8 +1,12 @@
+
+import java.awt.Graphics2D;
+import java.awt.image.ImageObserver;
 import java.util.LinkedList;
 
 public class GameEngine {
 
 	private final float MOVMENT_ANGLE = 15;
+	private final float SHOT_SPEED = 20;
 	
 	private Ship ship;
 	private LinkedList<Shot> shots;
@@ -28,6 +32,9 @@ public class GameEngine {
 	public void update(){
 		ship.move();
 		ship.speedDown();
+		for (Shot shot : shots){
+			shot.move();
+		}
 	}
 	
 	///Speed up the ship
@@ -52,8 +59,16 @@ public class GameEngine {
 	
 	///Shot with the ship
 	public void shot(){
-		Shot shot = new Shot(ship.getPosition(), ship.getDirection(), ship.getSpeed() + 1);
+		Shot shot = new Shot(ship.getPosition().getX(),ship.getPosition().getY(), ship.getDirection().getX(), ship.getDirection().getY(), SHOT_SPEED);
 		shots.add(shot);
+	}
+	
+	///Draw all the game
+	public void draw(Graphics2D g, ImageObserver ob){
+		ship.draw(g, ob);
+		for (Shot shot : shots){
+			shot.draw(g);
+		}
 	}
 	
 }
