@@ -1,18 +1,22 @@
+import java.util.LinkedList;
 
 public class GameEngine {
 
 	private final float MOVMENT_ANGLE = 15;
 	
 	private Ship ship;
+	private LinkedList<Shot> shots;
 	
 	///Default constructor
 	public GameEngine(){
 		ship = new Ship();
+		shots = new LinkedList<Shot>();
 	}
 	
 	///Constructor
 	public GameEngine(float posX, float posY, float dirX, float dirY, float speed){
 		ship = new Ship(posX, posY, dirX, dirY, speed);
+		shots = new LinkedList<Shot>();
 	}
 	
 	///Return the location of the ship
@@ -46,5 +50,10 @@ public class GameEngine {
 		ship.rotate(MOVMENT_ANGLE);
 	}
 	
+	///Shot with the ship
+	public void shot(){
+		Shot shot = new Shot(ship.getPosition(), ship.getDirection(), ship.getSpeed() + 1);
+		shots.add(shot);
+	}
 	
 }

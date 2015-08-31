@@ -11,6 +11,7 @@ import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import javax.swing.Timer;
 
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
@@ -19,18 +20,22 @@ import javax.swing.JPanel;
 public class MainPanel extends JPanel implements ActionListener {
 	
 	private final float SHIPSIZE = 50;
-	private final String Path =  System.getProperty("user.dir") + "\\src\\";;
+	private final String Path =  System.getProperty("user.dir") + "\\src\\";
+	private final int timeForInterval = 50;
 
 	private BoardPanel t;
 	private Listener keyboard_listener;
 	private GameEngine game = new GameEngine(Main.initializedHight/2,Main.initializedHight/2, 0, -1, 0);
+	private Timer timer;
 	
 	public MainPanel(){
 		///Initializing the board
 		t = new BoardPanel();
 		setLayout(new BorderLayout());
 		add(t, BorderLayout.CENTER);
-
+		timer = new Timer(timeForInterval, this);
+		timer.start();
+		
 		///Initializing the listener.
 		keyboard_listener = new Listener();
 		addKeyListener(keyboard_listener);
@@ -80,6 +85,9 @@ public class MainPanel extends JPanel implements ActionListener {
 				break;
 			case KeyEvent.VK_UP:
 				game.speedUpShip();
+				break;
+			case KeyEvent.VK_SPACE:
+				game.shot();
 				break;
 			}
 			repaint();

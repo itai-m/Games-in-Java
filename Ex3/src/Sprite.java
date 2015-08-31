@@ -1,3 +1,4 @@
+import java.awt.Graphics;
 
 public class Sprite {
 
@@ -105,5 +106,10 @@ public class Sprite {
 		if (speed == 0)
 			return true;
 		return false;
+	}
+	
+	///Draw the Sprite
+	public void draw(Graphics g){
+		
 	}
 }
