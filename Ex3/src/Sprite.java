@@ -1,11 +1,11 @@
 
 public class Sprite {
 
-	private final float acceleration = 2;
+	protected final static float acceleration = 2;
 	
 	private Vector2f position;
 	private Vector2f direction;
-	private float speed;
+	protected float speed;
 	
 	///Default constructor
 	public Sprite(){
@@ -72,7 +72,10 @@ public class Sprite {
 	
 	///Subtract the speed the acceleration
 	public void speedDown(){
-		speed -= acceleration;
+		if (speed <= 0)
+			speed = 0;
+		else
+			speed -= acceleration;
 	}
 	
 	///Get the sprite angle

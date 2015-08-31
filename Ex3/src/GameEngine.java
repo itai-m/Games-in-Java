@@ -22,12 +22,13 @@ public class GameEngine {
 	
 	///Update the game
 	public void update(){
-		//ship.move();
+		ship.move();
+		ship.speedDown();
 	}
 	
 	///Speed up the ship
 	public void speedUpShip(){
-		ship.move();
+		ship.speedUp();
 	}
 	
 	///Get ship angle
@@ -44,4 +45,6 @@ public class GameEngine {
 	public void moveShipRight(){
 		ship.rotate(MOVMENT_ANGLE);
 	}
+	
+	
 }

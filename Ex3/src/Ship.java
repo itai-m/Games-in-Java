@@ -16,5 +16,8 @@ public class Ship extends Sprite{
 		super(posX, posY, dirX, dirY, speed);
 	}
 	
+	public void speedUp(){
+		speed += acceleration*2;
+	}
 	
 }

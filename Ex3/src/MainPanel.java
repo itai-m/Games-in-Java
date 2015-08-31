@@ -23,7 +23,7 @@ public class MainPanel extends JPanel implements ActionListener {
 
 	private BoardPanel t;
 	private Listener keyboard_listener;
-	private GameEngine game = new GameEngine(Main.initializedHight/2,Main.initializedHight/2, 0, -1, 5);
+	private GameEngine game = new GameEngine(Main.initializedHight/2,Main.initializedHight/2, 0, -1, 0);
 	
 	public MainPanel(){
 		///Initializing the board
