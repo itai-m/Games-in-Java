@@ -33,7 +33,6 @@ public class Sprite {
 	///Rotate the sprite
 	public void rotate(float angle){
 		direction = direction.rotate(angle);
-		System.out.println(direction);
 	}
 	
 	///Get the position

@@ -6,7 +6,7 @@ import java.util.LinkedList;
 public class GameEngine {
 
 	private final float MOVMENT_ANGLE = 15;
-	private final float SHOT_SPEED = 20;
+	private final float SHOT_SPEED = 40;
 	
 	private Ship ship;
 	private LinkedList<Shot> shots;
@@ -32,9 +32,22 @@ public class GameEngine {
 	public void update(){
 		ship.move();
 		ship.speedDown();
-		for (Shot shot : shots){
-			shot.move();
+		for (int i = 0 ; i < shots.size() ; i++){
+			if (shots.get(i).isDone()){
+				shots.remove(i);
+			}
+			else{
+				shots.get(i).move();
+			}
 		}
+		/*for (Shot shot : shots){
+			if (shot.isDone()){
+				shots.remove(shot);
+			}
+			else{
+				shot.move();
+			}
+		}*/
 	}
 	
 	///Speed up the ship
