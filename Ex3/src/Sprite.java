@@ -108,7 +108,6 @@ public class Sprite {
 	}
 	
 	///Draw the Sprite
-	public void draw(Graphics g){
-		
+	public void draw(Graphics g) {
 	}
 }

@@ -7,20 +7,27 @@ public class GameEngine {
 
 	private final float MOVMENT_ANGLE = 15;
 	private final float SHOT_SPEED = 40;
+	public static final String Path =  System.getProperty("user.dir") + "\\src\\";;
+	private final int NUM_OF_ASTROIDS = 4;
 	
 	private Ship ship;
 	private LinkedList<Shot> shots;
+	private LinkedList<Astroid> astroids;
 	
 	///Default constructor
 	public GameEngine(){
 		ship = new Ship();
 		shots = new LinkedList<Shot>();
+		astroids = new LinkedList<Astroid>();
+		addAsteroids(NUM_OF_ASTROIDS);
 	}
 	
 	///Constructor
 	public GameEngine(float posX, float posY, float dirX, float dirY, float speed){
 		ship = new Ship(posX, posY, dirX, dirY, speed);
 		shots = new LinkedList<Shot>();
+		astroids = new LinkedList<Astroid>();
+		addAsteroids(NUM_OF_ASTROIDS);
 	}
 	
 	///Return the location of the ship
@@ -40,6 +47,10 @@ public class GameEngine {
 				shots.get(i).move();
 			}
 		}
+		for (int i = 0 ; i< astroids.size() ; i++){
+			astroids.get(i).move();
+		}
+		
 		/*for (Shot shot : shots){
 			if (shot.isDone()){
 				shots.remove(shot);
@@ -78,10 +89,20 @@ public class GameEngine {
 	
 	///Draw all the game
 	public void draw(Graphics2D g, ImageObserver ob){
-		ship.draw(g, ob);
+		
 		for (Shot shot : shots){
 			shot.draw(g);
 		}
+		for (Astroid ast : astroids){
+			ast.draw(g, ob);
+		}
+		ship.draw(g, ob);
+	}
+	
+	///Create asteroids
+	public void addAsteroids(int num){
+		Astroid astOne = new Astroid(50, 50, 10, 10, 2, 4);
+		astroids.add(astOne);
 	}
 	
 }
