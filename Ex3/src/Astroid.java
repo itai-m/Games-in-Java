@@ -62,11 +62,12 @@ public class Astroid extends Sprite{
 	///Draw the asteroid
 	public void draw(Graphics2D g, ImageObserver ob){
 		Image img = Toolkit.getDefaultToolkit().getImage(GameEngine.Path + "astroid.jpg");
-		g.drawImage(img, (int)getPosition().getX(), (int)getPosition().getY(), DRAW_SIZE*size, DRAW_SIZE*size, ob);
+		int tempSize = DRAW_SIZE*size;
+		g.drawImage(img, (int)getPosition().getX() - (tempSize / 2), (int)getPosition().getY() - (tempSize / 2), tempSize, tempSize, ob);
 	}
 	
 	///Set the asteroid to a random location 
-	public void randLoction(){
-		
+	public void randDirection(){
+		rotate((float) getRand(0, 360));
 	}
 }

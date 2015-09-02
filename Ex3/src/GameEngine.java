@@ -9,6 +9,8 @@ public class GameEngine {
 	private final float SHOT_SPEED = 40;
 	public static final String Path =  System.getProperty("user.dir") + "\\src\\";;
 	private final int NUM_OF_ASTROIDS = 4;
+	private final int ASTROIDS_SPEED = 10;
+	private final int ASTROIDS_SIZE = 4;
 	
 	private Ship ship;
 	private LinkedList<Shot> shots;
@@ -99,10 +101,13 @@ public class GameEngine {
 		ship.draw(g, ob);
 	}
 	
-	///Create asteroids
+	///Create asteroids and add them to the game
 	public void addAsteroids(int num){
-		Astroid astOne = new Astroid(50, 50, 10, 10, 2, 4);
-		astroids.add(astOne);
+		for (int i = 0; i < num ; i++){
+			Astroid astOne = new Astroid(0, 0, 1, 0, ASTROIDS_SPEED, ASTROIDS_SIZE);
+			astOne.randDirection();
+			astroids.add(astOne);
+		}
 	}
 	
 }
