@@ -11,6 +11,7 @@ public class GameEngine {
 	private final int NUM_OF_ASTROIDS = 4;
 	private final int ASTROIDS_SPEED = 10;
 	private final int ASTROIDS_SIZE = 4;
+	private final int NUMBER_OF_LIFE = 3;
 	
 	private Ship ship;
 	private LinkedList<Shot> shots;
@@ -26,7 +27,7 @@ public class GameEngine {
 	
 	///Constructor
 	public GameEngine(float posX, float posY, float dirX, float dirY, float speed){
-		ship = new Ship(posX, posY, dirX, dirY, speed);
+		ship = new Ship(posX, posY, dirX, dirY, speed, NUMBER_OF_LIFE);
 		shots = new LinkedList<Shot>();
 		astroids = new LinkedList<Astroid>();
 		addAsteroids(NUM_OF_ASTROIDS);
