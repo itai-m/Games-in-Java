@@ -53,15 +53,6 @@ public class GameEngine {
 		for (int i = 0 ; i< astroids.size() ; i++){
 			astroids.get(i).move();
 		}
-		
-		/*for (Shot shot : shots){
-			if (shot.isDone()){
-				shots.remove(shot);
-			}
-			else{
-				shot.move();
-			}
-		}*/
 	}
 	
 	///Speed up the ship
