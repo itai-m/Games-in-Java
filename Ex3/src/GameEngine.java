@@ -12,6 +12,9 @@ public class GameEngine {
 	private final int ASTROIDS_SPEED = 10;
 	private final int ASTROIDS_SIZE = 4;
 	private final int NUMBER_OF_LIFE = 3;
+	public static final int WIN = 1;
+	public static final int LOSE = 2;
+	public static final int NOTHING = 0;
 	
 	private Ship ship;
 	private LinkedList<Shot> shots;
@@ -39,7 +42,7 @@ public class GameEngine {
 	}
 	
 	///Update the game
-	public void update(){
+	public int update(){
 		ship.move();
 		ship.speedDown();
 		for (int i = 0 ; i < shots.size() ; i++){
@@ -54,6 +57,15 @@ public class GameEngine {
 			astroids.get(i).move();
 		}
 		collisionDetection();
+		if (isWin()){
+			return WIN;
+		}
+		else if (isLose()){
+			return LOSE;
+		}
+		else{
+			return NOTHING;
+		}
 	}
 	
 	///Speed up the ship
@@ -132,7 +144,7 @@ public class GameEngine {
 				///check if there is collision asteroids with ship
 				float shipX = ship.getPosition().getX();
 				float shipY = ship.getPosition().getY();
-				float shipSize = ship.SHIPSIZE / 2;
+				float shipSize = Ship.SHIPSIZE / 2;
 				if ((CDAstroid(astroids.get(i), shipX - shipSize, shipY - shipSize)) ||
 					(CDAstroid(astroids.get(i), shipX - shipSize, shipY + shipSize)) ||
 					(CDAstroid(astroids.get(i), shipX + shipSize, shipY - shipSize)) ||
@@ -142,6 +154,20 @@ public class GameEngine {
 				}
 			}
 		}
+	}
+	
+	///Check if the player win
+	private boolean isWin(){
+		if (astroids.size() == 0)
+			return true;
+		return false;
+	}
+	
+	///Check if the player lose
+	private boolean isLose(){
+		if (ship.isDead())
+			return true;
+		return false;
 	}
 	
 	
