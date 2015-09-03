@@ -6,7 +6,7 @@ import java.util.Random;
 
 public class Astroid extends Sprite{
 	
-	private final int DRAW_SIZE = 30;
+	public static final int DRAW_SIZE = 30;
 	
 	private int size;
 	
@@ -29,6 +29,8 @@ public class Astroid extends Sprite{
 
 	///Split the asteroid
 	public Astroid split(){
+		if (size <= 0)
+			return null;
 		Astroid temp = new Astroid(getPosition().getX(), getPosition().getY(), getDirection().getX(), getDirection().getY(), getSpeed() + 1, --size);
 		temp.rotate((float)getRand(180, 360));
 		this.rotate((float) getRand(0,180));

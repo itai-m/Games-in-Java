@@ -53,6 +53,7 @@ public class GameEngine {
 		for (int i = 0 ; i< astroids.size() ; i++){
 			astroids.get(i).move();
 		}
+		CDShotsAstroids();
 	}
 	
 	///Speed up the ship
@@ -100,6 +101,43 @@ public class GameEngine {
 			astOne.randDirection();
 			astroids.add(astOne);
 		}
+	}
+	
+	///Check collision detection with asteroid
+	private boolean CDAstroid(Astroid ast, float pointX, float pointY){
+		float dx = ast.getPosition().getX() - pointX;
+		float dy = ast.getPosition().getY() - pointY;
+		if (new Vector2f(dx, dy).lenght() <= Astroid.DRAW_SIZE * ast.getSize())
+			return true;
+		else 
+			return false;
+		
+	}
+	
+	///Collision detection shots with asteroids
+	private void CDShotsAstroids(){
+		for (int i = 0; i < astroids.size() ; i++){
+			for (int j = 0; j < shots.size() ; j++){
+				/*float dx = astroids.get(i).getPosition().getX() - shots.get(j).getPosition().getX();
+				float dy = astroids.get(i).getPosition().getY() - shots.get(j).getPosition().getY();
+				if (Math.sqrt(dx * dx + dy * dy) < Astroid.DRAW_SIZE * astroids.get(i).getSize()){
+					astroids.add(astroids.get(i).split());
+					shots.remove(j);
+				}*/
+				if (CDAstroid(astroids.get(i), shots.get(j).getPosition().getX(), shots.get(j).getPosition().getY())){
+					astroids.add(astroids.get(i).split());
+					shots.remove(j);
+				}
+			}
+			if (astroids.get(i).isDestroyed()){
+				astroids.remove(i);
+			}
+		}
+	}
+	
+	///Collision detection ships with asteroids, return true if he there is collision otherwise false
+	private boolean CDShipAstroids(){
+		return false;
 	}
 	
 }
