@@ -12,7 +12,7 @@ import javax.imageio.ImageIO;
 
 public class Ship extends Sprite{
 
-	private final float SHIPSIZE = 50;
+	public static final float SHIPSIZE = 50;
 	private final int LIFES_SHIPS_SIZE = (int) (SHIPSIZE / 2);
 	private final String Path =  System.getProperty("user.dir") + "\\src\\";
 	

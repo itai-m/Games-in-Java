@@ -53,7 +53,7 @@ public class GameEngine {
 		for (int i = 0 ; i< astroids.size() ; i++){
 			astroids.get(i).move();
 		}
-		CDShotsAstroids();
+		collisionDetection();
 	}
 	
 	///Speed up the ship
@@ -115,29 +115,34 @@ public class GameEngine {
 	}
 	
 	///Collision detection shots with asteroids
-	private void CDShotsAstroids(){
+	private void collisionDetection(){
 		for (int i = 0; i < astroids.size() ; i++){
 			for (int j = 0; j < shots.size() ; j++){
-				/*float dx = astroids.get(i).getPosition().getX() - shots.get(j).getPosition().getX();
-				float dy = astroids.get(i).getPosition().getY() - shots.get(j).getPosition().getY();
-				if (Math.sqrt(dx * dx + dy * dy) < Astroid.DRAW_SIZE * astroids.get(i).getSize()){
-					astroids.add(astroids.get(i).split());
-					shots.remove(j);
-				}*/
+				///check if there is collision asteroids with shots 
 				if (CDAstroid(astroids.get(i), shots.get(j).getPosition().getX(), shots.get(j).getPosition().getY())){
 					astroids.add(astroids.get(i).split());
 					shots.remove(j);
 				}
 			}
+			///check if asteroids is destroyed
 			if (astroids.get(i).isDestroyed()){
 				astroids.remove(i);
+			}
+			else{
+				///check if there is collision asteroids with ship
+				float shipX = ship.getPosition().getX();
+				float shipY = ship.getPosition().getY();
+				float shipSize = ship.SHIPSIZE / 2;
+				if ((CDAstroid(astroids.get(i), shipX - shipSize, shipY - shipSize)) ||
+					(CDAstroid(astroids.get(i), shipX - shipSize, shipY + shipSize)) ||
+					(CDAstroid(astroids.get(i), shipX + shipSize, shipY - shipSize)) ||
+					(CDAstroid(astroids.get(i), shipX + shipSize, shipY + shipSize)) )
+				{
+					ship.lifeDown();
+				}
 			}
 		}
 	}
 	
-	///Collision detection ships with asteroids, return true if he there is collision otherwise false
-	private boolean CDShipAstroids(){
-		return false;
-	}
 	
 }
