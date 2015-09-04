@@ -15,10 +15,12 @@ public class GameEngine {
 	public static final int WIN = 1;
 	public static final int LOSE = 2;
 	public static final int NOTHING = 0;
+	private final int STEP_OF_INVULNERABLE = 30;
 	
 	private Ship ship;
 	private LinkedList<Shot> shots;
 	private LinkedList<Astroid> astroids;
+	private int invulnerableSteps;
 	
 	///Default constructor
 	public GameEngine(){
@@ -26,6 +28,7 @@ public class GameEngine {
 		shots = new LinkedList<Shot>();
 		astroids = new LinkedList<Astroid>();
 		addAsteroids(NUM_OF_ASTROIDS);
+		invulnerableSteps = 0;
 	}
 	
 	///Constructor
@@ -34,6 +37,7 @@ public class GameEngine {
 		shots = new LinkedList<Shot>();
 		astroids = new LinkedList<Astroid>();
 		addAsteroids(NUM_OF_ASTROIDS);
+		invulnerableSteps = 0;
 	}
 	
 	///Return the location of the ship
@@ -56,7 +60,13 @@ public class GameEngine {
 		for (int i = 0 ; i< astroids.size() ; i++){
 			astroids.get(i).move();
 		}
-		collisionDetection();
+		if (invulnerableSteps <= 0){
+			collisionDetection(false);
+		}
+		else{
+			invulnerableSteps--;
+			collisionDetection(true);
+		}
 		if (isWin()){
 			return WIN;
 		}
@@ -126,8 +136,8 @@ public class GameEngine {
 		
 	}
 	
-	///Collision detection shots with asteroids
-	private void collisionDetection(){
+	///Collision detection shots with asteroids 
+	private void collisionDetection(boolean invulnerable){
 		for (int i = 0; i < astroids.size() ; i++){
 			for (int j = 0; j < shots.size() ; j++){
 				///check if there is collision asteroids with shots 
@@ -141,16 +151,19 @@ public class GameEngine {
 				astroids.remove(i);
 			}
 			else{
-				///check if there is collision asteroids with ship
-				float shipX = ship.getPosition().getX();
-				float shipY = ship.getPosition().getY();
-				float shipSize = Ship.SHIPSIZE / 2;
-				if ((CDAstroid(astroids.get(i), shipX - shipSize, shipY - shipSize)) ||
-					(CDAstroid(astroids.get(i), shipX - shipSize, shipY + shipSize)) ||
-					(CDAstroid(astroids.get(i), shipX + shipSize, shipY - shipSize)) ||
-					(CDAstroid(astroids.get(i), shipX + shipSize, shipY + shipSize)) )
-				{
-					ship.lifeDown();
+				if (!invulnerable){
+					///check if there is collision asteroids with ship
+					float shipX = ship.getPosition().getX();
+					float shipY = ship.getPosition().getY();
+					float shipSize = Ship.SHIPSIZE / 2;
+					if ((CDAstroid(astroids.get(i), shipX - shipSize, shipY - shipSize)) ||
+						(CDAstroid(astroids.get(i), shipX - shipSize, shipY + shipSize)) ||
+						(CDAstroid(astroids.get(i), shipX + shipSize, shipY - shipSize)) ||
+						(CDAstroid(astroids.get(i), shipX + shipSize, shipY + shipSize)) )
+					{
+						ship.lifeDown();
+						invulnerableSteps = STEP_OF_INVULNERABLE;
+					}
 				}
 			}
 		}
