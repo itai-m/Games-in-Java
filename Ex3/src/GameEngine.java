@@ -113,7 +113,8 @@ public class GameEngine {
 		for (Astroid ast : astroids){
 			ast.draw(g, ob);
 		}
-		ship.draw(g, ob);
+		if ((invulnerableSteps % 2) == 0)
+			ship.draw(g, ob);
 	}
 	
 	///Create asteroids and add them to the game

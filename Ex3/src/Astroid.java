@@ -26,7 +26,7 @@ public class Astroid extends Sprite{
 		super(posX, posY, dirX, dirY, speed);
 		this.size = size;
 	}
-
+ 
 	///Split the asteroid
 	public Astroid split(){
 		if (size <= 0)
