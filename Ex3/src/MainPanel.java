@@ -47,7 +47,20 @@ public class MainPanel extends JPanel implements ActionListener {
 			Graphics2D g2d = (Graphics2D) g;
 			this.setBackground(Color.BLACK);
 			game.draw(g2d, this);
-			game.update();
+			int status = game.update();
+			switch (status) {
+			case GameEngine.WIN:
+				///TODO win option
+				break;
+			case GameEngine.LOSE:
+				//TODO Lose option
+				break;
+			case GameEngine.NOTHING:
+				//keep going
+				break;
+			default:
+				break;
+			}
 		}
 	}
 	
