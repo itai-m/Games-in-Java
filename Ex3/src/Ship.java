@@ -25,13 +25,13 @@ public class Ship extends Sprite{
 	}
 	
 	///Constructors
-	public Ship(Vector2f position, Vector2f direction, float speed, int lifes){
-		super(position, direction, speed);
+	public Ship(Vector2f position, Vector2f direction, float speed, int lifes, int boardWidth, int boardHeight){
+		super(position, direction, speed, boardWidth, boardHeight);
 		this.lifes = lifes;
 	}
 	
-	public Ship(float posX, float posY, float dirX, float dirY, float speed, int lifes){
-		super(posX, posY, dirX, dirY, speed);
+	public Ship(int boardWidth, int boardHeight, float dirX, float dirY, float speed, int lifes){
+		super(boardWidth / 2, boardHeight / 2, dirX, dirY, speed, boardWidth,  boardHeight);
 		this.lifes = lifes;
 	}
 	

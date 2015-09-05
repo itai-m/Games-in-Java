@@ -1,4 +1,5 @@
 
+import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.image.ImageObserver;
 import java.util.LinkedList;
@@ -17,6 +18,8 @@ public class GameEngine {
 	public static final int NOTHING = 0;
 	private final int STEP_OF_INVULNERABLE = 30;
 	
+	
+	
 	private Ship ship;
 	private LinkedList<Shot> shots;
 	private LinkedList<Astroid> astroids;
@@ -25,25 +28,32 @@ public class GameEngine {
 	///Default constructor
 	public GameEngine(){
 		ship = new Ship();
-		shots = new LinkedList<Shot>();
-		astroids = new LinkedList<Astroid>();
-		addAsteroids(NUM_OF_ASTROIDS);
-		invulnerableSteps = 0;
+		initGame();
 	}
 	
 	///Constructor
-	public GameEngine(float posX, float posY, float dirX, float dirY, float speed){
-		ship = new Ship(posX, posY, dirX, dirY, speed, NUMBER_OF_LIFE);
+	public GameEngine(int boardWidth, int boardHeight, float dirX, float dirY, float speed){
+		ship = new Ship(boardWidth, boardHeight, dirX, dirY, speed, NUMBER_OF_LIFE);
+		initGame();
+	}
+	
+	///Initializing the game
+	private void initGame(){
 		shots = new LinkedList<Shot>();
 		astroids = new LinkedList<Astroid>();
 		addAsteroids(NUM_OF_ASTROIDS);
 		invulnerableSteps = 0;
 	}
 	
-	///Return the location of the ship
-	public Vector2f getShipLocation(){
-		return ship.getPosition();
+	///Set the board height and width
+	public void setBoardSize(int boardWidth, int boardHeight){
+		ship.setBoardSize(boardWidth, boardHeight);
+		for (int i = 0; i < shots.size() ; i++)
+			shots.get(i).setBoardSize(boardWidth, boardHeight);
+		for (int i = 0; i < astroids.size() ; i++)
+			astroids.get(i).setBoardSize(boardWidth, boardHeight);
 	}
+	
 	
 	///Update the game
 	public int update(){
@@ -100,13 +110,16 @@ public class GameEngine {
 	
 	///Shot with the ship
 	public void shot(){
-		Shot shot = new Shot(ship.getPosition().getX(),ship.getPosition().getY(), ship.getDirection().getX(), ship.getDirection().getY(), SHOT_SPEED);
+		Shot shot = new Shot(ship.getPosition().getX(),ship.getPosition().getY(), ship.getDirection().getX(), ship.getDirection().getY(), SHOT_SPEED, ship.getBoardWidth(), ship.getBoardHeight());
 		shots.add(shot);
 	}
 	
 	///Draw all the game
 	public void draw(Graphics2D g, ImageObserver ob){
-		
+		/*
+		g.setColor(Color.BLACK);
+		g.drawRect(0, 0, boardWidth, boardHeight);
+		*/
 		for (Shot shot : shots){
 			shot.draw(g);
 		}
@@ -120,7 +133,7 @@ public class GameEngine {
 	///Create asteroids and add them to the game
 	public void addAsteroids(int num){
 		for (int i = 0; i < num ; i++){
-			Astroid astOne = new Astroid(0, 0, 1, 0, ASTROIDS_SPEED, ASTROIDS_SIZE);
+			Astroid astOne = new Astroid(0, 0, 1, 0, ASTROIDS_SPEED, ASTROIDS_SIZE, ship.getBoardWidth(), ship.getBoardHeight());
 			astOne.randDirection();
 			astroids.add(astOne);
 		}
@@ -183,6 +196,7 @@ public class GameEngine {
 			return true;
 		return false;
 	}
+	
 	
 	
 }

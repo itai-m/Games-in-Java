@@ -16,13 +16,13 @@ public class Shot extends Sprite {
 	}
 	
 	///Constructors
-	public Shot(Vector2f position, Vector2f direction, float speed){
-		super(position, direction, speed);
+	public Shot(Vector2f position, Vector2f direction, float speed, int boardWidth, int boardHeight){
+		super(position, direction, speed, boardWidth, boardHeight);
 		steps = MAX_STEPS;
 	}
 	
-	public Shot(float posX, float posY, float dirX, float dirY, float speed){
-		super(posX, posY, dirX, dirY, speed);
+	public Shot(float posX, float posY, float dirX, float dirY, float speed, int boardWidth, int boardHeight){
+		super(posX, posY, dirX, dirY, speed, boardWidth,  boardHeight);
 		steps = MAX_STEPS;
 	}
 	

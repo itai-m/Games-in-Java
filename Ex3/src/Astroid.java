@@ -17,13 +17,13 @@ public class Astroid extends Sprite{
 	}
 	
 	///Constructor
-	public Astroid(Vector2f position, Vector2f direction, float speed ,int size){
-		super(position, direction, speed);
+	public Astroid(Vector2f position, Vector2f direction, float speed ,int size, int boardWidth, int boardHeight){
+		super(position, direction, speed, boardWidth, boardHeight);
 		this.size = size;
 	}
 	
-	public Astroid(float posX, float posY, float dirX, float dirY, float speed ,int size){
-		super(posX, posY, dirX, dirY, speed);
+	public Astroid(float posX, float posY, float dirX, float dirY, float speed ,int size, int boardWidth, int boardHeight){
+		super(posX, posY, dirX, dirY, speed, boardWidth,  boardHeight);
 		this.size = size;
 	}
  
@@ -31,7 +31,7 @@ public class Astroid extends Sprite{
 	public Astroid split(){
 		if (size <= 0)
 			return null;
-		Astroid temp = new Astroid(getPosition().getX(), getPosition().getY(), getDirection().getX(), getDirection().getY(), getSpeed() + 1, --size);
+		Astroid temp = new Astroid(getPosition().getX(), getPosition().getY(), getDirection().getX(), getDirection().getY(), getSpeed() + 1, --size, getBoardWidth(), getBoardHeight());
 		temp.rotate((float)getRand(180, 360));
 		this.rotate((float) getRand(0,180));
 		this.speedUp();

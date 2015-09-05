@@ -18,7 +18,7 @@ public class MainPanel extends JPanel implements ActionListener {
 
 	private BoardPanel t;
 	private Listener keyboard_listener;
-	private GameEngine game = new GameEngine(Main.initializedHight/2,Main.initializedHight/2, 0, -1, 0);
+	private GameEngine game = new GameEngine(Main.initializedHight, Main.initializedHight, 0, -1, 0);
 	private Timer timer;
 	
 	public MainPanel(){
@@ -43,6 +43,7 @@ public class MainPanel extends JPanel implements ActionListener {
 	///The panel that the board draw on
 	private class BoardPanel extends JPanel {
 		public void paintComponent(Graphics g){
+			game.setBoardSize(getWidth(), getHeight());
 			super.paintComponent(g);
 			Graphics2D g2d = (Graphics2D) g;
 			this.setBackground(Color.BLACK);
@@ -50,9 +51,11 @@ public class MainPanel extends JPanel implements ActionListener {
 			int status = game.update();
 			switch (status) {
 			case GameEngine.WIN:
+				System.out.println("win");
 				///TODO win option
 				break;
 			case GameEngine.LOSE:
+				System.out.println("lose");
 				//TODO Lose option
 				break;
 			case GameEngine.NOTHING:
