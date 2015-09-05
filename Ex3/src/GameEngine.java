@@ -196,6 +196,14 @@ public class GameEngine {
 		return false;
 	}
 	
+	///get ship board width
+	public int shipBoardWidth(){
+		return ship.getBoardWidth();
+	}
 	
+	///get ship board height
+	public int shipBoardHeight(){
+		return ship.getBoardHeight();
+	}
 	
 }

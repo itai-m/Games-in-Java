@@ -110,6 +110,26 @@ public class MainPanel extends JPanel implements ActionListener , Runnable {
         }
     }
 
+	private void gameRender(BufferedImage img)
+    {
+        Graphics dbg;
+        
+        img = new BufferedImage(game.shipBoardWidth(), game.shipBoardHeight(), BufferedImage.OPAQUE);
+        dbg = img.createGraphics();
+        dbg.setColor(Color.WHITE);
+        dbg.fillRect(0, 0, game.shipBoardWidth(), game.shipBoardHeight());
+        dbg.drawImage(img, 0, 0, this);
+        
+        // draw game elements
+        game.draw((Graphics2D) dbg, this);
+        
+        if(isGameOver)
+        {
+            gameOverMessage(dbg);
+            running = false;
+        }
+    }
+	
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
