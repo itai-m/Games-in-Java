@@ -6,12 +6,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.image.BufferedImage;
 
 import javax.swing.Timer;
 import javax.swing.JPanel;
 
 
-public class MainPanel extends JPanel implements ActionListener {
+public class MainPanel extends JPanel implements ActionListener , Runnable {
 	
 	
 	private final int timeForInterval = 50;
@@ -89,6 +90,29 @@ public class MainPanel extends JPanel implements ActionListener {
 			}
 			repaint();
 		}
+		
+	}
+	
+	///Paint a image to the screen
+	private void paintScreen(BufferedImage img){
+        Graphics g;
+        try {
+            g = getGraphics();
+            if(g != null && img != null)
+            {
+                g.drawImage(img, 0, 0, null);
+            }
+        }
+        catch(Exception e)
+        {
+            System.out.println("Graphics error");
+            e.printStackTrace();
+        }
+    }
+
+	@Override
+	public void run() {
+		// TODO Auto-generated method stub
 		
 	}
 

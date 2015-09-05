@@ -1,5 +1,4 @@
 
-import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.image.ImageObserver;
 import java.util.LinkedList;
