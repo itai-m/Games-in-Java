@@ -20,7 +20,7 @@ public class MainPanel extends JPanel implements ActionListener , Runnable {
 	private static final int PERIOD = 40;
 
 	private Listener keyboard_listener;
-	private GameEngine game = new GameEngine(Main.initializedHight, Main.initializedHight, 0, -1, 0);
+	private GameEngine game = new GameEngine(Main.initializedWidth, Main.initializedHight, 0, -1, 0);
 	private Timer timer;
 	private boolean running;
 	private Image bgImage;
@@ -49,27 +49,6 @@ public class MainPanel extends JPanel implements ActionListener , Runnable {
         gameRender();
         game.setBoardSize(getWidth(), getHeight());
         g.drawImage(dbImg, 0, 0, this);
-		/*
-		super.paintComponent(g);
-		Graphics2D g2d = (Graphics2D) g;
-		this.setBackground(Color.BLACK);
-		game.draw(g2d, this);
-		int status = game.update();
-		switch (status) {
-		case GameEngine.WIN:
-			System.out.println("win");
-			///TODO win option
-			break;
-		case GameEngine.LOSE:
-			System.out.println("lose");
-			//TODO Lose option
-			break;
-		case GameEngine.NOTHING:
-			//keep going
-			break;
-		default:
-			break;
-		}*/
 	}
 	
 	///The listener class for listen to the keyboard
@@ -121,7 +100,6 @@ public class MainPanel extends JPanel implements ActionListener , Runnable {
 	private void gameRender()
     {
         Graphics dbg;
-        System.out.println(game.shipBoardWidth());
         dbImg = new BufferedImage(game.shipBoardWidth(), game.shipBoardHeight(), BufferedImage.OPAQUE);
         dbg = dbImg.createGraphics();
         dbg.setColor(Color.BLACK);
@@ -140,10 +118,26 @@ public class MainPanel extends JPanel implements ActionListener , Runnable {
         
         while(running)
         {
-            game.update();
+        	int status = game.update();
             gameRender();
             paintScreen();   // active rendering
 
+    		switch (status) {
+    		case GameEngine.WIN:
+    			System.out.println("win");
+    			///TODO win option
+    			break;
+    		case GameEngine.LOSE:
+    			System.out.println("lose");
+    			//TODO Lose option
+    			break;
+    		case GameEngine.NOTHING:
+    			//keep going
+    			break;
+    		default:
+    			break;
+    		}
+    		
             diff = System.currentTimeMillis() - before;
             sleepTime = PERIOD - diff;
             if(sleepTime <= 0)
