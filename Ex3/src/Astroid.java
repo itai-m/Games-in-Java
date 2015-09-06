@@ -72,7 +72,6 @@ public class Astroid extends Sprite{
 	
 	///Draw the asteroid
 	public void draw(Graphics2D g, ImageObserver ob){
-		
 		int tempSize = DRAW_SIZE*size;
 		g.drawImage(img, (int)getPosition().getX() - (tempSize / 2), (int)getPosition().getY() - (tempSize / 2), tempSize, tempSize, ob);
 	}

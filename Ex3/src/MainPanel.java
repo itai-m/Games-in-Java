@@ -1,5 +1,6 @@
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -18,6 +19,8 @@ public class MainPanel extends JPanel implements ActionListener , Runnable {
 	
 	private final int timeForInterval = 50;
 	private static final int PERIOD = 40;
+	private final String WIN_MSG = "Congratulations You Win";
+	private final String LOSE_MSG = "Game Over - You Lose";
 
 	private Listener keyboard_listener;
 	private GameEngine game = new GameEngine(Main.initializedHight, Main.initializedHight, 0, -1, 0);
@@ -25,12 +28,14 @@ public class MainPanel extends JPanel implements ActionListener , Runnable {
 	private boolean running;
 	private Image bgImage;
     private BufferedImage dbImg = null;
+    private int status;
 	
 	public MainPanel(){
 		///Initializing the board
 		setLayout(new BorderLayout());
 		timer = new Timer(timeForInterval, this);
 		timer.start();
+		status = GameEngine.NOTHING;
 		
 		///Initializing the listener.
 		keyboard_listener = new Listener();
@@ -129,6 +134,12 @@ public class MainPanel extends JPanel implements ActionListener , Runnable {
         
         // draw game elements
         game.draw((Graphics2D) dbg, this);
+        
+        if (status == GameEngine.LOSE)
+        	drawMessage(dbg, LOSE_MSG);
+        else if (status == GameEngine.WIN)
+        	drawMessage(dbg, WIN_MSG);
+        	
     }
 	
 	@Override
@@ -139,7 +150,7 @@ public class MainPanel extends JPanel implements ActionListener , Runnable {
         
         while(running)
         {
-            game.update();
+        	status = game.update();
             gameRender();
             paintScreen();   // active rendering
 
@@ -169,5 +180,12 @@ public class MainPanel extends JPanel implements ActionListener , Runnable {
     public void startGame()
     {
         (new Thread(this)).start();
+    }
+    
+    private void drawMessage(Graphics g, String msg)
+    {
+        g.setFont(new Font("Arial", Font.PLAIN, 30));
+        g.setColor(Color.WHITE);
+        g.drawString(msg, game.shipBoardWidth() / 2 - 50, game.shipBoardHeight() / 2);
     }
 }
