@@ -121,7 +121,6 @@ public class MainPanel extends JPanel implements ActionListener , Runnable {
 	private void gameRender()
     {
         Graphics dbg;
-        System.out.println(game.shipBoardWidth());
         dbImg = new BufferedImage(game.shipBoardWidth(), game.shipBoardHeight(), BufferedImage.OPAQUE);
         dbg = dbImg.createGraphics();
         dbg.setColor(Color.BLACK);

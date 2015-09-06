@@ -9,22 +9,31 @@ public class Astroid extends Sprite{
 	public static final int DRAW_SIZE = 30;
 	
 	private int size;
+	private Image img;
 	
 	///Default constructor
 	public Astroid(){
 		super();
 		size = 3;
+		loadImag();
 	}
 	
 	///Constructor
 	public Astroid(Vector2f position, Vector2f direction, float speed ,int size, int boardWidth, int boardHeight){
 		super(position, direction, speed, boardWidth, boardHeight);
 		this.size = size;
+		loadImag();
 	}
 	
 	public Astroid(float posX, float posY, float dirX, float dirY, float speed ,int size, int boardWidth, int boardHeight){
 		super(posX, posY, dirX, dirY, speed, boardWidth,  boardHeight);
 		this.size = size;
+		loadImag();
+	}
+	
+	///Load the image of the asteroid
+	private void loadImag(){
+		img = Toolkit.getDefaultToolkit().getImage(GameEngine.Path + "astroid.png");
 	}
  
 	///Split the asteroid
@@ -63,7 +72,7 @@ public class Astroid extends Sprite{
 	
 	///Draw the asteroid
 	public void draw(Graphics2D g, ImageObserver ob){
-		Image img = Toolkit.getDefaultToolkit().getImage(GameEngine.Path + "astroid.png");
+		
 		int tempSize = DRAW_SIZE*size;
 		g.drawImage(img, (int)getPosition().getX() - (tempSize / 2), (int)getPosition().getY() - (tempSize / 2), tempSize, tempSize, ob);
 	}
