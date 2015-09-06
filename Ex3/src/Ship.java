@@ -67,7 +67,8 @@ public class Ship extends Sprite{
 		for (int i = 0; i < lifes ; i++){
 			g.drawImage(lifesImage, LIFES_SHIPS_SIZE*(i * 2 + 1), LIFES_SHIPS_SIZE, LIFES_SHIPS_SIZE, LIFES_SHIPS_SIZE, ob);
 		}
-		image = rotate(image,Math.toRadians(GetAngle() + 180) , ob );
+		//image = rotate(image,Math.toRadians(GetAngle() + 180) , ob );
+		image = rotateImage(image,(int) GetAngle() + 180 );
 		g.drawImage(image, (int)(loc.getX()-SHIPSIZE/2), (int)(loc.getY()-SHIPSIZE/2), (int)(SHIPSIZE), (int)(SHIPSIZE),ob);
 		
 	}
@@ -86,5 +87,15 @@ public class Ship extends Sprite{
 	    g.dispose();
 	    return result;
 	}
-
+	
+	private BufferedImage rotateImage(BufferedImage img, int angle)
+    {
+        BufferedImage res = new BufferedImage(img.getWidth(), img.getHeight(), BufferedImage.TYPE_INT_ARGB);
+        Graphics2D g2d = res.createGraphics();
+        g2d.rotate(Math.toRadians(angle), img.getWidth()/2, img.getHeight()/2);
+        
+        g2d.drawImage(img, 0, 0, null);
+     
+        return res;
+    }
 }
