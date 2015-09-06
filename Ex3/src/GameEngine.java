@@ -142,7 +142,7 @@ public class GameEngine {
 	private boolean CDAstroid(Astroid ast, float pointX, float pointY){
 		float dx = ast.getPosition().getX() - pointX;
 		float dy = ast.getPosition().getY() - pointY;
-		if (new Vector2f(dx, dy).lenght() <= Astroid.DRAW_SIZE * ast.getSize())
+		if ((new Vector2f(dx, dy)).lenght() < (Astroid.DRAW_SIZE * ast.getSize()) / 2)
 			return true;
 		else 
 			return false;
