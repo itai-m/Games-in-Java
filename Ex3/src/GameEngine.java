@@ -119,11 +119,11 @@ public class GameEngine {
 		g.setColor(Color.BLACK);
 		g.drawRect(0, 0, boardWidth, boardHeight);
 		*/
-		for (Shot shot : shots){
-			shot.draw(g);
+		for (int i = 0; i < shots.size() ; i++){
+			shots.get(i).draw(g);
 		}
-		for (Astroid ast : astroids){
-			ast.draw(g, ob);
+		for (int i = 0; i < astroids.size() ; i++){
+			astroids.get(i).draw(g, ob);
 		}
 		if ((invulnerableSteps % 2) == 0)
 			ship.draw(g, ob);

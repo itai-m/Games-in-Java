@@ -45,7 +45,11 @@ public class MainPanel extends JPanel implements ActionListener , Runnable {
 	
 	///The panel that the board draw on
 	public void paintComponent(Graphics g){
-		game.setBoardSize(getWidth(), getHeight());
+		super.paintComponent(g);
+        gameRender();
+        game.setBoardSize(getWidth(), getHeight());
+        g.drawImage(dbImg, 0, 0, this);
+		/*
 		super.paintComponent(g);
 		Graphics2D g2d = (Graphics2D) g;
 		this.setBackground(Color.BLACK);
@@ -65,7 +69,7 @@ public class MainPanel extends JPanel implements ActionListener , Runnable {
 			break;
 		default:
 			break;
-		}
+		}*/
 	}
 	
 	///The listener class for listen to the keyboard
@@ -86,6 +90,9 @@ public class MainPanel extends JPanel implements ActionListener , Runnable {
 				break;
 			case KeyEvent.VK_SPACE:
 				game.shot();
+				break;
+			case KeyEvent.VK_ESCAPE:
+				//TODO: end the game
 				break;
 			}
 			repaint();
@@ -110,15 +117,16 @@ public class MainPanel extends JPanel implements ActionListener , Runnable {
         }
     }
 
+	///Render all the game using double buffering
 	private void gameRender()
     {
         Graphics dbg;
-        
+        System.out.println(game.shipBoardWidth());
         dbImg = new BufferedImage(game.shipBoardWidth(), game.shipBoardHeight(), BufferedImage.OPAQUE);
         dbg = dbImg.createGraphics();
         dbg.setColor(Color.BLACK);
         dbg.fillRect(0, 0, game.shipBoardWidth(), game.shipBoardHeight());
-        dbg.drawImage(dbImg, 0, 0, this);
+        dbg.drawImage(bgImage, 0, 0, this);
         
         // draw game elements
         game.draw((Graphics2D) dbg, this);
@@ -133,8 +141,8 @@ public class MainPanel extends JPanel implements ActionListener , Runnable {
         while(running)
         {
             game.update();
-            //gameRender();
-            //paintScreen();   // active rendering
+            gameRender();
+            paintScreen();   // active rendering
 
             diff = System.currentTimeMillis() - before;
             sleepTime = PERIOD - diff;
@@ -151,4 +159,16 @@ public class MainPanel extends JPanel implements ActionListener , Runnable {
 		
 	}
 
+	// only start the animation once the JPanel has been added to the JFrame
+    public void addNotify()
+    { 
+        super.addNotify();   // creates the peer
+        startGame();    // start the thread
+    }
+    
+    ///Start the game
+    public void startGame()
+    {
+        (new Thread(this)).start();
+    }
 }
