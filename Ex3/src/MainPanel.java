@@ -2,6 +2,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
@@ -16,17 +17,18 @@ public class MainPanel extends JPanel implements ActionListener , Runnable {
 	
 	
 	private final int timeForInterval = 50;
+	private static final int PERIOD = 40;
 
-	private BoardPanel t;
 	private Listener keyboard_listener;
 	private GameEngine game = new GameEngine(Main.initializedHight, Main.initializedHight, 0, -1, 0);
 	private Timer timer;
+	private boolean running;
+	private Image bgImage;
+    private BufferedImage dbImg = null;
 	
 	public MainPanel(){
 		///Initializing the board
-		t = new BoardPanel();
 		setLayout(new BorderLayout());
-		add(t, BorderLayout.CENTER);
 		timer = new Timer(timeForInterval, this);
 		timer.start();
 		
@@ -42,29 +44,27 @@ public class MainPanel extends JPanel implements ActionListener , Runnable {
 	}
 	
 	///The panel that the board draw on
-	private class BoardPanel extends JPanel {
-		public void paintComponent(Graphics g){
-			game.setBoardSize(getWidth(), getHeight());
-			super.paintComponent(g);
-			Graphics2D g2d = (Graphics2D) g;
-			this.setBackground(Color.BLACK);
-			game.draw(g2d, this);
-			int status = game.update();
-			switch (status) {
-			case GameEngine.WIN:
-				System.out.println("win");
-				///TODO win option
-				break;
-			case GameEngine.LOSE:
-				System.out.println("lose");
-				//TODO Lose option
-				break;
-			case GameEngine.NOTHING:
-				//keep going
-				break;
-			default:
-				break;
-			}
+	public void paintComponent(Graphics g){
+		game.setBoardSize(getWidth(), getHeight());
+		super.paintComponent(g);
+		Graphics2D g2d = (Graphics2D) g;
+		this.setBackground(Color.BLACK);
+		game.draw(g2d, this);
+		int status = game.update();
+		switch (status) {
+		case GameEngine.WIN:
+			System.out.println("win");
+			///TODO win option
+			break;
+		case GameEngine.LOSE:
+			System.out.println("lose");
+			//TODO Lose option
+			break;
+		case GameEngine.NOTHING:
+			//keep going
+			break;
+		default:
+			break;
 		}
 	}
 	
@@ -94,13 +94,13 @@ public class MainPanel extends JPanel implements ActionListener , Runnable {
 	}
 	
 	///Paint a image to the screen
-	private void paintScreen(BufferedImage img){
+	private void paintScreen(){
         Graphics g;
         try {
             g = getGraphics();
-            if(g != null && img != null)
+            if(g != null && dbImg != null)
             {
-                g.drawImage(img, 0, 0, null);
+                g.drawImage(dbImg, 0, 0, null);
             }
         }
         catch(Exception e)
@@ -110,29 +110,44 @@ public class MainPanel extends JPanel implements ActionListener , Runnable {
         }
     }
 
-	private void gameRender(BufferedImage img)
+	private void gameRender()
     {
         Graphics dbg;
         
-        img = new BufferedImage(game.shipBoardWidth(), game.shipBoardHeight(), BufferedImage.OPAQUE);
-        dbg = img.createGraphics();
-        dbg.setColor(Color.WHITE);
+        dbImg = new BufferedImage(game.shipBoardWidth(), game.shipBoardHeight(), BufferedImage.OPAQUE);
+        dbg = dbImg.createGraphics();
+        dbg.setColor(Color.BLACK);
         dbg.fillRect(0, 0, game.shipBoardWidth(), game.shipBoardHeight());
-        dbg.drawImage(img, 0, 0, this);
+        dbg.drawImage(dbImg, 0, 0, this);
         
         // draw game elements
         game.draw((Graphics2D) dbg, this);
-        
-        if(isGameOver)
-        {
-            gameOverMessage(dbg);
-            running = false;
-        }
     }
 	
 	@Override
 	public void run() {
-		// TODO Auto-generated method stub
+		long before, diff, sleepTime;
+        before = System.currentTimeMillis();
+        running = true;
+        
+        while(running)
+        {
+            game.update();
+            //gameRender();
+            //paintScreen();   // active rendering
+
+            diff = System.currentTimeMillis() - before;
+            sleepTime = PERIOD - diff;
+            if(sleepTime <= 0)
+                sleepTime = 5;
+
+            try {
+                Thread.sleep(sleepTime);
+            }
+            catch(InterruptedException e){}
+
+            before = System.currentTimeMillis();
+        }
 		
 	}
 
