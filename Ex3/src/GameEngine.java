@@ -9,7 +9,7 @@ public class GameEngine {
 	private final float SHOT_SPEED = 40;
 	public static final String Path =  System.getProperty("user.dir") + "\\src\\";;
 	private final int NUM_OF_ASTROIDS = 4;
-	private final int ASTROIDS_SPEED = 10;
+	private final int ASTROIDS_SPEED = 8;
 	private final int ASTROIDS_SIZE = 4;
 	private final int NUMBER_OF_LIFE = 3;
 	public static final int WIN = 1;
@@ -109,8 +109,11 @@ public class GameEngine {
 	
 	///Shot with the ship
 	public void shot(){
-		Shot shot = new Shot(ship.getPosition().getX(),ship.getPosition().getY(), ship.getDirection().getX(), ship.getDirection().getY(), SHOT_SPEED, ship.getBoardWidth(), ship.getBoardHeight());
-		shots.add(shot);
+		System.out.println(ship.isDead());
+		if (!ship.isDead()){
+			Shot shot = new Shot(ship.getPosition().getX(),ship.getPosition().getY(), ship.getDirection().getX(), ship.getDirection().getY(), SHOT_SPEED, ship.getBoardWidth(), ship.getBoardHeight());
+			shots.add(shot);
+		}
 	}
 	
 	///Draw all the game
@@ -125,7 +128,7 @@ public class GameEngine {
 		for (int i = 0; i < astroids.size() ; i++){
 			astroids.get(i).draw(g, ob);
 		}
-		if ((invulnerableSteps % 2) == 0)
+		if (((invulnerableSteps % 2) == 0) && (!isLose()))
 			ship.draw(g, ob);
 	}
 	

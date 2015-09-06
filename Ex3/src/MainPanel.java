@@ -181,6 +181,6 @@ public class MainPanel extends JPanel implements ActionListener , Runnable {
     {
         g.setFont(new Font("Arial", Font.PLAIN, 30));
         g.setColor(Color.WHITE);
-        g.drawString(msg, game.shipBoardWidth() / 2 - 50, game.shipBoardHeight() / 2);
+        g.drawString(msg, game.shipBoardWidth() / 2 - msg.length() * 9, game.shipBoardHeight() / 2);
     }
 }

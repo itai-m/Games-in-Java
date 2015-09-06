@@ -47,7 +47,7 @@ public class Ship extends Sprite{
 	
 	///Check if the life's ship is over
 	public boolean isDead(){
-		if (lifes == 0)
+		if (lifes <= 0)
 			return true;
 		return false;
 	}
