@@ -117,10 +117,6 @@ public class GameEngine {
 	
 	///Draw all the game
 	public void draw(Graphics2D g, ImageObserver ob){
-		/*
-		g.setColor(Color.BLACK);
-		g.drawRect(0, 0, boardWidth, boardHeight);
-		*/
 		for (int i = 0; i < shots.size() ; i++){
 			shots.get(i).draw(g);
 		}
