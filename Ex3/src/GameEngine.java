@@ -109,7 +109,6 @@ public class GameEngine {
 	
 	///Shot with the ship
 	public void shot(){
-		System.out.println(ship.isDead());
 		if (!ship.isDead()){
 			Shot shot = new Shot(ship.getPosition().getX(),ship.getPosition().getY(), ship.getDirection().getX(), ship.getDirection().getY(), SHOT_SPEED, ship.getBoardWidth(), ship.getBoardHeight());
 			shots.add(shot);
