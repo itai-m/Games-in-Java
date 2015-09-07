@@ -132,22 +132,6 @@ public class MainPanel extends JPanel implements ActionListener , Runnable {
         	status = game.update();
             gameRender();
             paintScreen();   // active rendering
-
-    		switch (status) {
-    		case GameEngine.WIN:
-    			System.out.println("win");
-    			///TODO win option
-    			break;
-    		case GameEngine.LOSE:
-    			System.out.println("lose");
-    			//TODO Lose option
-    			break;
-    		case GameEngine.NOTHING:
-    			//keep going
-    			break;
-    		default:
-    			break;
-    		}
     		
             diff = System.currentTimeMillis() - before;
             sleepTime = PERIOD - diff;
