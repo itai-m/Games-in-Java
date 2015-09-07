@@ -20,7 +20,7 @@ public class MainPanel extends JPanel implements ActionListener {
 	///Constant variables
 	private final int boardSize = 4;
 	private final int spaceInBoard = 10;
-	private final String Path =  System.getProperty("user.dir") + "\\src\\";;
+	private final String Path =  System.getProperty("user.dir") + "\\src\\";
 
 	///Define all the objects
 	private BoardPanel t;
