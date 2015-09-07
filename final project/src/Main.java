@@ -6,7 +6,7 @@ public class Main {
 	
     public static void main(String[] args)
     {
-        JFrame frame = new JFrame("Ex3");
+        JFrame frame = new JFrame("test");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(initializedWidth, initializedHight);
         GamePanel p = new GamePanel();
