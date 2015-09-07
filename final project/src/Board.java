@@ -27,7 +27,7 @@ public class Board {
 		initBricks();
 	}
 	
-	
+	///Constructor
 	public Board(int width, int height, int boardWidth, int boardHeight){
 		tiles = new int[width][height];
 		this.boardHeight = boardHeight;
