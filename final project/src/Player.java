@@ -1,5 +1,5 @@
 
-public class Player {
+public class Player extends Sprite{
 	
 	private int x;
 	private int y;
