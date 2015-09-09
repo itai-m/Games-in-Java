@@ -1,7 +1,7 @@
 
 public class Player extends Sprite{
 	
-	private final int SPEED = 4;
+	private final static int SPEED = 4;
 	private final int LEFT = 1;
 	private final int RIGHT = 2;
 	private final int UP = 3;
@@ -27,56 +27,36 @@ public class Player extends Sprite{
 		turnTo = RIGHT;
 	}
 
-	///Turn to the left, return false if is allready turn to the left, otherwise true
+	///Turn to the left, return false if is already turn to the left, otherwise true
 	public boolean turnLeft(){
 		super.setDirection(new Vector2f (0, -1));
 		return turnToSide(LEFT);
 	}
 
-	///Turn to the right, return false if is allready turn to the right, otherwise true
+	///Turn to the right, return false if is already turn to the right, otherwise true
 	public boolean turnRight(){
 		super.setDirection(new Vector2f (0, 1));
 		return turnToSide(RIGHT);
 	}
 
-	///Turn to the up, return false if is allready turn to the up, otherwise true
+	///Turn to the up, return false if is already turn to the up, otherwise true
 	public boolean turnUp(){
 		super.setDirection(new Vector2f (-1, 0));
 		return turnToSide(UP);
 	}
 
-	///Turn to the down, return false if is allready turn to the down, otherwise true
+	///Turn to the down, return false if is already turn to the down, otherwise true
 	public boolean turnDown(){
 		super.setDirection(new Vector2f (1, 0));
 		return turnToSide(DOWN);
 	}
 
-	///Turn to side, if allready on that side return false, otherwise true
+	///Turn to side, if already on that side return false, otherwise true
 	private boolean turnToSide(int side){
 		if (turnTo == side)
 			return false;
 		turnTo = side;
 		return true;
-	}
-
-	///Get the x
-	public int getX() {
-		return x;
-	}
-
-	///Set the x
-	public void setX(int x) {
-		this.x = x;
-	}
-
-	///Get the y
-	public int getY() {
-		return y;
-	}
-
-	///Set the y
-	public void setY(int y) {
-		this.y = y;
 	}
 
 	///Get the height
