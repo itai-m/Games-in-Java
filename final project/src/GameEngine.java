@@ -15,8 +15,9 @@ public class GameEngine {
 	///Constructors
 	public GameEngine(int boardWidth, int boardHeight){
 		board = new Board(10, 10, boardWidth, boardHeight);
-		player = new Player(2, 2, boardWidth / 10, boardHeight / 10, boardWidth, boardHeight);
+		player = new Player(200, 200, boardWidth / 10, boardHeight / 10, boardWidth, boardHeight);
 	}
+	
 	
 	///Update the game
 	public void update(){
@@ -25,7 +26,7 @@ public class GameEngine {
 	
 	///Resize the game
 	public void setBoardSize(int boardWidth, int boardHeight){
-		
+		board.setBoardSize(boardWidth, boardHeight);
 	}
 	
 	///Player shot
@@ -35,7 +36,8 @@ public class GameEngine {
 	
 	///Draw the game
 	public void draw(Graphics2D g, ImageObserver ob){
-		
+		board.draw(g, ob);
+		player.draw(g, ob);
 	}
 	
 	///Move the player to the right

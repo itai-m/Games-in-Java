@@ -12,8 +12,8 @@ public class Board {
 	private int[][] tiles;
 	private int boardWidth;
 	private int boardHeight;
-	private int height;
-	private int width;
+	private int row;
+	private int col;
 	private int rowSize;
 	private int colSize;
 	private Image brick1 = null;
@@ -26,14 +26,14 @@ public class Board {
 	}
 	
 	///Constructor
-	public Board(int width, int height, int boardWidth, int boardHeight){
-		tiles = new int[width][height];
+	public Board(int col, int row, int boardWidth, int boardHeight){
+		tiles = new int[col][row];
 		this.boardHeight = boardHeight;
 		this.boardWidth = boardWidth;
-		this.rowSize = boardHeight / height;
-		this.colSize = boardWidth / width;
-		this.height = height;
-		this.width = width;
+		this.rowSize = boardHeight / row;
+		this.colSize = boardWidth / col;
+		this.row = row;
+		this.col = col;
 		initImag();
 		loadExampleMap();
 	}
@@ -82,8 +82,8 @@ public class Board {
 	public void setBoardSize(int boardWidth, int boardHeight){
 		this.boardHeight = boardHeight;
 		this.boardWidth = boardWidth;
-		this.rowSize = boardHeight / height;
-		this.colSize = boardWidth / width;
+		this.rowSize = boardHeight / row;
+		this.colSize = boardWidth / col;
 	}
 	
 	///Get one of the tile

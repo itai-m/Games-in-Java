@@ -1,4 +1,3 @@
-import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -12,11 +11,14 @@ public class Player extends Sprite{
 	private final int RIGHT = 2;
 	private final int UP = 3;
 	private final int DOWN = 4;
+	private final int SPRITE_WIDTH = 32;
+	private final int SPRITE_HEIGHT = 48;
 
 	private int height;
 	private int width;
 	private int turnTo;
 	private Image player;
+	private int step;
 	
 	///Default constructor
 	public Player (){
@@ -24,6 +26,7 @@ public class Player extends Sprite{
 		turnTo = RIGHT;
 		height = 10;
 		width = 10;
+		step = 0;
 		initImages();
 	}
 	
@@ -32,13 +35,14 @@ public class Player extends Sprite{
 		super(x, y, 0, 1, SPEED, boardWidth, boardHeight);
 		this.height = height;
 		this.width = width;
-		turnTo = RIGHT;
+		turnTo = DOWN;
+		step = 0;
 		initImages();
 	}
 	
 	///Initialization the images
 	private void initImages(){
-		player = Toolkit.getDefaultToolkit().getImage(Path + "player.jpg");
+		player = Toolkit.getDefaultToolkit().getImage(Path + "player.png");
 	}
 
 	///Turn to the left, return false if is already turn to the left, otherwise true
@@ -95,6 +99,23 @@ public class Player extends Sprite{
 	
 	///Draw the Player
 	public void draw(Graphics2D g, ImageObserver ob){
-		g.drawImage(player, (int)getPosition().getX(), (int)getPosition().getY(), width, height, ob);
+		//g.drawImage(player, (int)getPosition().getX(), (int)getPosition().getY(), width, height, ob);
+		switch (turnTo) {
+		case DOWN:
+			g.drawImage(player, (int)getPosition().getX(), (int)getPosition().getY(), width, height, SPRITE_WIDTH, SPRITE_HEIGHT, SPRITE_WIDTH * step, 0, ob);
+			break;
+		case UP:
+			g.drawImage(player, (int)getPosition().getX(), (int)getPosition().getY(), width, height, SPRITE_WIDTH, SPRITE_HEIGHT, SPRITE_WIDTH * step, SPRITE_HEIGHT * 3, ob);
+			break;
+		case LEFT:
+			g.drawImage(player, (int)getPosition().getX(), (int)getPosition().getY(), width, height, SPRITE_WIDTH, SPRITE_HEIGHT, SPRITE_WIDTH * step, SPRITE_HEIGHT, ob);
+			break;
+		case RIGHT:
+			g.drawImage(player, (int)getPosition().getX(), (int)getPosition().getY(), width, height, SPRITE_WIDTH, SPRITE_HEIGHT, SPRITE_WIDTH * step, SPRITE_HEIGHT * 2, ob);
+			break;
+		default:
+			break;
+		}
+		
 	}
 }
