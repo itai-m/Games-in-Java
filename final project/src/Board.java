@@ -4,11 +4,9 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.image.ImageObserver;
 
-import javax.swing.text.StyledEditorKit.BoldAction;
-
 public class Board {
 
-	private final String Path =  System.getProperty("user.dir") + "\\src\\";
+	private final String Path =  System.getProperty("user.dir") + "\\image\\";
 	
 	private final int INIT_SIZE = 10;
 	private int[][] tiles;
@@ -24,7 +22,7 @@ public class Board {
 	///Default constructor
 	public Board(){
 		tiles = new int[INIT_SIZE][INIT_SIZE];
-		initBricks();
+		initImag();
 	}
 	
 	///Constructor
@@ -36,11 +34,12 @@ public class Board {
 		this.colSize = boardWidth / width;
 		this.height = height;
 		this.width = width;
-		initBricks();
+		initImag();
 		loadExampleMap();
 	}
 	
-	private void initBricks(){
+	///Initialization the images
+	private void initImag(){
 		brick1 = Toolkit.getDefaultToolkit().getImage(Path + "b1.jpg");
 		background  = Toolkit.getDefaultToolkit().getImage(Path + "background.jpg");
 	}

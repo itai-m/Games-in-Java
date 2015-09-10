@@ -1,6 +1,10 @@
+import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.Toolkit;
 
 public class Player extends Sprite{
 	
+	private final String Path =  System.getProperty("user.dir") + "\\image\\";
 	private final static int SPEED = 4;
 	private final int LEFT = 1;
 	private final int RIGHT = 2;
@@ -10,6 +14,7 @@ public class Player extends Sprite{
 	private int height;
 	private int width;
 	private int turnTo;
+	private Image player;
 	
 	///Default constructor
 	public Player (){
@@ -17,6 +22,7 @@ public class Player extends Sprite{
 		turnTo = RIGHT;
 		height = 10;
 		width = 10;
+		initImages();
 	}
 	
 	///Constructor
@@ -25,6 +31,12 @@ public class Player extends Sprite{
 		this.height = height;
 		this.width = width;
 		turnTo = RIGHT;
+		initImages();
+	}
+	
+	///Initialization the images
+	private void initImages(){
+		player = Toolkit.getDefaultToolkit().getImage(Path + "player.jpg");
 	}
 
 	///Turn to the left, return false if is already turn to the left, otherwise true
@@ -77,5 +89,10 @@ public class Player extends Sprite{
 	///Set the width
 	public void setWidth(int width) {
 		this.width = width;
+	}
+	
+	///Draw the Player
+	public void draw(Graphics g) {
+		
 	}
 }
