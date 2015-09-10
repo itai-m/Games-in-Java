@@ -14,8 +14,9 @@ public class GameEngine {
 	
 	///Constructors
 	public GameEngine(int boardWidth, int boardHeight){
+		System.out.println(boardWidth / 10);
 		board = new Board(10, 10, boardWidth, boardHeight);
-		player = new Player(200, 200, boardWidth / 10, boardHeight / 10, boardWidth, boardHeight);
+		player = new Player((boardWidth / 10) * 2, boardHeight - (boardHeight / 10) * (5/2), boardWidth / 10, boardHeight / 10, boardWidth, boardHeight);
 	}
 	
 	

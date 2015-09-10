@@ -17,6 +17,7 @@ public class Player extends Sprite{
 	private final int SPRITE_UP_ROW = 3;
 	private final int SPRITE_LEFT_ROW = 1;
 	private final int SPRITE_RIGHT_ROW = 2;
+	private final int SPRITE_COLS = 4;
 
 	private int height;
 	private int width;
@@ -75,8 +76,11 @@ public class Player extends Sprite{
 
 	///Turn to side, if already on that side return false, otherwise true
 	private boolean turnToSide(int side){
-		if (turnTo == side)
+		if (turnTo == side){
+			step = (step + 1) % SPRITE_COLS;
 			return false;
+		}
+		step = 0;
 		turnTo = side;
 		return true;
 	}
@@ -103,22 +107,23 @@ public class Player extends Sprite{
 	
 	///Draw the Player
 	public void draw(Graphics2D g, ImageObserver ob){
+		int x = (int)getPosition().getX();
+		int y = (int)getPosition().getY();
 		switch (turnTo) {
 		case DOWN:
-			g.drawImage(player, (int)getPosition().getX(), (int)getPosition().getY(), width, height, SPRITE_WIDTH * (step+1), SPRITE_HEIGHT * (SPRITE_DOWN_ROW+1), SPRITE_WIDTH * step, SPRITE_HEIGHT * SPRITE_DOWN_ROW, ob);
+			g.drawImage(player, x - width/2, y - height/2, x + width/2, y + height/2, SPRITE_WIDTH * step, SPRITE_HEIGHT * SPRITE_DOWN_ROW, SPRITE_WIDTH * (step+1), SPRITE_HEIGHT * (SPRITE_DOWN_ROW+1), ob);
 			break;
 		case UP:
-			g.drawImage(player, (int)getPosition().getX(), (int)getPosition().getY(), width, height, SPRITE_WIDTH * (step+1), SPRITE_HEIGHT * (SPRITE_UP_ROW+1), SPRITE_WIDTH * step, SPRITE_HEIGHT * SPRITE_UP_ROW, ob);
+			g.drawImage(player, x - width/2, y - height/2, x + width/2, y + height/2, SPRITE_WIDTH * step, SPRITE_HEIGHT * SPRITE_UP_ROW, SPRITE_WIDTH * (step+1), SPRITE_HEIGHT * (SPRITE_UP_ROW+1), ob);
 			break;
 		case LEFT:
-			g.drawImage(player, (int)getPosition().getX(), (int)getPosition().getY(), width, height, SPRITE_WIDTH * (step+1), SPRITE_HEIGHT * (SPRITE_LEFT_ROW+1), SPRITE_WIDTH * step, SPRITE_HEIGHT * SPRITE_LEFT_ROW, ob);
+			g.drawImage(player, x - width/2, y - height/2, x + width/2, y + height/2, SPRITE_WIDTH * step, SPRITE_HEIGHT * SPRITE_LEFT_ROW, SPRITE_WIDTH * (step+1), SPRITE_HEIGHT * (SPRITE_LEFT_ROW+1), ob);
 			break;
 		case RIGHT:
-			g.drawImage(player, (int)getPosition().getX(), (int)getPosition().getY(), width, height, SPRITE_WIDTH * (step+1), SPRITE_HEIGHT * (SPRITE_RIGHT_ROW+1), SPRITE_WIDTH * step, SPRITE_HEIGHT * SPRITE_RIGHT_ROW, ob);
+			g.drawImage(player, x - width/2, y - height/2, x + width/2, y + height/2, SPRITE_WIDTH * step, SPRITE_HEIGHT * SPRITE_RIGHT_ROW, SPRITE_WIDTH * (step+1), SPRITE_HEIGHT * (SPRITE_RIGHT_ROW+1), ob);
 			break;
 		default:
 			break;
 		}
-		
 	}
 }
