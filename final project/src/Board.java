@@ -59,6 +59,7 @@ public class Board {
 		tiles = tilesExa.clone();
 	}
 	
+	///Draw the board
 	public void draw(Graphics2D g, ImageObserver ob){
 		g.drawImage(background, 0, 0, boardWidth, boardHeight, ob);
 		for (int i = 0; i < tiles.length ; i++){
@@ -83,5 +84,10 @@ public class Board {
 		this.boardWidth = boardWidth;
 		this.rowSize = boardHeight / height;
 		this.colSize = boardWidth / width;
+	}
+	
+	///Get one of the tile
+	public int getTile(int x, int y){
+		return tiles[x][y];
 	}
 }

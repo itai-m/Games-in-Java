@@ -1,6 +1,8 @@
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.awt.image.ImageObserver;
 
 public class Player extends Sprite{
 	
@@ -92,7 +94,7 @@ public class Player extends Sprite{
 	}
 	
 	///Draw the Player
-	public void draw(Graphics g) {
-		
+	public void draw(Graphics2D g, ImageObserver ob){
+		g.drawImage(player, (int)getPosition().getX(), (int)getPosition().getY(), width, height, ob);
 	}
 }
