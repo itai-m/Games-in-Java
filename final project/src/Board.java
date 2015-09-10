@@ -90,4 +90,24 @@ public class Board {
 	public int getTile(int x, int y){
 		return tiles[x][y];
 	}
+
+	///Get the board width
+	public int getBoardWidth() {
+		return boardWidth;
+	}
+
+	///Set the board width
+	public void setBoardWidth(int boardWidth) {
+		this.boardWidth = boardWidth;
+	}
+
+	///Get the board height
+	public int getBoardHeight() {
+		return boardHeight;
+	}
+
+	///Set the board height
+	public void setBoardHeight(int boardHeight) {
+		this.boardHeight = boardHeight;
+	}
 }

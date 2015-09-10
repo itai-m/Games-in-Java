@@ -1,9 +1,12 @@
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.image.BufferedImage;
 
 import javax.swing.JPanel;
 
@@ -11,12 +14,19 @@ import javax.swing.JPanel;
 
 public class GamePanel extends JPanel implements ActionListener , Runnable{
 
+	private static final int PERIOD = 40;
+	
 	private GameEngine game;
 	private Listener keyboard_listener;
+	private boolean running;
+	
+	private Image bgImage;
+    private BufferedImage dbImg = null;
 	
 	///Constructor
 	public GamePanel(){
 		game = new GameEngine( Main.initializedWidth, Main.initializedHight);
+		running = true;
 		
 		///Initializing the listener.
 		keyboard_listener = new Listener();
@@ -25,16 +35,68 @@ public class GamePanel extends JPanel implements ActionListener , Runnable{
 	}
 	
 	public void paintComponent(Graphics g){
-		game.setBoardSize(getWidth(), getHeight());
-		game.draw((Graphics2D) g, this);
+		super.paintComponent(g);
+        gameRender();
+        game.setBoardSize(getWidth(), getHeight());
+        g.drawImage(dbImg, 0, 0, this);
 	}
 	
 	@Override
 	public void run() {
-		game.setBoardSize(getWidth(), getHeight());
+		long before, diff, sleepTime;
+        before = System.currentTimeMillis();
+        running = true;
+        
+        while(running)
+        {
+        	game.update();
+            gameRender();
+            paintScreen();   // active rendering
+    		
+            diff = System.currentTimeMillis() - before;
+            sleepTime = PERIOD - diff;
+            if(sleepTime <= 0)
+                sleepTime = 5;
+
+            try {
+                Thread.sleep(sleepTime);
+            }
+            catch(InterruptedException e){}
+
+            before = System.currentTimeMillis();
+        }
 		
 	}
+	
+	///Render all the game using double buffering
+	private void gameRender()
+    {
+        Graphics dbg;
+        dbImg = new BufferedImage(game.getBoardWidth(), game.getBoardHeight(), BufferedImage.OPAQUE);
+        dbg = dbImg.createGraphics();
+        dbg.drawImage(bgImage, 0, 0, this);
+        
+        // draw game elements
+        game.draw((Graphics2D) dbg, this);
+    }
 
+	///Paint a image to the screen
+	private void paintScreen(){
+        Graphics g;
+        try {
+            g = getGraphics();
+            if(g != null && dbImg != null)
+            {
+                g.drawImage(dbImg, 0, 0, null);
+            }
+        }
+        catch(Exception e)
+        {
+            System.out.println("Graphics error");
+            e.printStackTrace();
+        }
+    }
+		
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		// TODO Auto-generated method stub
@@ -83,6 +145,5 @@ public class GamePanel extends JPanel implements ActionListener , Runnable{
   			}
   			repaint();
   		}
-  		
   	}
 }

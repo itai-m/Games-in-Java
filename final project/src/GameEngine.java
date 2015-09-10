@@ -18,6 +18,11 @@ public class GameEngine {
 		player = new Player(2, 2, boardWidth / 10, boardHeight / 10, boardWidth, boardHeight);
 	}
 	
+	///Update the game
+	public void update(){
+		
+	}
+	
 	///Resize the game
 	public void setBoardSize(int boardWidth, int boardHeight){
 		
@@ -51,5 +56,15 @@ public class GameEngine {
 	//Move the player to the down
 	public void MoveDown(){
 		
+	}
+	
+	///Get the board width
+	public int getBoardWidth() {
+		return board.getBoardWidth();
+	}
+	
+	///Get the board height
+	public int getBoardHeight() {
+		return board.getBoardHeight();
 	}
 }
