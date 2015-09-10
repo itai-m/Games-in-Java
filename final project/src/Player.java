@@ -6,7 +6,7 @@ import java.awt.image.ImageObserver;
 public class Player extends Sprite{
 	
 	private final String Path =  System.getProperty("user.dir") + "\\image\\";
-	private final static int SPEED = 4;
+	private final static int SPEED = 6;
 	private final int LEFT = 1;
 	private final int RIGHT = 2;
 	private final int UP = 3;
@@ -52,25 +52,25 @@ public class Player extends Sprite{
 
 	///Turn to the left, return false if is already turn to the left, otherwise true
 	public boolean turnLeft(){
-		super.setDirection(new Vector2f (0, -1));
+		super.setDirection(new Vector2f (-1, 0));
 		return turnToSide(LEFT);
 	}
 
 	///Turn to the right, return false if is already turn to the right, otherwise true
 	public boolean turnRight(){
-		super.setDirection(new Vector2f (0, 1));
+		super.setDirection(new Vector2f (1, 0));
 		return turnToSide(RIGHT);
 	}
 
 	///Turn to the up, return false if is already turn to the up, otherwise true
 	public boolean turnUp(){
-		super.setDirection(new Vector2f (-1, 0));
+		super.setDirection(new Vector2f (0, -1));
 		return turnToSide(UP);
 	}
 
 	///Turn to the down, return false if is already turn to the down, otherwise true
 	public boolean turnDown(){
-		super.setDirection(new Vector2f (1, 0));
+		super.setDirection(new Vector2f (0, 1));
 		return turnToSide(DOWN);
 	}
 

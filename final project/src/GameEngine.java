@@ -44,21 +44,25 @@ public class GameEngine {
 	///Move the player to the right
 	public void MoveRight(){
 		player.turnRight();
+		player.move();
 	}
 	
 	//Move the player to the up
 	public void MoveUp(){
 		player.turnUp();
+		player.move();
 	}
 		
 	//Move the player to the left
 	public void MoveLeft(){
 		player.turnLeft();
+		player.move();
 	}
 	
 	//Move the player to the down
 	public void MoveDown(){
 		player.turnDown();
+		player.move();
 	}
 	
 	///Get the board width
