@@ -23,6 +23,11 @@ public class GameEngine {
 		
 	}
 	
+	///Player shot
+	public void shot(){
+		
+	}
+	
 	///Draw the game
 	public void draw(Graphics2D g, ImageObserver ob){
 		
