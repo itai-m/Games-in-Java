@@ -1,28 +1,33 @@
 import java.awt.Graphics2D;
 import java.awt.image.ImageObserver;
+import java.util.LinkedList;
 
 public class GameEngine {
 
 	private Board board;
 	private Player player;
+	private LinkedList<Shot> shots;
 	
 	///Default constructor
 	public GameEngine(){
 		board = new Board();
 		player = new Player();
+		shots = new LinkedList<Shot>();
 	}
 	
 	///Constructors
 	public GameEngine(int boardWidth, int boardHeight){
-		System.out.println(boardWidth / 10);
 		board = new Board(10, 10, boardWidth, boardHeight);
 		player = new Player((boardWidth / 10) * 2, boardHeight - (boardHeight / 10) * (5/2), boardWidth / 15, boardHeight / 15, boardWidth, boardHeight);
+		shots = new LinkedList<Shot>();
 	}
 	
 	
 	///Update the game
 	public void update(){
-		
+		for (int i = 0; i < shots.size() ; i++){
+			shots.get(i).move();
+		}
 	}
 	
 	///Resize the game
@@ -32,13 +37,17 @@ public class GameEngine {
 	
 	///Player shot
 	public void shot(){
-		
+		Shot tempShot = new Shot(player.getPosition().getX(), player.getPosition().getY(), player.getDirection().getX(), player.getDirection().getY(), player.getWidth() / 3, player.getHeight() / 3, player.getBoardWidth(), player.getBoardHeight());
+		shots.add(tempShot);
 	}
 	
 	///Draw the game
 	public void draw(Graphics2D g, ImageObserver ob){
 		board.draw(g, ob);
 		player.draw(g, ob);
+		for (int i = 0; i < shots.size() ; i++){
+			shots.get(i).draw(g, ob);
+		}
 	}
 	
 	///Move the player to the right
