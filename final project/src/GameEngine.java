@@ -37,7 +37,7 @@ public class GameEngine {
 	
 	///Player shot
 	public void shot(){
-		Shot tempShot = new Shot(player.getPosition().getX(), player.getPosition().getY(), player.getDirection().getX(), player.getDirection().getY(), player.getWidth() / 3, player.getHeight() / 3, player.getBoardWidth(), player.getBoardHeight());
+		Shot tempShot = new Shot(player.getPosition().getX(), player.getPosition().getY(), player.getDirection().getX(), player.getDirection().getY(), (int)(player.getWidth() / 1.3), (int)(player.getHeight() / 1.3), player.getBoardWidth(), player.getBoardHeight());
 		shots.add(tempShot);
 	}
 	
