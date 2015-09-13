@@ -49,20 +49,25 @@ public class Shot extends Sprite{
 		int x2 = (int)getPosition().getX();
 		int y2 = (int)getPosition().getY();
 		if (getDirection().getX() != 0){
-			x1 -= width / 2;
 			y1 -= height / 2;
+			y2 += height /2;
+			if (getDirection().getX() == 1){
+				x1 -= width / 2;
+				x2 += width / 2;
+			}
+			else{
+				x1 += width / 2;
+				x2 -= width / 2;
+			}
+		}
+		else{ 
+			x1 -= width / 2;
+			y1 -= height / 2 ;
 			x2 += width / 2;
 			y2 += height /2;
-		}
-		if (getDirection().getX() == -1){
-			width *= -1;
-		}
-		else if (getDirection().getY() == 1){
-			width *= -1;
-			height *= -1;
-		}
-		else if (getDirection().getY() == -1){
-			
+			if (getDirection().getY() == -1){
+				
+			}
 		}
 		
 		if (step < STEP_PER_PIC){
