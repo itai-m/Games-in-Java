@@ -44,10 +44,16 @@ public class Shot extends Sprite{
 	
 	///Draw the shot
 	public void draw(Graphics2D g, ImageObserver ob){
-		int x = (int)getPosition().getX();
-		int y = (int)getPosition().getY();
-		int width = this.width;
-		int height = this.height;
+		int x1 = (int)getPosition().getX();
+		int y1 = (int)getPosition().getY();
+		int x2 = (int)getPosition().getX();
+		int y2 = (int)getPosition().getY();
+		if (getDirection().getX() != 0){
+			x1 -= width / 2;
+			y1 -= height / 2;
+			x2 += width / 2;
+			y2 += height /2;
+		}
 		if (getDirection().getX() == -1){
 			width *= -1;
 		}
@@ -60,22 +66,22 @@ public class Shot extends Sprite{
 		}
 		
 		if (step < STEP_PER_PIC){
-			g.drawImage(imag, x - width/2, y - height/2, x + width/2, y + height/2, SPRITE_WIDTH[0], 0, SPRITE_WIDTH[1], SPRITE_HEIGHT, ob);
+			g.drawImage(imag, x1, y1, x2, y2, SPRITE_WIDTH[0], 0, SPRITE_WIDTH[1], SPRITE_HEIGHT, ob);
 		}
 		else if (step < STEP_PER_PIC * 2){
-			g.drawImage(imag, x - width/2, y - height/2, x + width/2, y + height/2, SPRITE_WIDTH[1], 0, SPRITE_WIDTH[2], SPRITE_HEIGHT, ob);
+			g.drawImage(imag, x1, y1, x2, y2, SPRITE_WIDTH[1], 0, SPRITE_WIDTH[2], SPRITE_HEIGHT, ob);
 		}
 		else if (step < STEP_PER_PIC * 3){
-			g.drawImage(imag, x - width/2, y - height/2, x + width/2, y + height/2, SPRITE_WIDTH[2], 0, SPRITE_WIDTH[3], SPRITE_HEIGHT, ob);
+			g.drawImage(imag, x1, y1, x2, y2, SPRITE_WIDTH[2], 0, SPRITE_WIDTH[3], SPRITE_HEIGHT, ob);
 		}
 		else if (step < STEP_PER_PIC * 4){
-			g.drawImage(imag, x - width/2, y - height/2, x + width/2, y + height/2, SPRITE_WIDTH[3], 0, SPRITE_WIDTH[4], SPRITE_HEIGHT, ob);
+			g.drawImage(imag, x1, y1, x2, y2, SPRITE_WIDTH[3], 0, SPRITE_WIDTH[4], SPRITE_HEIGHT, ob);
 		}
 		else if (step < STEP_PER_PIC * 5){
-			g.drawImage(imag, x - width/2, y - height/2, x + width/2, y + height/2, SPRITE_WIDTH[4], 0, SPRITE_WIDTH[5], SPRITE_HEIGHT, ob);
+			g.drawImage(imag, x1, y1, x2, y2, SPRITE_WIDTH[4], 0, SPRITE_WIDTH[5], SPRITE_HEIGHT, ob);
 		}
 		else if (step >= STEP_PER_PIC * 5){
-			g.drawImage(imag, x - width/2, y - height/2, x + width/2, y + height/2, SPRITE_WIDTH[5], 0, SPRITE_WIDTH[6], SPRITE_HEIGHT, ob);
+			g.drawImage(imag, x1, y1, x2, y2, SPRITE_WIDTH[5], 0, SPRITE_WIDTH[6], SPRITE_HEIGHT, ob);
 		}
 	}
 
