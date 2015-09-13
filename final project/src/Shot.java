@@ -46,6 +46,15 @@ public class Shot extends Sprite{
 	public void draw(Graphics2D g, ImageObserver ob){
 		int x = (int)getPosition().getX();
 		int y = (int)getPosition().getY();
+		int width = this.width;
+		int height = this.height;
+		if (getDirection().getX() == -1){
+			width *= -1;
+		}
+		else if (getDirection().getY() == 1){
+			height *= -1;
+		}
+		
 		if (step < STEP_PER_PIC){
 			g.drawImage(imag, x - width/2, y - height/2, x + width/2, y + height/2, SPRITE_WIDTH[0], 0, SPRITE_WIDTH[1], SPRITE_HEIGHT, ob);
 		}

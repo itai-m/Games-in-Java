@@ -44,10 +44,10 @@ public class GameEngine {
 	///Draw the game
 	public void draw(Graphics2D g, ImageObserver ob){
 		board.draw(g, ob);
-		player.draw(g, ob);
 		for (int i = 0; i < shots.size() ; i++){
 			shots.get(i).draw(g, ob);
 		}
+		player.draw(g, ob);
 	}
 	
 	///Move the player to the right

@@ -1,4 +1,6 @@
 import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
 
 public class Sprite {
 
@@ -148,4 +150,16 @@ public class Sprite {
 	///Draw the Sprite
 	public void draw(Graphics g) {
 	}
+	
+	///Rotate the image of the sprite
+	public BufferedImage rotateImage(BufferedImage img, int angle)
+    {
+        BufferedImage res = new BufferedImage(img.getWidth(), img.getHeight(), BufferedImage.TYPE_INT_ARGB);
+        Graphics2D g2d = res.createGraphics();
+        g2d.rotate(Math.toRadians(angle), img.getWidth()/2, img.getHeight()/2);
+        
+        g2d.drawImage(img, 0, 0, null);
+     
+        return res;
+    }
 }
