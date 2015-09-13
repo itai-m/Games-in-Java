@@ -52,7 +52,11 @@ public class Shot extends Sprite{
 			width *= -1;
 		}
 		else if (getDirection().getY() == 1){
+			width *= -1;
 			height *= -1;
+		}
+		else if (getDirection().getY() == -1){
+			
 		}
 		
 		if (step < STEP_PER_PIC){
