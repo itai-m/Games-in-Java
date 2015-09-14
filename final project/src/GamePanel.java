@@ -25,7 +25,7 @@ public class GamePanel extends JPanel implements ActionListener , Runnable{
 	
 	///Constructor
 	public GamePanel(){
-		game = new GameEngine( Main.initializedWidth, Main.initializedHight, 10, 10);
+		game = new GameEngine( Main.initializedWidth, Main.initializedHight, 11, 10);
 		running = true;
 		
 		///Initializing the listener.

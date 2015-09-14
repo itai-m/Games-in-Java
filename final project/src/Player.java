@@ -6,7 +6,7 @@ import java.awt.image.ImageObserver;
 public class Player extends Sprite{
 	
 	private final String Path =  System.getProperty("user.dir") + "\\image\\";
-	private final static int SPEED = 6;
+	private final static int SPEED = 5;
 	private final int LEFT = 1;
 	private final int RIGHT = 2;
 	private final int UP = 3;
@@ -27,19 +27,15 @@ public class Player extends Sprite{
 	private Image player;
 	private int step;
 	
-	///Default constructor
-	public Player (){
-		super();
-		turnTo = RIGHT;
-		height = 10;
-		width = 10;
-		step = 0;
-		initImages();
-	}
+	private int row;
+	private int col;
+	
 	
 	///Constructor
 	public Player(int x, int y, int col, int row, int boardWidth, int boardHeight){
 		super(x, y, 0, 1, SPEED, boardWidth, boardHeight);
+		this.col = col;
+		this.row = row;
 		this.height = (int) (boardHeight / (row * PROPORCEN_TO_BAORD));
 		this.width = (int) (boardWidth / (col * PROPORCEN_TO_BAORD));
 		turnTo = DOWN;
@@ -145,7 +141,14 @@ public class Player extends Sprite{
 	
 	///Set the board width and height
 	public void setBoardSize(int boardWidth, int boardHeight){
+		int widthDelta = getBoardWidth() - boardWidth;
+		int heighthDelta = getBoardHeight() - boardHeight;
+		widthDelta /= col / PROPORCEN_TO_BAORD ;
+		heighthDelta /= row / PROPORCEN_TO_BAORD ;
+		setPosition(new Vector2f(getPosition().getX() - widthDelta, getPosition().getY() - heighthDelta));
+		System.out.println(getPosition());
 		super.setBoardSize(boardWidth, boardHeight);
-		
+		this.height = (int) (boardHeight / (row * PROPORCEN_TO_BAORD));
+		this.width = (int) (boardWidth / (col * PROPORCEN_TO_BAORD));
 	}
 }

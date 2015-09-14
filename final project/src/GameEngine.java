@@ -11,7 +11,7 @@ public class GameEngine {
 	///Default constructor
 	public GameEngine(){
 		board = new Board();
-		player = new Player();
+		player = new Player(Main.initializedWidth/9,Main.initializedHight/9,10,10, Main.initializedWidth, Main.initializedHight);
 		shots = new LinkedList<Shot>();
 	}
 	
@@ -100,8 +100,6 @@ public class GameEngine {
 
 		if ((board.getTile(playerCol1, playerRow) == Board.EMPTY_TILE) && (board.getTile(playerCol2, playerRow) == Board.EMPTY_TILE)){
 			player.fall();
-			System.out.println(player.getPosition());
-			System.out.println(playerCol1 + ", " + playerRow);
 		}
 		else if (playerRow == 0){
 			player.setPosition(new Vector2f(player.getPosition().getX(), board.getBoardHeight() - player.getHeight() / 2 ));
