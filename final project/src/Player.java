@@ -19,6 +19,7 @@ public class Player extends Sprite{
 	private final int SPRITE_RIGHT_ROW = 2;
 	private final int SPRITE_COLS = 4;
 	private final int FALL_SPEED = 10;
+	private final double PROPORCEN_TO_BAORD = 1.5;
 
 	private int height;
 	private int width;
@@ -37,10 +38,10 @@ public class Player extends Sprite{
 	}
 	
 	///Constructor
-	public Player(int x, int y, int width, int height, int boardWidth, int boardHeight){
+	public Player(int x, int y, int col, int row, int boardWidth, int boardHeight){
 		super(x, y, 0, 1, SPEED, boardWidth, boardHeight);
-		this.height = height;
-		this.width = width;
+		this.height = (int) (boardHeight / (row * PROPORCEN_TO_BAORD));
+		this.width = (int) (boardWidth / (col * PROPORCEN_TO_BAORD));
 		turnTo = DOWN;
 		step = 0;
 		initImages();
@@ -138,5 +139,11 @@ public class Player extends Sprite{
 	///Get the fall speeding
 	public int getFALL_SPEED() {
 		return FALL_SPEED;
+	}
+	
+	///Set the board width and height
+	public void setBoardSize(int boardWidth, int boardHeight){
+		super.setBoardSize(boardWidth, boardHeight);
+		
 	}
 }

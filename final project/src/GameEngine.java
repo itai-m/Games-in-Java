@@ -19,9 +19,9 @@ public class GameEngine {
 	}
 	
 	///Constructors
-	public GameEngine(int boardWidth, int boardHeight){
-		board = new Board(10, 10, boardWidth, boardHeight);
-		player = new Player((boardWidth / 10) * 2, boardHeight - (boardHeight / 10) * (5/2), boardWidth / 15, boardHeight / 15, boardWidth, boardHeight);
+	public GameEngine(int boardWidth, int boardHeight, int col, int row){
+		board = new Board(col, row, boardWidth, boardHeight);
+		player = new Player((boardWidth / col) * 2, boardHeight - (boardHeight / row) * (5/2), col, row, boardWidth, boardHeight);
 		shots = new LinkedList<Shot>();
 	}
 	
@@ -37,6 +37,7 @@ public class GameEngine {
 	///Resize the game
 	public void setBoardSize(int boardWidth, int boardHeight){
 		board.setBoardSize(boardWidth, boardHeight);
+		player.setBoardSize(boardWidth, boardHeight);
 	}
 	
 	///Player shot
@@ -57,7 +58,8 @@ public class GameEngine {
 	///Move the player to the right
 	public void MoveRight(){
 		player.turnRight();
-		player.move();
+		if (checkMoveRight())
+			player.move();
 	}
 	
 	//Move the player to the up
@@ -69,7 +71,8 @@ public class GameEngine {
 	//Move the player to the left
 	public void MoveLeft(){
 		player.turnLeft();
-		player.move();
+		if (checkMoveLeft())
+			player.move();
 	}
 	
 	//Move the player to the down
@@ -90,7 +93,6 @@ public class GameEngine {
 	
 	///Check if the player need to fall
 	private void playerFalling(){
-		//System.out.println(player.getPosition().getX() + " , " + board.getColSize());
 		int playerCol = (int)(player.getPosition().getX() / board.getColSize());
 		int playerRow = (int)((player.getPosition().getY() + player.getHeight() / 2 + player.getFALL_SPEED()) / board.getRowSize());
 		
@@ -100,7 +102,6 @@ public class GameEngine {
 		if (playerCol >= board.getCol()){
 			playerCol = 0;
 		}
-		System.out.println(board.getTile(playerCol, playerRow));
 		if (board.getTile(playerCol, playerRow) == Board.EMPTY_TILE){
 			player.fall();
 		}
@@ -108,6 +109,24 @@ public class GameEngine {
 			player.setPosition(new Vector2f(player.getPosition().getX(), playerRow * board.getRowSize() - player.getHeight() / 2 ));
 		}
 		
+	}
+	
+	///Check if the player can move right
+	private boolean checkMoveRight(){
+		int playerCol = (int)((player.getPosition().getX() + (player.getWidth() / 4) + player.getSpeed()) / board.getColSize());
+		int playerRow = (int)(player.getPosition().getY() / board.getRowSize());
+		if (board.getTile(playerCol, playerRow) == Board.EMPTY_TILE)
+			return true;
+		return false;
+	}
+	
+	///Check if the player can move left
+	private boolean checkMoveLeft(){
+		int playerCol = (int)((player.getPosition().getX() - (player.getWidth() / 4) -player.getSpeed()) / board.getColSize());
+		int playerRow = (int)(player.getPosition().getY() / board.getRowSize());
+		if (board.getTile(playerCol, playerRow) == Board.EMPTY_TILE)
+			return true;
+		return false;
 	}
 	
 	///Check collision detection square with point, (x,y) this is the left top point of the square

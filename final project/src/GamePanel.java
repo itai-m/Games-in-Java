@@ -1,4 +1,4 @@
-import java.awt.Color;
+
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -25,7 +25,7 @@ public class GamePanel extends JPanel implements ActionListener , Runnable{
 	
 	///Constructor
 	public GamePanel(){
-		game = new GameEngine( Main.initializedWidth, Main.initializedHight);
+		game = new GameEngine( Main.initializedWidth, Main.initializedHight, 10, 10);
 		running = true;
 		
 		///Initializing the listener.
