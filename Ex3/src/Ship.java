@@ -67,8 +67,8 @@ public class Ship extends Sprite{
 		for (int i = 0; i < lifes ; i++){
 			g.drawImage(lifesImage, LIFES_SHIPS_SIZE*(i * 2 + 1), LIFES_SHIPS_SIZE, LIFES_SHIPS_SIZE, LIFES_SHIPS_SIZE, ob);
 		}
-		//image = rotate(image,Math.toRadians(GetAngle() + 180) , ob );
-		image = rotateImage(image,(int) GetAngle() + 180 );
+		image = rotate(image,Math.toRadians(GetAngle() + 180) , ob );
+		//image = rotateImage(image,(int) GetAngle() + 180 );
 		g.drawImage(image, (int)(loc.getX()-SHIPSIZE/2), (int)(loc.getY()-SHIPSIZE/2), (int)(SHIPSIZE), (int)(SHIPSIZE),ob);
 		
 	}
@@ -88,6 +88,8 @@ public class Ship extends Sprite{
 	    return result;
 	}
 	
+	
+	//one more way to rotate image
 	private BufferedImage rotateImage(BufferedImage img, int angle)
     {
         BufferedImage res = new BufferedImage(img.getWidth(), img.getHeight(), BufferedImage.TYPE_INT_ARGB);
