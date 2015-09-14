@@ -133,6 +133,8 @@ public class Player extends Sprite{
 	public void fall(){
 		float x = getPosition().getX();
 		float y = getPosition().getY() + FALL_SPEED;
+		if (y > getBoardHeight())
+			y = 0;
 		setPosition(new Vector2f(x,y));
 	}
 
