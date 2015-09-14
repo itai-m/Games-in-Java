@@ -146,7 +146,6 @@ public class Player extends Sprite{
 		widthDelta /= col / PROPORCEN_TO_BAORD ;
 		heighthDelta /= row / PROPORCEN_TO_BAORD ;
 		setPosition(new Vector2f(getPosition().getX() - widthDelta, getPosition().getY() - heighthDelta));
-		System.out.println(getPosition());
 		super.setBoardSize(boardWidth, boardHeight);
 		this.height = (int) (boardHeight / (row * PROPORCEN_TO_BAORD));
 		this.width = (int) (boardWidth / (col * PROPORCEN_TO_BAORD));
