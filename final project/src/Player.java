@@ -18,6 +18,7 @@ public class Player extends Sprite{
 	private final int SPRITE_LEFT_ROW = 1;
 	private final int SPRITE_RIGHT_ROW = 2;
 	private final int SPRITE_COLS = 4;
+	private final int FALL_SPEED = 10;
 
 	private int height;
 	private int width;
@@ -125,5 +126,17 @@ public class Player extends Sprite{
 		default:
 			break;
 		}
+	}
+	
+	///Move the player down (falling)
+	public void fall(){
+		float x = getPosition().getX();
+		float y = getPosition().getY() + FALL_SPEED;
+		setPosition(new Vector2f(x,y));
+	}
+
+	///Get the fall speeding
+	public int getFALL_SPEED() {
+		return FALL_SPEED;
 	}
 }

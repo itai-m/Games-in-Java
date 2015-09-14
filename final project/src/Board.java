@@ -7,6 +7,7 @@ import java.awt.image.ImageObserver;
 public class Board {
 
 	private final String Path =  System.getProperty("user.dir") + "\\image\\";
+	public final static int EMPTY_TILE = 0;
 	
 	private final int INIT_SIZE = 10;
 	private int[][] tiles;
@@ -88,7 +89,7 @@ public class Board {
 	
 	///Get one of the tile
 	public int getTile(int x, int y){
-		return tiles[x][y];
+		return tiles[y][x];
 	}
 
 	///Get the board width
@@ -109,5 +110,25 @@ public class Board {
 	///Set the board height
 	public void setBoardHeight(int boardHeight) {
 		this.boardHeight = boardHeight;
+	}
+
+	///Get the row size
+	public int getRowSize() {
+		return rowSize;
+	}
+
+	///Get the col size
+	public int getColSize() {
+		return colSize;
+	}
+
+	///Get the row
+	public int getRow() {
+		return row;
+	}
+
+	///Get the col
+	public int getCol() {
+		return col;
 	}
 }

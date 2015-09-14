@@ -56,7 +56,7 @@ public class Sprite {
 
 	///Set the position
 	public void setPosition(Vector2f position) {
-		this.position = position.normalize();
+		this.position = position;
 	}
 
 	///Get the direction
@@ -66,7 +66,7 @@ public class Sprite {
 
 	///Set the direction
 	public void setDirection(Vector2f direction) {
-		this.direction = direction;
+		this.direction = direction.normalize();
 	}
 
 	///Get the speed
