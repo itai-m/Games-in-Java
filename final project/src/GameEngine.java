@@ -28,8 +28,7 @@ public class GameEngine {
 	public void update(){
 		for (int i = 0; i < shots.size() ; i++){
 			shots.get(i).move();
-			int tile = CDShotBrick(shots.get(i));
-			if (tile != Board.EMPTY_TILE){
+			if (CDShotBrick(shots.get(i))){
 				shots.remove(i);
 			}
 			else if (shots.get(i).isOver()){
@@ -155,8 +154,21 @@ public class GameEngine {
 		return board.getTile(col, row);
 	}
 	
-	///Check collision detection with the shot and a brick, return the brick kind that the shot on
-	private int CDShotBrick(Shot shot){
-		return getTileByPoint((int)shot.getPosition().getX(), (int)shot.getPosition().getY());
+	///Check collision detection with the shot and a brick, return true if there is collision
+	private boolean CDShotBrick(Shot shot){
+		int x = (int)shot.getPosition().getX();
+		int y = (int)shot.getPosition().getY();
+		int tile = getTileByPoint(x, y);
+		if (tile == Board.EMPTY_TILE){
+			return false;
+		}
+		int col = x / board.getColSize();
+		int row = y / board.getRowSize();
+		row = checkRow(row);
+		col = checkCol(col);
+		if (board.getMB(col, row) == null){
+			System.out.println("ERROR: in CDShotBrick - no birck");
+		}
+		return true;
 	}
 }

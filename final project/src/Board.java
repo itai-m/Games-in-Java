@@ -165,4 +165,14 @@ public class Board {
 	public int getCol() {
 		return col;
 	}
+	
+	///Get a MovingBrick
+	public MovingBrick getMB(int x, int y){
+		for (int i = 0; i < bricks.size() ; i++){
+			if ((bricks.get(i).getPosition().getX() == x) && (bricks.get(i).getPosition().getY() == y)){
+				return bricks.get(i);
+			}
+		}
+		return null;
+	}
 }
