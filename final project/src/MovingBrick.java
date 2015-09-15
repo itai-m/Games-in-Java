@@ -48,7 +48,7 @@ public class MovingBrick extends Sprite{
 		BufferedImage tempArrowImage = null;
 		try {
 			tempBrikcImage = ImageIO.read( new File( Path + "woodenBrikc.jpg" ) );
-			tempArrowImage = ImageIO.read( new File( Path + "Arrow.png" ) );
+			tempArrowImage = ImageIO.read( new File( Path + "CoolerdArrow.png" ) );
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -57,13 +57,13 @@ public class MovingBrick extends Sprite{
 		
 		switch (kind) {
 		case UP:
-			tempArrowImage = rotateImage(tempArrowImage, 0);
+			tempArrowImage = rotateImage(tempArrowImage, 270);
 			break;
 		case DOWN:
-			tempArrowImage = rotateImage(tempArrowImage, 0);
+			tempArrowImage = rotateImage(tempArrowImage, 90);
 			break;
 		case LEFT:
-			tempArrowImage = rotateImage(tempArrowImage, 0);
+			tempArrowImage = rotateImage(tempArrowImage, 180);
 			break;
 		case RIGHT:
 			tempArrowImage = rotateImage(tempArrowImage, 0);
@@ -72,7 +72,7 @@ public class MovingBrick extends Sprite{
 			break;
 		}
 		g2d.drawImage(tempBrikcImage, 0, 0, null);
-		g2d.drawImage(tempArrowImage, 0, 0, tempBrikcImage.getWidth(), tempBrikcImage.getHeight(), null);
+		g2d.drawImage(tempArrowImage, tempBrikcImage.getWidth() / 4, tempBrikcImage.getHeight() / 4, tempBrikcImage.getWidth() / 2, tempBrikcImage.getHeight() / 2, null);
 	}
 	
 	///Set the saving of board sizing

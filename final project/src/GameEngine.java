@@ -27,7 +27,12 @@ public class GameEngine {
 	///Update the game
 	public void update(){
 		for (int i = 0; i < shots.size() ; i++){
-			shots.get(i).move();
+			if (shots.get(i).isOver()){
+				shots.remove(i);
+			}
+			else{
+				shots.get(i).move();
+			}
 		}
 		playerFalling();
 	}

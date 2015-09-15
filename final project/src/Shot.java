@@ -10,7 +10,7 @@ public class Shot extends Sprite{
 	private final int[] SPRITE_WIDTH = {0, 50, 95, 145, 224, 307, 374};
 	private final int STEP_PER_PIC = 14;
 	private final int SPRITE_HEIGHT = 48;
-	private final int MAX_STEP = STEP_PER_PIC * 7;
+	private final int MAX_STEP = STEP_PER_PIC * 8;
 	
 	private Image imag;
 	private int height;
