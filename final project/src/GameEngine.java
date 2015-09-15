@@ -68,7 +68,6 @@ public class GameEngine {
 	//Move the player to the up
 	public void MoveUp(){
 		player.turnUp();
-		player.move();
 	}
 		
 	//Move the player to the left
@@ -81,7 +80,6 @@ public class GameEngine {
 	//Move the player to the down
 	public void MoveDown(){
 		player.turnDown();
-		player.move();
 	}
 	
 	///Get the board width
@@ -96,15 +94,13 @@ public class GameEngine {
 	
 	///Check if the player need to fall
 	private void playerFalling(){
-		int playerCol1 = (int)((player.getPosition().getX() - player.getWidth() / 4) / board.getColSize());
-		int playerCol2 = (int)((player.getPosition().getX() + player.getWidth() / 4) / board.getColSize());
 		int playerRow = (int)((player.getPosition().getY() + player.getHeight() / 2 + player.getFALL_SPEED()) / board.getRowSize());
-		
 		playerRow = checkRow(playerRow);
-		playerCol1 = checkCol(playerCol1);
-		playerCol2 = checkCol(playerCol2);
+		
+		int tile1 = getTileByPoint((int)(player.getPosition().getX() - player.getWidth() / 4),(int)(player.getPosition().getY() + player.getHeight() / 2 + player.getFALL_SPEED()));
+		int tile2 = getTileByPoint((int)(player.getPosition().getX() + player.getWidth() / 4),(int)(player.getPosition().getY() + player.getHeight() / 2 + player.getFALL_SPEED()));
 
-		if ((board.getTile(playerCol1, playerRow) == Board.EMPTY_TILE) && (board.getTile(playerCol2, playerRow) == Board.EMPTY_TILE)){
+		if ((tile1 == Board.EMPTY_TILE) && (tile2 == Board.EMPTY_TILE)){
 			player.fall();
 		}
 		else if (playerRow == 0){
@@ -118,17 +114,13 @@ public class GameEngine {
 	
 	///Check if the player can move right
 	private boolean checkMoveRight(){
-		int playerCol = (int)((player.getPosition().getX() + (player.getWidth() / 4) + player.getSpeed()) / board.getColSize());
-		int playerRow = (int)(player.getPosition().getY() / board.getRowSize());
-		
-		playerRow = checkRow(playerRow);
-		playerCol = checkCol(playerCol);
-		
-		if (board.getTile(playerCol, playerRow) == Board.EMPTY_TILE)
+		int tile = getTileByPoint((int)((player.getPosition().getX() + (player.getWidth() / 4) + player.getSpeed())), (int)(player.getPosition().getY()));
+		if (tile == Board.EMPTY_TILE)
 			return true;
 		return false;
 	}
 	
+	///Check the the col
 	private int checkCol(int playerCol){
 		if (playerCol >= board.getCol()){
 			playerCol = 0;
@@ -136,6 +128,7 @@ public class GameEngine {
 		return playerCol;
 	}
 	
+	///Check the the row 
 	private int checkRow(int playerRow){
 		if (playerRow >= board.getRow() ){
 			playerRow = 0;
@@ -145,15 +138,19 @@ public class GameEngine {
 	
 	///Check if the player can move left
 	private boolean checkMoveLeft(){
-		int playerCol = (int)((player.getPosition().getX() - (player.getWidth() / 4) -player.getSpeed()) / board.getColSize());
-		int playerRow = (int)(player.getPosition().getY() / board.getRowSize());
-		
-		playerRow = checkRow(playerRow);
-		playerCol = checkCol(playerCol);
-		
-		if (board.getTile(playerCol, playerRow) == Board.EMPTY_TILE)
+		int tile = getTileByPoint((int)(player.getPosition().getX() - (player.getWidth() / 4) -player.getSpeed()), (int)player.getPosition().getY());
+		if (tile == Board.EMPTY_TILE)
 			return true;
 		return false;
+	}
+	
+	///Get the tile id by a point
+	private int getTileByPoint(int playerCol, int playerRow){
+		playerCol /= board.getColSize();
+		playerRow /= board.getRowSize();
+		playerRow = checkRow(playerRow);
+		playerCol = checkCol(playerCol);
+		return board.getTile(playerCol, playerRow);
 	}
 	
 }
