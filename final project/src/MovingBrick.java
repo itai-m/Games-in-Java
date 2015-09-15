@@ -1,6 +1,5 @@
 import java.awt.Graphics2D;
-import java.awt.Image;
-import java.awt.Toolkit;
+
 import java.awt.image.BufferedImage;
 import java.awt.image.ImageObserver;
 import java.io.File;
@@ -11,10 +10,10 @@ import javax.imageio.ImageIO;
 public class MovingBrick extends Sprite{
 	
 	private final String Path =  System.getProperty("user.dir") + "\\image\\";
-	public static final int UP = 0;
-	public static final int DOWN = 1;
-	public static final int LEFT = 2;
-	public static final int RIGHT = 4;
+	public static final int UP = 1001;
+	public static final int DOWN = 1002;
+	public static final int LEFT = 1003;
+	public static final int RIGHT = 1004;
 	
 	private int kind;
 	private int colSize;
@@ -30,7 +29,7 @@ public class MovingBrick extends Sprite{
 	
 	///Constructors
 	public MovingBrick(float x, float y, int kind, int colSize, int rowSize, int boardWidth, int boardHeight){
-		super(x * colSize, y * rowSize, 1, 0, 1, boardWidth, boardHeight);
+		super(x, y, 1, 0, 1, boardWidth, boardHeight);
 		this.colSize = colSize;
 		this.rowSize = rowSize;
 		if ((kind == UP) || (kind == DOWN)){
@@ -73,7 +72,7 @@ public class MovingBrick extends Sprite{
 			break;
 		}
 		g2d.drawImage(tempBrikcImage, 0, 0, null);
-		g2d.drawImage(tempArrowImage, tempBrikcImage.getWidth() - colSize, tempBrikcImage.getHeight() - rowSize, colSize, rowSize, null);
+		g2d.drawImage(tempArrowImage, 0, 0, tempBrikcImage.getWidth(), tempBrikcImage.getHeight(), null);
 	}
 	
 	///Set the saving of board sizing
@@ -91,8 +90,9 @@ public class MovingBrick extends Sprite{
 	
 	///Draw the brick
 	public void draw(Graphics2D g, ImageObserver ob){
-		g.drawImage(image, (int)getPosition().getX(), (int)getPosition().getY(), colSize, rowSize, ob);
+		g.drawImage(image, (int)getPosition().getX() * colSize, (int)getPosition().getY() * rowSize, colSize, rowSize, ob);
 	}
+	
 	
 }
 

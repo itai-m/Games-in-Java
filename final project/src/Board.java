@@ -9,6 +9,11 @@ public class Board {
 
 	private final String Path =  System.getProperty("user.dir") + "\\image\\";
 	public final static int EMPTY_TILE = 0;
+	public final static int NONE_MOVING_TILE = 1;
+	public final static int MB_UP = MovingBrick.UP;
+	public final static int MB_DWON = MovingBrick.DOWN;
+	public final static int MB_LEFT = MovingBrick.LEFT;
+	public final static int MB_RIGHT = MovingBrick.RIGHT;
 	
 	private final int INIT_SIZE = 10;
 	private int[][] tiles;
@@ -42,7 +47,7 @@ public class Board {
 		bricks = new LinkedList<MovingBrick>();
 		initImag();
 		loadExampleMap();
-		
+		addMovingBricks();
 	}
 	
 	///Initialization the images
@@ -54,7 +59,7 @@ public class Board {
 	///Load an example map
 	private void loadExampleMap(){
 		int [][] tilesExa =  {{1, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0},
-						   {1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0},
+						   {1, MovingBrick.UP, 1, 0, 0, 0, 0, 0, 0, 0, 0},
 						   {1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0},
 						   {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
 						   {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -66,22 +71,42 @@ public class Board {
 		tiles = tilesExa.clone();
 	}
 	
-	///Draw the board
-	public void draw(Graphics2D g, ImageObserver ob){
-		g.drawImage(background, 0, 0, boardWidth, boardHeight, ob);
+	///Add moving bricks form the the map to the list
+	private void addMovingBricks(){
 		for (int i = 0; i < tiles.length ; i++){
 			for (int j = 0 ; j < tiles[i].length ; j++){
 				switch (tiles[i][j]) {
-				case 0:
-					g.setColor(Color.WHITE);
+				case MovingBrick.UP:
+					bricks.add(new MovingBrick(i, j, MovingBrick.UP, colSize, rowSize, boardWidth, boardHeight));
 					break;
-				case 1:
-					g.drawImage(brick1, colSize * j, rowSize * i, colSize, rowSize, ob);
+				case MovingBrick.DOWN:
+					bricks.add(new MovingBrick(i, j, MovingBrick.DOWN, colSize, rowSize, boardWidth, boardHeight));
+					break;
+				case MovingBrick.LEFT:
+					bricks.add(new MovingBrick(i, j, MovingBrick.LEFT, colSize, rowSize, boardWidth, boardHeight));
+					break;
+				case MovingBrick.RIGHT:
+					bricks.add(new MovingBrick(i, j, MovingBrick.RIGHT, colSize, rowSize, boardWidth, boardHeight));
 					break;
 				default:
 					break;
 				}
 			}
+		}
+	}
+	
+	///Draw the board
+	public void draw(Graphics2D g, ImageObserver ob){
+		g.drawImage(background, 0, 0, boardWidth, boardHeight, ob);
+		for (int i = 0; i < tiles.length ; i++){
+			for (int j = 0 ; j < tiles[i].length ; j++){
+				if (tiles[i][j] == NONE_MOVING_TILE) {
+					g.drawImage(brick1, colSize * j, rowSize * i, colSize, rowSize, ob);
+				}
+			}
+		}
+		for (int i = 0; i < bricks.size() ; i++){
+			bricks.get(i).draw(g, ob);
 		}
 	}
 	
@@ -91,6 +116,9 @@ public class Board {
 		this.boardWidth = boardWidth;
 		this.rowSize = boardHeight / row;
 		this.colSize = boardWidth / col;
+		for (int i = 0; i < bricks.size() ; i++){
+			bricks.get(i).setBoardSize(boardWidth, boardHeight, colSize, rowSize);
+		}
 	}
 	
 	///Get one of the tile
