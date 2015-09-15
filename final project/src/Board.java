@@ -3,6 +3,7 @@ import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.image.ImageObserver;
+import java.util.LinkedList;
 
 public class Board {
 
@@ -11,6 +12,8 @@ public class Board {
 	
 	private final int INIT_SIZE = 10;
 	private int[][] tiles;
+	private LinkedList<MovingBrick> bricks;
+	
 	private int boardWidth;
 	private int boardHeight;
 	private int row;
@@ -24,6 +27,7 @@ public class Board {
 	public Board(){
 		tiles = new int[INIT_SIZE][INIT_SIZE];
 		initImag();
+		bricks = new LinkedList<MovingBrick>();
 	}
 	
 	///Constructor
@@ -35,8 +39,10 @@ public class Board {
 		this.colSize = boardWidth / col;
 		this.row = row;
 		this.col = col;
+		bricks = new LinkedList<MovingBrick>();
 		initImag();
 		loadExampleMap();
+		
 	}
 	
 	///Initialization the images

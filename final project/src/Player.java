@@ -150,4 +150,6 @@ public class Player extends Sprite{
 		this.height = (int) (boardHeight / (row * PROPORCEN_TO_BAORD));
 		this.width = (int) (boardWidth / (col * PROPORCEN_TO_BAORD));
 	}
+	
+	
 }

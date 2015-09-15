@@ -1,7 +1,12 @@
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.awt.image.BufferedImage;
 import java.awt.image.ImageObserver;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
 
 public class MovingBrick extends Sprite{
 	
@@ -14,7 +19,7 @@ public class MovingBrick extends Sprite{
 	private int kind;
 	private int colSize;
 	private int rowSize;
-	private Image image;
+	private BufferedImage image;
 	
 	///Default constructor
 	public MovingBrick(){
@@ -40,22 +45,35 @@ public class MovingBrick extends Sprite{
 	
 	///Initialization the images
 	private void initImages(int kind){
+		BufferedImage tempBrikcImage = null;
+		BufferedImage tempArrowImage = null;
+		try {
+			tempBrikcImage = ImageIO.read( new File( Path + "woodenBrikc.jpg" ) );
+			tempArrowImage = ImageIO.read( new File( Path + "Arrow.png" ) );
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		image = new BufferedImage(tempBrikcImage.getWidth(), tempBrikcImage.getHeight(), BufferedImage.TYPE_INT_ARGB);
+		Graphics2D g2d = image.createGraphics();
+		
 		switch (kind) {
 		case UP:
-			image = Toolkit.getDefaultToolkit().getImage(Path + "upBirck.png");
+			tempArrowImage = rotateImage(tempArrowImage, 0);
 			break;
 		case DOWN:
-			image = Toolkit.getDefaultToolkit().getImage(Path + "downBirck.png");
+			tempArrowImage = rotateImage(tempArrowImage, 0);
 			break;
 		case LEFT:
-			image = Toolkit.getDefaultToolkit().getImage(Path + "leftBirck.png");
+			tempArrowImage = rotateImage(tempArrowImage, 0);
 			break;
 		case RIGHT:
-			image = Toolkit.getDefaultToolkit().getImage(Path + "rightBirck.png");
+			tempArrowImage = rotateImage(tempArrowImage, 0);
 			break;
 		default:
 			break;
 		}
+		g2d.drawImage(tempBrikcImage, 0, 0, null);
+		g2d.drawImage(tempArrowImage, tempBrikcImage.getWidth() - colSize, tempBrikcImage.getHeight() - rowSize, colSize, rowSize, null);
 	}
 	
 	///Set the saving of board sizing
@@ -73,7 +91,8 @@ public class MovingBrick extends Sprite{
 	
 	///Draw the brick
 	public void draw(Graphics2D g, ImageObserver ob){
-		//TODO
+		g.drawImage(image, (int)getPosition().getX(), (int)getPosition().getY(), colSize, rowSize, ob);
 	}
+	
 }
 

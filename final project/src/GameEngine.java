@@ -7,6 +7,7 @@ public class GameEngine {
 	private Board board;
 	private Player player;
 	private LinkedList<Shot> shots;
+
 	
 	///Default constructor
 	public GameEngine(){
