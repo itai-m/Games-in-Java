@@ -166,6 +166,11 @@ public class GameEngine {
 		int row = y / board.getRowSize();
 		row = checkRow(row);
 		col = checkCol(col);
+		if (tile == Board.MB_UP){
+			if((player.getColLoc() == col) && (player.getRowLoc() == row)){
+				
+			}
+		}
 		board.moveMB(col, row);
 
 		return true;

@@ -151,5 +151,13 @@ public class Player extends Sprite{
 		this.width = (int) (boardWidth / (col * PROPORCEN_TO_BAORD));
 	}
 	
+	///Get the location by col
+	public int getColLoc(){
+		return (int) (getPosition().getX() / (getBoardWidth() / col));
+	}
 	
+	///Get the location by row
+	public int getRowLoc(){
+		return (int) (getPosition().getY() / (getBoardHeight() / row));
+	}
 }
