@@ -32,13 +32,23 @@ public class MovingBrick extends Sprite{
 		super(x, y, 1, 0, 1, boardWidth, boardHeight);
 		this.colSize = colSize;
 		this.rowSize = rowSize;
-		if ((kind == UP) || (kind == DOWN)){
-			setSpeed(rowSize);
-		}
-		else if ((kind == LEFT) || (kind == RIGHT)){
-			setSpeed(colSize);
-		}
 		this.kind = kind;
+		switch (kind) {
+		case UP:
+			setDirection(new Vector2f(0, -1));
+			break;
+		case DOWN:
+			setDirection(new Vector2f(0, 1));
+			break;
+		case LEFT:
+			setDirection(new Vector2f(-1, 0));
+			break;
+		case RIGHT:
+			setDirection(new Vector2f(1, 0));
+			break;
+		default:
+			break;
+		}
 		initImages(kind);
 	}
 	
@@ -75,17 +85,16 @@ public class MovingBrick extends Sprite{
 		g2d.drawImage(tempArrowImage, tempBrikcImage.getWidth() / 4, tempBrikcImage.getHeight() / 4, tempBrikcImage.getWidth() / 2, tempBrikcImage.getHeight() / 2, null);
 	}
 	
+	///Get the kind of the brick
+	public int getKind() {
+		return kind;
+	}
+
 	///Set the saving of board sizing
 	public void setBoardSize(int boardWidth, int boardHeight, int colSize, int rowSize){
 		super.setBoardSize(boardWidth, boardHeight);
 		this.colSize = colSize;
 		this.rowSize = rowSize;
-		if ((kind == UP) || (kind == DOWN)){
-			setSpeed(rowSize);
-		}
-		else if ((kind == LEFT) || (kind == RIGHT)){
-			setSpeed(colSize);
-		}
 	}
 	
 	///Draw the brick

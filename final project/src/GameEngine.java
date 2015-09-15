@@ -166,9 +166,8 @@ public class GameEngine {
 		int row = y / board.getRowSize();
 		row = checkRow(row);
 		col = checkCol(col);
-		if (board.getMB(col, row) == null){
-			System.out.println("ERROR: in CDShotBrick - no birck");
-		}
+		board.moveMB(col, row);
+
 		return true;
 	}
 }

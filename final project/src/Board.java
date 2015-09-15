@@ -1,4 +1,4 @@
-import java.awt.Color;
+
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -67,7 +67,7 @@ public class Board {
 						   {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
 						   {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
 						   {0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0},
-					  	   {1, 1, 1, 0, 0, 1, 1, 1, 0, 1, 0}};
+					  	   {1, 1, 1, MovingBrick.UP, 0, 1, 1, 1, 0, 1, 0}};
 		tiles = tilesExa.clone();
 	}
 	
@@ -166,13 +166,40 @@ public class Board {
 		return col;
 	}
 	
-	///Get a MovingBrick
-	public MovingBrick getMB(int x, int y){
+	///Move a MovingBrick
+	public void moveMB(int x, int y){
 		for (int i = 0; i < bricks.size() ; i++){
 			if ((bricks.get(i).getPosition().getX() == x) && (bricks.get(i).getPosition().getY() == y)){
-				return bricks.get(i);
+				switch (bricks.get(i).getKind()) {
+					case MB_UP:
+						if ((y == 0) || (tiles[y - 1][x] != EMPTY_TILE))
+							continue;
+						tiles[y][x] = EMPTY_TILE;
+						tiles[y - 1][x] = MB_UP;
+						break;
+					case MB_DWON:
+						if ((y == row - 1) || (tiles[y + 1][x] != EMPTY_TILE))
+							continue;
+						tiles[y][x] = EMPTY_TILE;
+						tiles[y + 1][x] = MB_UP;
+						break;
+					case MB_LEFT:
+						if ((x == 0) || (tiles[y][x - 1] != EMPTY_TILE))
+							continue;
+						tiles[y][x] = EMPTY_TILE;
+						tiles[y][x - 1] = MB_UP;
+						break;
+					case MB_RIGHT:
+						if ((x == col - 1) || (tiles[y][x + 1] != EMPTY_TILE))
+							continue;
+						tiles[y][x] = EMPTY_TILE;
+						tiles[y][x + 1] = MB_UP;
+						break;
+					default:
+						break;
+				}
+				bricks.get(i).move();
 			}
 		}
-		return null;
 	}
 }
