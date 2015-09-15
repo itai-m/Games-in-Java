@@ -48,7 +48,7 @@ public class MovingBrick extends Sprite{
 		BufferedImage tempArrowImage = null;
 		try {
 			tempBrikcImage = ImageIO.read( new File( Path + "woodenBrikc.jpg" ) );
-			tempArrowImage = ImageIO.read( new File( Path + "CoolerdArrow.png" ) );
+			tempArrowImage = ImageIO.read( new File( Path + "BlueArrow.png" ) );
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

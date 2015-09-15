@@ -12,7 +12,7 @@ public class GameEngine {
 	///Default constructor
 	public GameEngine(){
 		board = new Board();
-		player = new Player(Main.initializedWidth/9,Main.initializedHight/9,10,10, Main.initializedWidth, Main.initializedHight);
+		player = new Player(Main.initializedWidth/9, Main.initializedHight/9, 10, 10, Main.initializedWidth, Main.initializedHight);
 		shots = new LinkedList<Shot>();
 	}
 	
@@ -27,11 +27,13 @@ public class GameEngine {
 	///Update the game
 	public void update(){
 		for (int i = 0; i < shots.size() ; i++){
-			if (shots.get(i).isOver()){
+			shots.get(i).move();
+			int tile = CDShotBrick(shots.get(i));
+			if (tile != Board.EMPTY_TILE){
 				shots.remove(i);
 			}
-			else{
-				shots.get(i).move();
+			else if (shots.get(i).isOver()){
+				shots.remove(i);
 			}
 		}
 		playerFalling();
@@ -145,12 +147,16 @@ public class GameEngine {
 	}
 	
 	///Get the tile id by a point
-	private int getTileByPoint(int playerCol, int playerRow){
-		playerCol /= board.getColSize();
-		playerRow /= board.getRowSize();
-		playerRow = checkRow(playerRow);
-		playerCol = checkCol(playerCol);
-		return board.getTile(playerCol, playerRow);
+	private int getTileByPoint(int x, int y){
+		int col = x / board.getColSize();
+		int row = y / board.getRowSize();
+		row = checkRow(row);
+		col = checkCol(col);
+		return board.getTile(col, row);
 	}
 	
+	///Check collision detection with the shot and a brick, return the brick kind that the shot on
+	private int CDShotBrick(Shot shot){
+		return getTileByPoint((int)shot.getPosition().getX(), (int)shot.getPosition().getY());
+	}
 }

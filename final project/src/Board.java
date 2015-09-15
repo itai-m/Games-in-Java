@@ -61,7 +61,7 @@ public class Board {
 		int [][] tilesExa =  {{1, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0},
 						   {1, MovingBrick.UP, 1, 0, 0, 0, 0, 0, 0, 0, 0},
 						   {1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0},
-						   {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+						   {1, 0, 0, 0, 0, 0, 0, MovingBrick.DOWN, MovingBrick.LEFT, MovingBrick.RIGHT, 0},
 						   {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
 						   {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
 						   {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -77,16 +77,16 @@ public class Board {
 			for (int j = 0 ; j < tiles[i].length ; j++){
 				switch (tiles[i][j]) {
 				case MovingBrick.UP:
-					bricks.add(new MovingBrick(i, j, MovingBrick.UP, colSize, rowSize, boardWidth, boardHeight));
+					bricks.add(new MovingBrick(j, i, MovingBrick.UP, colSize, rowSize, boardWidth, boardHeight));
 					break;
 				case MovingBrick.DOWN:
-					bricks.add(new MovingBrick(i, j, MovingBrick.DOWN, colSize, rowSize, boardWidth, boardHeight));
+					bricks.add(new MovingBrick(j, i, MovingBrick.DOWN, colSize, rowSize, boardWidth, boardHeight));
 					break;
 				case MovingBrick.LEFT:
-					bricks.add(new MovingBrick(i, j, MovingBrick.LEFT, colSize, rowSize, boardWidth, boardHeight));
+					bricks.add(new MovingBrick(j, i, MovingBrick.LEFT, colSize, rowSize, boardWidth, boardHeight));
 					break;
 				case MovingBrick.RIGHT:
-					bricks.add(new MovingBrick(i, j, MovingBrick.RIGHT, colSize, rowSize, boardWidth, boardHeight));
+					bricks.add(new MovingBrick(j, i, MovingBrick.RIGHT, colSize, rowSize, boardWidth, boardHeight));
 					break;
 				default:
 					break;
