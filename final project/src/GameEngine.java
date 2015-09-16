@@ -19,13 +19,17 @@ public class GameEngine {
 	}
 	
 	///Constructors
-	public GameEngine(int boardWidth, int boardHeight, int col, int row){
-		board = new Board(col, row, boardWidth, boardHeight);
-		player = new Player((boardWidth / col) * 2, boardHeight - (boardHeight / row) * (5/2), col, row, boardWidth, boardHeight);
-		shots = new LinkedList<Shot>();
+	public GameEngine(int boardWidth, int boardHeight){
 		level = 0;
+		initLevel(level, boardWidth, boardHeight);
 	}
 	
+	///Initialization the levels
+	private void initLevel(int level, int boardWidth, int boardHeight){
+		board = new Board(boardWidth, boardHeight, level);
+		player = new Player((int)((boardWidth / board.getCol()) * 1.5), boardHeight - (boardHeight / board.getRow()) * (5/3), board.getCol(), board.getRow(), boardWidth, boardHeight);
+		shots = new LinkedList<Shot>();
+	}
 	
 	///Update the game
 	public void update(){
@@ -191,6 +195,7 @@ public class GameEngine {
 	
 	///Player win the level
 	private void leverWon(){
-		//TODO
+		level++;
+		initLevel(level, board.getBoardWidth(), board.getBoardHeight());
 	}
 }

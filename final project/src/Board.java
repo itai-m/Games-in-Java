@@ -7,7 +7,7 @@ import java.util.LinkedList;
 
 public class Board {
 
-	private final String Path =  System.getProperty("user.dir") + "\\image\\";
+	private final String Path =  System.getProperty("user.dir") + "\\image\\Board\\";
 	public final static int EMPTY_TILE = 0;
 	public final static int NONE_MOVING_TILE = 1;
 	public final static int MB_UP = MovingBrick.UP;
@@ -33,34 +33,71 @@ public class Board {
 	///Default constructor
 	public Board(){
 		tiles = new int[INIT_SIZE][INIT_SIZE];
-		initImag();
+		initImag(0);
 		bricks = new LinkedList<MovingBrick>();
 	}
 	
 	///Constructor
-	public Board(int col, int row, int boardWidth, int boardHeight){
-		tiles = new int[col][row];
+	public Board(int boardWidth, int boardHeight, int maplevel){
+		loadMap(maplevel);
 		this.boardHeight = boardHeight;
 		this.boardWidth = boardWidth;
 		this.rowSize = boardHeight / row;
 		this.colSize = boardWidth / col;
-		this.row = row;
-		this.col = col;
 		bricks = new LinkedList<MovingBrick>();
-		initImag();
-		loadExampleMap();
+		initImag(maplevel);
 		addMovingBricks();
 	}
 	
-	///Initialization the images
-	private void initImag(){
-		brick1 = Toolkit.getDefaultToolkit().getImage(Path + "b1.jpg");
-		background  = Toolkit.getDefaultToolkit().getImage(Path + "background.jpg");
-		door  = Toolkit.getDefaultToolkit().getImage(Path + "door.png");
+	///Load a map from the list
+	private void loadMap(int mapNumber){
+		switch (mapNumber) {
+		case 0:
+			loadExampleMap();
+			break;
+		case 1:
+			loadMap1();
+			break;
+
+		default:
+			break;
+		}
 	}
 	
+	///Initialization the images
+	private void initImag(int level){
+		switch (level) {
+		case 0:
+			background  = Toolkit.getDefaultToolkit().getImage(Path + "background.jpg");
+			break;
+		case 1:
+			background  = Toolkit.getDefaultToolkit().getImage(Path + "background1.jpg");
+			break;
+		default:
+			break;
+		}
+		brick1 = Toolkit.getDefaultToolkit().getImage(Path + "b1.jpg");
+		door  = Toolkit.getDefaultToolkit().getImage(Path + "door.png");
+	}
+	private void loadMap1(){
+		this.col = 12;
+		this.row = 10;
+		int [][] tilesExa =  {{1, 0, 0, 0, 1, 0, 0, 0, DOOR, 1, 0, 0},
+				   			  {1, MovingBrick.UP, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+				   			  {1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0},
+				   			  {1, 0, 0, 0, 0, 0, 0, MovingBrick.DOWN, MovingBrick.LEFT, MovingBrick.RIGHT, 0, 0},
+				   			  {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+				   			  {MovingBrick.RIGHT, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+				   			  {1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0},
+				   			  {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+				   			  {0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0},
+				   			  {1, 1, 1, MovingBrick.UP, 0, 1, 1, 1, 1, 1, 0, 0}};
+		tiles = tilesExa.clone();
+	}
 	///Load an example map
 	private void loadExampleMap(){
+		this.row = 10;
+		this.col = 11;
 		int [][] tilesExa =  {{1, 0, 0, 0, 1, 0, 0, 0, DOOR, 1, 0},
 						   {1, MovingBrick.UP, 1, 0, 0, 0, 0, 0, 0, 0, 0},
 						   {1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0},
