@@ -7,6 +7,7 @@ public class GameEngine {
 	private Board board;
 	private Player player;
 	private LinkedList<Shot> shots;
+	private int level;
 
 	
 	///Default constructor
@@ -14,6 +15,7 @@ public class GameEngine {
 		board = new Board();
 		player = new Player(Main.initializedWidth/9, Main.initializedHight/9, 10, 10, Main.initializedWidth, Main.initializedHight);
 		shots = new LinkedList<Shot>();
+		level = 0;
 	}
 	
 	///Constructors
@@ -21,6 +23,7 @@ public class GameEngine {
 		board = new Board(col, row, boardWidth, boardHeight);
 		player = new Player((boardWidth / col) * 2, boardHeight - (boardHeight / row) * (5/2), col, row, boardWidth, boardHeight);
 		shots = new LinkedList<Shot>();
+		level = 0;
 	}
 	
 	
@@ -104,6 +107,10 @@ public class GameEngine {
 		int tile1 = board.getTileByPoint((int)(player.getPosition().getX() - player.getWidth() / 4),(int)(player.getPosition().getY() + player.getHeight() / 2 + player.getFALL_SPEED()));
 		int tile2 = board.getTileByPoint((int)(player.getPosition().getX() + player.getWidth() / 4),(int)(player.getPosition().getY() + player.getHeight() / 2 + player.getFALL_SPEED()));
 
+		if ((tile1 == Board.DOOR) || (tile2 == Board.DOOR)){
+			leverWon();
+			return;
+		}
 		if ((tile1 == Board.EMPTY_TILE) && (tile2 == Board.EMPTY_TILE)){
 			player.fall();
 		}
@@ -119,6 +126,10 @@ public class GameEngine {
 	///Check if the player can move right
 	private boolean checkMoveRight(){
 		int tile = board.getTileByPoint((int)((player.getPosition().getX() + (player.getWidth() / 4) + player.getSpeed())), (int)(player.getPosition().getY()));
+		if (tile == Board.DOOR){
+			leverWon();
+			return false;
+		}
 		if (tile == Board.EMPTY_TILE)
 			return true;
 		return false;
@@ -129,6 +140,10 @@ public class GameEngine {
 	///Check if the player can move left
 	private boolean checkMoveLeft(){
 		int tile = board.getTileByPoint((int)(player.getPosition().getX() - (player.getWidth() / 4) -player.getSpeed()), (int)player.getPosition().getY());
+		if (tile == Board.DOOR){
+			leverWon();
+			return false;
+		}
 		if (tile == Board.EMPTY_TILE)
 			return true;
 		return false;
@@ -172,5 +187,10 @@ public class GameEngine {
 		board.moveMB(col, row);
 
 		return true;
+	}
+	
+	///Player win the level
+	private void leverWon(){
+		//TODO
 	}
 }

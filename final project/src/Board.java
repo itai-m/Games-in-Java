@@ -14,6 +14,7 @@ public class Board {
 	public final static int MB_DWON = MovingBrick.DOWN;
 	public final static int MB_LEFT = MovingBrick.LEFT;
 	public final static int MB_RIGHT = MovingBrick.RIGHT;
+	public final static int DOOR = 2002;
 	
 	private final int INIT_SIZE = 10;
 	private int[][] tiles;
@@ -27,6 +28,7 @@ public class Board {
 	private int colSize;
 	private Image brick1 = null;
 	private Image background = null;
+	private Image door = null;
 	
 	///Default constructor
 	public Board(){
@@ -54,11 +56,12 @@ public class Board {
 	private void initImag(){
 		brick1 = Toolkit.getDefaultToolkit().getImage(Path + "b1.jpg");
 		background  = Toolkit.getDefaultToolkit().getImage(Path + "background.jpg");
+		door  = Toolkit.getDefaultToolkit().getImage(Path + "door.png");
 	}
 	
 	///Load an example map
 	private void loadExampleMap(){
-		int [][] tilesExa =  {{1, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0},
+		int [][] tilesExa =  {{1, 0, 0, 0, 1, 0, 0, 0, DOOR, 1, 0},
 						   {1, MovingBrick.UP, 1, 0, 0, 0, 0, 0, 0, 0, 0},
 						   {1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0},
 						   {1, 0, 0, 0, 0, 0, 0, MovingBrick.DOWN, MovingBrick.LEFT, MovingBrick.RIGHT, 0},
@@ -102,6 +105,9 @@ public class Board {
 			for (int j = 0 ; j < tiles[i].length ; j++){
 				if (tiles[i][j] == NONE_MOVING_TILE) {
 					g.drawImage(brick1, colSize * j, rowSize * i, colSize, rowSize, ob);
+				}
+				else if (tiles[i][j] == DOOR){
+					g.drawImage(door, colSize * j, rowSize * i, colSize, rowSize, ob);
 				}
 			}
 		}
