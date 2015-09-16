@@ -96,10 +96,10 @@ public class GameEngine {
 	///Check if the player need to fall
 	private void playerFalling(){
 		int playerRow = (int)((player.getPosition().getY() + player.getHeight() / 2 + player.getFALL_SPEED()) / board.getRowSize());
-		playerRow = checkRow(playerRow);
+		playerRow = board.checkRow(playerRow);
 		
-		int tile1 = getTileByPoint((int)(player.getPosition().getX() - player.getWidth() / 4),(int)(player.getPosition().getY() + player.getHeight() / 2 + player.getFALL_SPEED()));
-		int tile2 = getTileByPoint((int)(player.getPosition().getX() + player.getWidth() / 4),(int)(player.getPosition().getY() + player.getHeight() / 2 + player.getFALL_SPEED()));
+		int tile1 = board.getTileByPoint((int)(player.getPosition().getX() - player.getWidth() / 4),(int)(player.getPosition().getY() + player.getHeight() / 2 + player.getFALL_SPEED()));
+		int tile2 = board.getTileByPoint((int)(player.getPosition().getX() + player.getWidth() / 4),(int)(player.getPosition().getY() + player.getHeight() / 2 + player.getFALL_SPEED()));
 
 		if ((tile1 == Board.EMPTY_TILE) && (tile2 == Board.EMPTY_TILE)){
 			player.fall();
@@ -115,60 +115,42 @@ public class GameEngine {
 	
 	///Check if the player can move right
 	private boolean checkMoveRight(){
-		int tile = getTileByPoint((int)((player.getPosition().getX() + (player.getWidth() / 4) + player.getSpeed())), (int)(player.getPosition().getY()));
+		int tile = board.getTileByPoint((int)((player.getPosition().getX() + (player.getWidth() / 4) + player.getSpeed())), (int)(player.getPosition().getY()));
 		if (tile == Board.EMPTY_TILE)
 			return true;
 		return false;
 	}
 	
-	///Check the the col
-	private int checkCol(int playerCol){
-		if (playerCol >= board.getCol()){
-			playerCol = 0;
-		}
-		return playerCol;
-	}
 	
-	///Check the the row 
-	private int checkRow(int playerRow){
-		if (playerRow >= board.getRow() ){
-			playerRow = 0;
-		}
-		return playerRow;
-	}
 	
 	///Check if the player can move left
 	private boolean checkMoveLeft(){
-		int tile = getTileByPoint((int)(player.getPosition().getX() - (player.getWidth() / 4) -player.getSpeed()), (int)player.getPosition().getY());
+		int tile = board.getTileByPoint((int)(player.getPosition().getX() - (player.getWidth() / 4) -player.getSpeed()), (int)player.getPosition().getY());
 		if (tile == Board.EMPTY_TILE)
 			return true;
 		return false;
 	}
 	
-	///Get the tile id by a point
-	private int getTileByPoint(int x, int y){
-		int col = x / board.getColSize();
-		int row = y / board.getRowSize();
-		row = checkRow(row);
-		col = checkCol(col);
-		return board.getTile(col, row);
-	}
+	
 	
 	///Check collision detection with the shot and a brick, return true if there is collision
 	private boolean CDShotBrick(Shot shot){
 		int x = (int)shot.getPosition().getX();
 		int y = (int)shot.getPosition().getY();
-		int tile = getTileByPoint(x, y);
+		int tile = board.getTileByPoint(x, y);
 		if (tile == Board.EMPTY_TILE){
 			return false;
 		}
 		int col = x / board.getColSize();
 		int row = y / board.getRowSize();
-		row = checkRow(row);
-		col = checkCol(col);
+		row = board.checkRow(row);
+		col = board.checkCol(col);
 		if (tile == Board.MB_UP){
-			if((player.getColLoc() == col) && (player.getRowLoc() == row)){
-				
+			System.out.println(tile);
+			if((player.getColLoc() == col) && (player.getRowLoc() == row - 1)){
+				System.out.println(player.getColLoc() + " " + player.getRowLoc());
+				System.out.println(col + " " + row);
+				player.setPosition(new Vector2f(player.getPosition().getX(), player.getPosition().getY() - board.getRowSize()));
 			}
 		}
 		board.moveMB(col, row);

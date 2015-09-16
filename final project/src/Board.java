@@ -202,4 +202,29 @@ public class Board {
 			}
 		}
 	}
+	
+	///Get the tile id by a point
+	public int getTileByPoint(int x, int y){
+		int col = x / colSize;
+		int row = y / rowSize;
+		row = checkRow(row);
+		col = checkCol(col);
+		return getTile(col, row);
+	}
+	
+	///Check the the col
+	public int checkCol(int playerCol){
+		if (playerCol >= col){
+			playerCol = 0;
+		}
+		return playerCol;
+	}
+	
+	///Check the the row 
+	public int checkRow(int playerRow){
+		if (playerRow >= row ){
+			playerRow = 0;
+		}
+		return playerRow;
+	}
 }
