@@ -141,17 +141,26 @@ public class GameEngine {
 		if (tile == Board.EMPTY_TILE){
 			return false;
 		}
+		
 		int col = x / board.getColSize();
 		int row = y / board.getRowSize();
 		row = board.checkRow(row);
 		col = board.checkCol(col);
-		if (tile == Board.MB_UP){
-			System.out.println(tile);
-			if((player.getColLoc() == col) && (player.getRowLoc() == row - 1)){
-				System.out.println(player.getColLoc() + " " + player.getRowLoc());
-				System.out.println(col + " " + row);
-				player.setPosition(new Vector2f(player.getPosition().getX(), player.getPosition().getY() - board.getRowSize()));
-			}
+		
+		switch (tile) {
+			case Board.MB_UP:
+				if((player.getColLoc() == col) && (player.getRowLoc() == row - 1)){
+					player.setPosition(new Vector2f(player.getPosition().getX(), player.getPosition().getY() - board.getRowSize()));
+				}
+				break;
+			case Board.MB_LEFT:
+				//TODO
+				break;
+			case Board.MB_RIGHT:
+				//TODO
+				break;
+			default:
+				break;
 		}
 		board.moveMB(col, row);
 

@@ -181,19 +181,19 @@ public class Board {
 						if ((y == row - 1) || (tiles[y + 1][x] != EMPTY_TILE))
 							continue;
 						tiles[y][x] = EMPTY_TILE;
-						tiles[y + 1][x] = MB_UP;
+						tiles[y + 1][x] = MB_DWON;
 						break;
 					case MB_LEFT:
 						if ((x == 0) || (tiles[y][x - 1] != EMPTY_TILE))
 							continue;
 						tiles[y][x] = EMPTY_TILE;
-						tiles[y][x - 1] = MB_UP;
+						tiles[y][x - 1] = MB_LEFT;
 						break;
 					case MB_RIGHT:
 						if ((x == col - 1) || (tiles[y][x + 1] != EMPTY_TILE))
 							continue;
 						tiles[y][x] = EMPTY_TILE;
-						tiles[y][x + 1] = MB_UP;
+						tiles[y][x + 1] = MB_RIGHT;
 						break;
 					default:
 						break;
