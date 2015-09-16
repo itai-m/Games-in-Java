@@ -36,8 +36,8 @@ public class GamePanel extends JPanel implements ActionListener , Runnable{
 	
 	public void paintComponent(Graphics g){
 		super.paintComponent(g);
+		game.setBoardSize(getWidth(), getHeight());
         gameRender();
-        game.setBoardSize(getWidth(), getHeight());
         g.drawImage(dbImg, 0, 0, this);
 	}
 	

@@ -115,4 +115,9 @@ public class Shot extends Sprite{
 		super.move();
 		step++;
 	}
+	
+	///Resizing the board size
+	public void setBoardSize(int boardWidth, int boardHeight){
+		super.setBoardSize(boardWidth, boardHeight);
+	}
 }

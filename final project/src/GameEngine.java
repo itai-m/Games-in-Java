@@ -42,6 +42,9 @@ public class GameEngine {
 	public void setBoardSize(int boardWidth, int boardHeight){
 		board.setBoardSize(boardWidth, boardHeight);
 		player.setBoardSize(boardWidth, boardHeight);
+		for (int i = 0; i < shots.size() ; i++){
+			shots.get(i).setBoardSize(boardWidth, boardHeight);
+		}
 	}
 	
 	///Player shot
@@ -154,10 +157,14 @@ public class GameEngine {
 				}
 				break;
 			case Board.MB_LEFT:
-				//TODO
+				if((player.getColLoc() == col - 1) && (player.getRowLoc() == row)){
+					player.setPosition(new Vector2f(player.getPosition().getX() - board.getColSize(), player.getPosition().getY()));
+				}
 				break;
 			case Board.MB_RIGHT:
-				//TODO
+				if((player.getColLoc() == col + 1) && (player.getRowLoc() == row)){
+					player.setPosition(new Vector2f(player.getPosition().getX() + board.getColSize(), player.getPosition().getY()));
+				}
 				break;
 			default:
 				break;
