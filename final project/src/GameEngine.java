@@ -3,11 +3,15 @@ import java.awt.image.ImageObserver;
 import java.util.LinkedList;
 
 public class GameEngine {
+	
+	private final int START_LEVEL = 0;
+	private final int FINAL_LEVEL = 1;
 
 	private Board board;
 	private Player player;
 	private LinkedList<Shot> shots;
 	private int level;
+	private Sound sound;
 
 	
 	///Default constructor
@@ -16,12 +20,14 @@ public class GameEngine {
 		player = new Player(Main.initializedWidth/9, Main.initializedHight/9, 10, 10, Main.initializedWidth, Main.initializedHight);
 		shots = new LinkedList<Shot>();
 		level = 0;
+		sound = new Sound();
 	}
 	
 	///Constructors
 	public GameEngine(int boardWidth, int boardHeight){
-		level = 0;
+		level = START_LEVEL;
 		initLevel(level, boardWidth, boardHeight);
+		sound = new Sound();
 	}
 	
 	///Initialization the levels
@@ -58,6 +64,7 @@ public class GameEngine {
 	public void shot(){
 		Shot tempShot = new Shot(player.getPosition().getX(), player.getPosition().getY(), player.getDirection().getX(), player.getDirection().getY(), (int)(player.getWidth() / 1.3), (int)(player.getHeight() / 1.3), player.getBoardWidth(), player.getBoardHeight());
 		shots.add(tempShot);
+		sound.shotSound();
 	}
 	
 	///Draw the game
@@ -196,6 +203,10 @@ public class GameEngine {
 	///Player win the level
 	private void leverWon(){
 		level++;
+		if (level == FINAL_LEVEL + 1){
+			//TODO: win mag
+		}
+			
 		initLevel(level, board.getBoardWidth(), board.getBoardHeight());
 	}
 }
