@@ -1,12 +1,15 @@
 
-public class Sound {
+public class Sound extends Thread{
 
 	private final String Path =  System.getProperty("user.dir") + "\\audio\\";
 	
+	private AudioPlayer audio;
 	
 	///Constructor
 	public Sound(){
+		audio = new AudioPlayer();
 		initSound();
+		
 	}
 	
 	///Initialization the sound files
@@ -16,6 +19,6 @@ public class Sound {
 	
 	///Play the shot sound
 	public void shotSound(){
-		AudioPlayer.play(Path + "Laser.wav");
+		audio.play(Path + "Laser.wav");
 	}
 }

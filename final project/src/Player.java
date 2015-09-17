@@ -18,7 +18,7 @@ public class Player extends Sprite{
 	private final int SPRITE_LEFT_ROW = 1;
 	private final int SPRITE_RIGHT_ROW = 2;
 	private final int SPRITE_COLS = 4;
-	private final int FALL_SPEED = 20;
+	private final int FALL_SPEED = 15;
 	private final double PROPORCEN_TO_BAORD = 1.5;
 
 	private int height;

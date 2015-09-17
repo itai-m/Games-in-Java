@@ -12,6 +12,7 @@ public class GameEngine {
 	private LinkedList<Shot> shots;
 	private int level;
 	private Sound sound;
+	private LinkedList<Explosion> explosions;
 
 	
 	///Default constructor
@@ -19,6 +20,7 @@ public class GameEngine {
 		board = new Board();
 		player = new Player(Main.initializedWidth/9, Main.initializedHight/9, 10, 10, Main.initializedWidth, Main.initializedHight);
 		shots = new LinkedList<Shot>();
+		explosions = new LinkedList<Explosion>();
 		level = 0;
 		sound = new Sound();
 	}
@@ -35,6 +37,7 @@ public class GameEngine {
 		board = new Board(boardWidth, boardHeight, level);
 		player = new Player((int)((boardWidth / board.getCol()) * 1.5), boardHeight - (boardHeight / board.getRow()) * (5/3), board.getCol(), board.getRow(), boardWidth, boardHeight);
 		shots = new LinkedList<Shot>();
+		explosions = new LinkedList<Explosion>();
 	}
 	
 	///Update the game
@@ -42,10 +45,18 @@ public class GameEngine {
 		for (int i = 0; i < shots.size() ; i++){
 			shots.get(i).move();
 			if (CDShotBrick(shots.get(i))){
+				Explosion temp = new Explosion((int)shots.get(i).getPosition().getX(), (int)shots.get(i).getPosition().getY(), 0, 0, board.getColSize(), board.getRowSize(), board.getBoardWidth(), board.getBoardHeight());
+				explosions.add(temp);
 				shots.remove(i);
 			}
 			else if (shots.get(i).isOver()){
 				shots.remove(i);
+			}
+		}
+		for (int i = 0; i < explosions.size() ; i++){
+			explosions.get(i).move();
+			if (explosions.get(i).isOver()){
+				explosions.remove(i);
 			}
 		}
 		playerFalling();
@@ -72,6 +83,9 @@ public class GameEngine {
 		board.draw(g, ob);
 		for (int i = 0; i < shots.size() ; i++){
 			shots.get(i).draw(g, ob);
+		}
+		for (int i = 0; i < explosions.size() ; i++){
+			explosions.get(i).draw(g, ob);
 		}
 		player.draw(g, ob);
 	}
@@ -125,7 +139,7 @@ public class GameEngine {
 		if ((tile1 == Board.EMPTY_TILE) && (tile2 == Board.EMPTY_TILE)){
 			player.fall();
 		}
-		else if (playerRow == 0){
+		else if (playerRow == Board.EMPTY_TILE){
 			player.setPosition(new Vector2f(player.getPosition().getX(), board.getBoardHeight() - player.getHeight() / 2 ));
 		}
 		else if (playerRow * board.getRowSize() < player.getPosition().getY() + player.getHeight() / 2 + player.getFALL_SPEED()){

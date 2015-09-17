@@ -13,7 +13,7 @@ public class AudioPlayer
 	private static final int EXTERNAL_BUFFER_SIZE = 128000;
         public static final int ONCE = 1, LOOP = 2;
 	
-        public static void playMultiple(String fName, int nLoopCount)
+        public void playMultiple(String fName, int nLoopCount)
         {
             Clip clip = null;
             File clipFile = new File(fName);
@@ -51,7 +51,7 @@ public class AudioPlayer
             }	
         }
       
-	public static void play(String fileName)
+	public void play(String fileName)
 	{
             File soundFile = new File(fileName);
             AudioInputStream audioInputStream = null;
