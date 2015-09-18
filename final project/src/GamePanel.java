@@ -17,7 +17,7 @@ public class GamePanel extends JPanel implements ActionListener , Runnable{
 	private static final int PERIOD = 40;
 	
 	private GameEngine game;
-	private Listener keyboard_listener;
+	private Listener keyboardListener;
 	private boolean running;
 	
 	private Image bgImage;
@@ -29,8 +29,8 @@ public class GamePanel extends JPanel implements ActionListener , Runnable{
 		running = true;
 		
 		///Initializing the listener.
-		keyboard_listener = new Listener();
-		addKeyListener(keyboard_listener);
+		keyboardListener = new Listener();
+		addKeyListener(keyboardListener);
 		setFocusable(true);
 	}
 	
@@ -47,8 +47,7 @@ public class GamePanel extends JPanel implements ActionListener , Runnable{
         before = System.currentTimeMillis();
         running = true;
         
-        while(running)
-        {
+        while(running){
         	game.update();
             gameRender();
             paintScreen();   // active rendering
@@ -90,8 +89,7 @@ public class GamePanel extends JPanel implements ActionListener , Runnable{
                 g.drawImage(dbImg, 0, 0, null);
             }
         }
-        catch(Exception e)
-        {
+        catch(Exception e){
             System.out.println("Graphics error");
             e.printStackTrace();
         }
