@@ -4,7 +4,7 @@ import java.util.LinkedList;
 
 public class GameEngine {
 	
-	private final int START_LEVEL = 0;
+	private final int START_LEVEL = 1;
 	private final int FINAL_LEVEL = 1;
 
 	private Board board;
@@ -217,10 +217,12 @@ public class GameEngine {
 	///Player win the level
 	private void leverWon(){
 		level++;
-		if (level == FINAL_LEVEL + 1){
+		if (level >= FINAL_LEVEL + 1){
 			//TODO: win mag
+			System.out.println("player win");
 		}
-			
-		initLevel(level, board.getBoardWidth(), board.getBoardHeight());
+		else{	
+			initLevel(level, board.getBoardWidth(), board.getBoardHeight());
+		}
 	}
 }
