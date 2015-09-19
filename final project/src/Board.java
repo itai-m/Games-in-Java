@@ -7,7 +7,7 @@ import java.util.LinkedList;
 
 public class Board {
 
-	private final String Path =  System.getProperty("user.dir") + "\\image\\Board\\";
+	private final String PATH =  System.getProperty("user.dir") + "\\image\\Board\\";
 	public final static int EMPTY_TILE = 0;
 	public final static int NONE_MOVING_TILE = 1;
 	public final static int MB_UP = MovingBrick.UP;
@@ -76,25 +76,25 @@ public class Board {
 	private void initImag(int level){
 		switch (level) {
 		case 0:
-			background  = Toolkit.getDefaultToolkit().getImage(Path + "background.jpg");
+			background  = Toolkit.getDefaultToolkit().getImage(PATH + "background.jpg");
 			break;
 		case 1:
-			background  = Toolkit.getDefaultToolkit().getImage(Path + "background1.jpg");
+			background  = Toolkit.getDefaultToolkit().getImage(PATH + "background1.jpg");
 			break;
 		case 2:
-			background  = Toolkit.getDefaultToolkit().getImage(Path + "background2.jpg");
+			background  = Toolkit.getDefaultToolkit().getImage(PATH + "background2.jpg");
 			break;
 		case 3:
-			background  = Toolkit.getDefaultToolkit().getImage(Path + "background3.jpg");
+			background  = Toolkit.getDefaultToolkit().getImage(PATH + "background3.jpg");
 			break;
 		case 4:
-			background  = Toolkit.getDefaultToolkit().getImage(Path + "background4.jpg");
+			background  = Toolkit.getDefaultToolkit().getImage(PATH + "background4.jpg");
 			break;
 		default:
 			break;
 		}
-		brick1 = Toolkit.getDefaultToolkit().getImage(Path + "b1.jpg");
-		door  = Toolkit.getDefaultToolkit().getImage(Path + "door.png");
+		brick1 = Toolkit.getDefaultToolkit().getImage(PATH + "b1.jpg");
+		door  = Toolkit.getDefaultToolkit().getImage(PATH + "door.png");
 	}
 	
 	///Load map number 1

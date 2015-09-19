@@ -5,7 +5,7 @@ import java.awt.image.ImageObserver;
 
 public class Player extends Sprite{
 	
-	private final String Path =  System.getProperty("user.dir") + "\\image\\";
+	private final String PATH =  System.getProperty("user.dir") + "\\image\\";
 	private final static int SPEED = 5;
 	private final int LEFT = 1;
 	private final int RIGHT = 2;
@@ -20,6 +20,7 @@ public class Player extends Sprite{
 	private final int SPRITE_COLS = 4;
 	private final int FALL_SPEED = 15;
 	private final double PROPORCEN_TO_BAORD = 1.5;
+	private final int NUMBER_OF_PLAYER_IMGAES = 1;
 
 	private int height;
 	private int width;
@@ -45,7 +46,7 @@ public class Player extends Sprite{
 	
 	///Initialization the images
 	private void initImages(){
-		player = Toolkit.getDefaultToolkit().getImage(Path + "player.png");
+		player = Toolkit.getDefaultToolkit().getImage(PATH + "player.png");
 	}
 
 	///Turn to the left, return false if is already turn to the left, otherwise true

@@ -5,7 +5,7 @@ import java.awt.image.ImageObserver;
 
 public class Shot extends Sprite{
 
-	private final String Path =  System.getProperty("user.dir") + "\\image\\";
+	private final String PATH =  System.getProperty("user.dir") + "\\image\\";
 	private final static int SPEED = 10;
 	private final int[] SPRITE_WIDTH = {0, 50, 95, 145, 224, 307, 374};
 	private final int STEP_PER_PIC = 14;
@@ -32,7 +32,7 @@ public class Shot extends Sprite{
 	
 	///Initialization the images
 	private void initImages(){
-		imag = Toolkit.getDefaultToolkit().getImage(Path + "shot.png");
+		imag = Toolkit.getDefaultToolkit().getImage(PATH + "shot.png");
 	}
 	
 	///Check if the shot pass is time
