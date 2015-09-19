@@ -4,7 +4,7 @@ import java.util.LinkedList;
 
 public class GameEngine {
 	
-	private final int START_LEVEL = 1;
+	private final int START_LEVEL = 0;
 	private final int FINAL_LEVEL = 4;
 
 	private Board board;
