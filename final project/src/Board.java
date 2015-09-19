@@ -15,6 +15,7 @@ public class Board {
 	public final static int MB_LEFT = MovingBrick.LEFT;
 	public final static int MB_RIGHT = MovingBrick.RIGHT;
 	public final static int DOOR = 2002;
+	public final static int ERROR = -1;
 	
 	private final int INIT_SIZE = 10;
 	private int[][] tiles;
@@ -237,6 +238,8 @@ public class Board {
 	
 	///Get one of the tile
 	public int getTile(int x, int y){
+		if ((x > col) || (y > row) || (x < 0) || (y < 0))
+			return ERROR;
 		return tiles[y][x];
 	}
 

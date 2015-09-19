@@ -193,17 +193,32 @@ public class GameEngine {
 		switch (tile) {
 			case Board.MB_UP:
 				if((player.getColLoc() == col) && (player.getRowLoc() == row - 1)){
-					player.setPosition(new Vector2f(player.getPosition().getX(), player.getPosition().getY() - board.getRowSize()));
+					if ((board.getTile(col, row - 2) == Board.EMPTY_TILE) || (board.getTile(col, row - 2) == Board.DOOR)){
+						player.setPosition(new Vector2f(player.getPosition().getX(), player.getPosition().getY() - board.getRowSize()));
+					}
+					else{
+						return true;
+					}
 				}
 				break;
 			case Board.MB_LEFT:
 				if((player.getColLoc() == col - 1) && (player.getRowLoc() == row)){
-					player.setPosition(new Vector2f(player.getPosition().getX() - board.getColSize(), player.getPosition().getY()));
+					if ((board.getTile(col - 2, row) == Board.EMPTY_TILE) || (board.getTile(col - 2, row) == Board.DOOR)){
+						player.setPosition(new Vector2f(player.getPosition().getX() - board.getColSize(), player.getPosition().getY()));
+					}
+					else{
+						return true;
+					}
 				}
 				break;
 			case Board.MB_RIGHT:
 				if((player.getColLoc() == col + 1) && (player.getRowLoc() == row)){
-					player.setPosition(new Vector2f(player.getPosition().getX() + board.getColSize(), player.getPosition().getY()));
+					if ((board.getTile(col + 2, row) == Board.EMPTY_TILE) || (board.getTile(col + 2, row) == Board.DOOR)){
+						player.setPosition(new Vector2f(player.getPosition().getX() + board.getColSize(), player.getPosition().getY()));
+					}
+					else{
+						return true;
+					}
 				}
 				break;
 			default:
