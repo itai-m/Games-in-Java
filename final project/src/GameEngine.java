@@ -5,7 +5,7 @@ import java.util.LinkedList;
 public class GameEngine {
 	
 	private final int START_LEVEL = 1;
-	private final int FINAL_LEVEL = 1;
+	private final int FINAL_LEVEL = 4;
 
 	private Board board;
 	private Player player;
@@ -225,4 +225,5 @@ public class GameEngine {
 			initLevel(level, board.getBoardWidth(), board.getBoardHeight());
 		}
 	}
+	
 }
