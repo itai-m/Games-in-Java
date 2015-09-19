@@ -1,0 +1,8 @@
+Welcome to the ElevatorBox.
+your goal is to get to the door,
+when you shot the wooden box the go with the direction of the arrow on them.
+Keys:
+Arrows - use for the movement of your player.
+Space - use for shooting.
+R - for reset the level.
+A - change the appearance of the player.
