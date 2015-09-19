@@ -137,6 +137,9 @@ public class GamePanel extends JPanel implements ActionListener , Runnable{
   			case KeyEvent.VK_SPACE:
   				game.shot();
   				break;
+  			case KeyEvent.VK_R:
+  				game.resetLevel();
+  				break;
   			case KeyEvent.VK_ESCAPE:
   				//TODO: end the game
   				break;

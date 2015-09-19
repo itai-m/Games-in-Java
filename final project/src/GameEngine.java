@@ -226,4 +226,8 @@ public class GameEngine {
 		}
 	}
 	
+	///Reset the level
+	public void resetLevel(){
+		initLevel(level,board.getBoardWidth(), board.getBoardHeight());
+	}
 }
