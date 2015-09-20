@@ -223,6 +223,11 @@ public class GameEngine {
 					}
 				}
 				break;
+			case Board.MB_DWON:
+				if((player.getColLoc() == col) && (player.getRowLoc() == row + 1)){
+					return true;
+				}
+				break;
 			default:
 				break;
 		}
