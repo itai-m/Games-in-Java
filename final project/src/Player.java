@@ -5,7 +5,7 @@ import java.awt.image.ImageObserver;
 
 public class Player extends Sprite{
 	
-	private final String PATH =  System.getProperty("user.dir") + "\\image\\";
+	private final String PATH =  System.getProperty("user.dir") + "\\image\\Player\\";
 	private final static int SPEED = 5;
 	private final int LEFT = 1;
 	private final int RIGHT = 2;
@@ -20,13 +20,14 @@ public class Player extends Sprite{
 	private final int SPRITE_COLS = 4;
 	private final int FALL_SPEED = 15;
 	private final double PROPORCEN_TO_BAORD = 1.5;
-	private final int NUMBER_OF_PLAYER_IMGAES = 1;
+	private final int NUMBER_OF_PLAYER_IMGAES = 2;
 
 	private int height;
 	private int width;
 	private int turnTo;
-	private Image player;
+	private Image[] players;
 	private int step;
+	private int imageNum;
 	
 	private int row;
 	private int col;
@@ -41,12 +42,16 @@ public class Player extends Sprite{
 		this.width = (int) (boardWidth / (col * PROPORCEN_TO_BAORD));
 		turnTo = DOWN;
 		step = 0;
+		imageNum = 0;
 		initImages();
 	}
 	
 	///Initialization the images
 	private void initImages(){
-		player = Toolkit.getDefaultToolkit().getImage(PATH + "player.png");
+		players = new Image[NUMBER_OF_PLAYER_IMGAES];
+		for (int i = 0 ; i < NUMBER_OF_PLAYER_IMGAES ; i++){
+			players[i] = Toolkit.getDefaultToolkit().getImage(PATH + "player" + i + ".png");
+		}
 	}
 
 	///Turn to the left, return false if is already turn to the left, otherwise true
@@ -110,16 +115,16 @@ public class Player extends Sprite{
 		int y = (int)getPosition().getY();
 		switch (turnTo) {
 		case DOWN:
-			g.drawImage(player, x - width/2, y - height/2, x + width/2, y + height/2, SPRITE_WIDTH * step, SPRITE_HEIGHT * SPRITE_DOWN_ROW, SPRITE_WIDTH * (step+1), SPRITE_HEIGHT * (SPRITE_DOWN_ROW+1), ob);
+			g.drawImage(players[imageNum], x - width/2, y - height/2, x + width/2, y + height/2, SPRITE_WIDTH * step, SPRITE_HEIGHT * SPRITE_DOWN_ROW, SPRITE_WIDTH * (step+1), SPRITE_HEIGHT * (SPRITE_DOWN_ROW+1), ob);
 			break;
 		case UP:
-			g.drawImage(player, x - width/2, y - height/2, x + width/2, y + height/2, SPRITE_WIDTH * step, SPRITE_HEIGHT * SPRITE_UP_ROW, SPRITE_WIDTH * (step+1), SPRITE_HEIGHT * (SPRITE_UP_ROW+1), ob);
+			g.drawImage(players[imageNum], x - width/2, y - height/2, x + width/2, y + height/2, SPRITE_WIDTH * step, SPRITE_HEIGHT * SPRITE_UP_ROW, SPRITE_WIDTH * (step+1), SPRITE_HEIGHT * (SPRITE_UP_ROW+1), ob);
 			break;
 		case LEFT:
-			g.drawImage(player, x - width/2, y - height/2, x + width/2, y + height/2, SPRITE_WIDTH * step, SPRITE_HEIGHT * SPRITE_LEFT_ROW, SPRITE_WIDTH * (step+1), SPRITE_HEIGHT * (SPRITE_LEFT_ROW+1), ob);
+			g.drawImage(players[imageNum], x - width/2, y - height/2, x + width/2, y + height/2, SPRITE_WIDTH * step, SPRITE_HEIGHT * SPRITE_LEFT_ROW, SPRITE_WIDTH * (step+1), SPRITE_HEIGHT * (SPRITE_LEFT_ROW+1), ob);
 			break;
 		case RIGHT:
-			g.drawImage(player, x - width/2, y - height/2, x + width/2, y + height/2, SPRITE_WIDTH * step, SPRITE_HEIGHT * SPRITE_RIGHT_ROW, SPRITE_WIDTH * (step+1), SPRITE_HEIGHT * (SPRITE_RIGHT_ROW+1), ob);
+			g.drawImage(players[imageNum], x - width/2, y - height/2, x + width/2, y + height/2, SPRITE_WIDTH * step, SPRITE_HEIGHT * SPRITE_RIGHT_ROW, SPRITE_WIDTH * (step+1), SPRITE_HEIGHT * (SPRITE_RIGHT_ROW+1), ob);
 			break;
 		default:
 			break;
@@ -160,5 +165,15 @@ public class Player extends Sprite{
 	///Get the location by row
 	public int getRowLoc(){
 		return (int) (getPosition().getY() / (getBoardHeight() / row));
+	}
+	
+	///Change the appearance of the player
+	public void ChangeAppearance(){
+		if (imageNum >= NUMBER_OF_PLAYER_IMGAES){
+			imageNum = 0;
+		}
+		else{
+			imageNum++;
+		}
 	}
 }

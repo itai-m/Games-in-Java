@@ -134,9 +134,9 @@ public class GameEngine {
 
 		if ((tile1 == Board.DOOR) || (tile2 == Board.DOOR)){
 			leverWon();
-			return;
+			player.fall();
 		}
-		if ((tile1 == Board.EMPTY_TILE) && (tile2 == Board.EMPTY_TILE)){
+		else if ((tile1 == Board.EMPTY_TILE) && (tile2 == Board.EMPTY_TILE)){
 			player.fall();
 		}
 		else if (playerRow == Board.EMPTY_TILE){
@@ -153,7 +153,7 @@ public class GameEngine {
 		int tile = board.getTileByPoint((int)((player.getPosition().getX() + (player.getWidth() / 4) + player.getSpeed())), (int)(player.getPosition().getY()));
 		if (tile == Board.DOOR){
 			leverWon();
-			return false;
+			return true;
 		}
 		if (tile == Board.EMPTY_TILE)
 			return true;
@@ -243,6 +243,10 @@ public class GameEngine {
 	
 	///Reset the level
 	public void resetLevel(){
-		initLevel(level,board.getBoardWidth(), board.getBoardHeight());
+		board.loadMap(level);
+		player.setPosition(new Vector2f((int)((board.getBoardWidth() / board.getCol()) * 1.5), board.getBoardHeight() - (board.getBoardHeight() / board.getRow()) * (5/3)));
+		//initLevel(level,board.getBoardWidth(), board.getBoardHeight());
 	}
+	
+	
 }

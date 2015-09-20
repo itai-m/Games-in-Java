@@ -45,13 +45,11 @@ public class Board {
 		this.boardWidth = boardWidth;
 		this.rowSize = boardHeight / row;
 		this.colSize = boardWidth / col;
-		bricks = new LinkedList<MovingBrick>();
 		initImag(maplevel);
-		addMovingBricks();
 	}
 	
 	///Load a map from the list
-	private void loadMap(int mapNumber){
+	public void loadMap(int mapNumber){
 		switch (mapNumber) {
 		case 0:
 			loadExampleMap();
@@ -71,6 +69,8 @@ public class Board {
 		default:
 			break;
 		}
+		bricks = new LinkedList<MovingBrick>();
+		addMovingBricks();
 	}
 	
 	///Initialization the images
