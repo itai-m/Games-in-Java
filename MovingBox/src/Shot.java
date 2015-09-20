@@ -1,6 +1,4 @@
 import java.awt.Graphics2D;
-import java.awt.Image;
-import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
 import java.awt.image.ImageObserver;
 import java.io.File;
@@ -39,7 +37,7 @@ public class Shot extends Sprite{
 	private void initImages(){
 		try {
 			if (getDirection().getY() != 0){
-				imag = ImageIO.read( new File( PATH + "shot.png" ) );
+				imag = ImageIO.read( new File( PATH + "shot2.png" ) );
 			}
 			else{
 				imag = ImageIO.read( new File( PATH + "shot.png" ) );
@@ -95,15 +93,18 @@ public class Shot extends Sprite{
 		}
 		else{ 
 			x1 -= width / 2;
-			y1 -= height / 2 ;
 			x2 += width / 2;
-			y2 += height /2;
-			if (getDirection().getY() == -1){
-				
+			
+			if (getDirection().getY() == 1){
+				y1 -= height / 2;
+				y2 += height /2;
+			}
+			else{
+				y1 += height / 2;
+				y2 -= height /2;
 			}
 			
 			if (step < STEP_PER_PIC){
-				//g.drawImage(imag, x1, y1, ob);
 				g.drawImage(imag, x1, y1, x2, y2, 0, SPRITE_WIDTH[0], SPRITE_HEIGHT, SPRITE_WIDTH[1], ob);
 			}
 			else if (step < STEP_PER_PIC * 2){
