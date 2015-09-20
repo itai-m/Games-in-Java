@@ -37,7 +37,7 @@ public class GamePanel extends JPanel implements ActionListener , Runnable{
 	public void paintComponent(Graphics g){
 		super.paintComponent(g);
 		game.setBoardSize(getWidth(), getHeight());
-        gameRender();
+        //gameRender();
         g.drawImage(dbImg, 0, 0, this);
 	}
 	
@@ -120,32 +120,29 @@ public class GamePanel extends JPanel implements ActionListener , Runnable{
   		@Override
   		public void keyPressed(KeyEvent e) {
   			super.keyPressed(e);
-  			int key = e.getKeyCode();
-  			switch (key){
-  			case KeyEvent.VK_LEFT:
+  			if (e.getKeyCode() == KeyEvent.VK_LEFT){
   				game.MoveLeft();
-  				break;
-  			case KeyEvent.VK_RIGHT:
+  			}
+  			if (e.getKeyCode() == KeyEvent.VK_RIGHT){
   				game.MoveRight();
-  				break;
-  			case KeyEvent.VK_UP:
+  			}
+  			if (e.getKeyCode() == KeyEvent.VK_UP){
   				game.MoveUp();
-  				break;
-  			case KeyEvent.VK_DOWN:
+  			}
+  			if (e.getKeyCode() == KeyEvent.VK_DOWN){
   				game.MoveDown();
-  				break;
-  			case KeyEvent.VK_SPACE:
+  			}
+  			if (e.getKeyCode() == KeyEvent.VK_SPACE){
   				game.shot();
-  				break;
-  			case KeyEvent.VK_R:
+  			}
+  			if (e.getKeyCode() == KeyEvent.VK_R){
   				game.resetLevel();
-  				break;
-  			case KeyEvent.VK_A:
+  			}
+  			if (e.getKeyCode() == KeyEvent.VK_A){
   				game.changePlayerAppearance();
-  				break;
-  			case KeyEvent.VK_ESCAPE:
+  			}
+  			if (e.getKeyCode() == KeyEvent.VK_ESCAPE){
   				//TODO: end the game
-  				break;
   			}
   			repaint();
   		}

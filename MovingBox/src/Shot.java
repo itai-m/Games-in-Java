@@ -1,7 +1,12 @@
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.awt.image.BufferedImage;
 import java.awt.image.ImageObserver;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
 
 public class Shot extends Sprite{
 
@@ -12,7 +17,7 @@ public class Shot extends Sprite{
 	private final int SPRITE_HEIGHT = 48;
 	private final int MAX_STEP = STEP_PER_PIC * 8;
 	
-	private Image imag;
+	private BufferedImage imag;
 	private int height;
 	private int width;
 	private int step;
@@ -32,7 +37,16 @@ public class Shot extends Sprite{
 	
 	///Initialization the images
 	private void initImages(){
-		imag = Toolkit.getDefaultToolkit().getImage(PATH + "shot.png");
+		try {
+			if (getDirection().getY() != 0){
+				imag = ImageIO.read( new File( PATH + "shot.png" ) );
+			}
+			else{
+				imag = ImageIO.read( new File( PATH + "shot.png" ) );
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	///Check if the shot pass is time
@@ -59,6 +73,25 @@ public class Shot extends Sprite{
 				x1 += width / 2;
 				x2 -= width / 2;
 			}
+			if (step < STEP_PER_PIC){
+				g.drawImage(imag, x1, y1, x2, y2, SPRITE_WIDTH[0], 0, SPRITE_WIDTH[1], SPRITE_HEIGHT, ob);
+			}
+			else if (step < STEP_PER_PIC * 2){
+				g.drawImage(imag, x1, y1, x2, y2, SPRITE_WIDTH[1], 0, SPRITE_WIDTH[2], SPRITE_HEIGHT, ob);
+			}
+			else if (step < STEP_PER_PIC * 3){
+				g.drawImage(imag, x1, y1, x2, y2, SPRITE_WIDTH[2], 0, SPRITE_WIDTH[3], SPRITE_HEIGHT, ob);
+			}
+			else if (step < STEP_PER_PIC * 4){
+				g.drawImage(imag, x1, y1, x2, y2, SPRITE_WIDTH[3], 0, SPRITE_WIDTH[4], SPRITE_HEIGHT, ob);
+			}
+			else if (step < STEP_PER_PIC * 5){
+				g.drawImage(imag, x1, y1, x2, y2, SPRITE_WIDTH[4], 0, SPRITE_WIDTH[5], SPRITE_HEIGHT, ob);
+			}
+			else if (step >= STEP_PER_PIC * 5){
+				g.drawImage(imag, x1, y1, x2, y2, SPRITE_WIDTH[5], 0, SPRITE_WIDTH[6], SPRITE_HEIGHT, ob);
+			}
+			
 		}
 		else{ 
 			x1 -= width / 2;
@@ -68,26 +101,28 @@ public class Shot extends Sprite{
 			if (getDirection().getY() == -1){
 				
 			}
+			
+			if (step < STEP_PER_PIC){
+				//g.drawImage(imag, x1, y1, ob);
+				g.drawImage(imag, x1, y1, x2, y2, 0, SPRITE_WIDTH[0], SPRITE_HEIGHT, SPRITE_WIDTH[1], ob);
+			}
+			else if (step < STEP_PER_PIC * 2){
+				g.drawImage(imag, x1, y1, x2, y2, 0, SPRITE_WIDTH[1], SPRITE_HEIGHT, SPRITE_WIDTH[2], ob);
+			}
+			else if (step < STEP_PER_PIC * 3){
+				g.drawImage(imag, x1, y1, x2, y2, 0, SPRITE_WIDTH[2], SPRITE_HEIGHT, SPRITE_WIDTH[3], ob);
+			}
+			else if (step < STEP_PER_PIC * 4){
+				g.drawImage(imag, x1, y1, x2, y2, 0, SPRITE_WIDTH[3], SPRITE_HEIGHT, SPRITE_WIDTH[4], ob);
+			}
+			else if (step < STEP_PER_PIC * 5){
+				g.drawImage(imag, x1, y1, x2, y2, 0, SPRITE_WIDTH[4], SPRITE_HEIGHT, SPRITE_WIDTH[5], ob);
+			}
+			else if (step >= STEP_PER_PIC * 5){
+				g.drawImage(imag, x1, y1, x2, y2, 0, SPRITE_WIDTH[5], SPRITE_HEIGHT, SPRITE_WIDTH[6], ob);
+			}
 		}
 		
-		if (step < STEP_PER_PIC){
-			g.drawImage(imag, x1, y1, x2, y2, SPRITE_WIDTH[0], 0, SPRITE_WIDTH[1], SPRITE_HEIGHT, ob);
-		}
-		else if (step < STEP_PER_PIC * 2){
-			g.drawImage(imag, x1, y1, x2, y2, SPRITE_WIDTH[1], 0, SPRITE_WIDTH[2], SPRITE_HEIGHT, ob);
-		}
-		else if (step < STEP_PER_PIC * 3){
-			g.drawImage(imag, x1, y1, x2, y2, SPRITE_WIDTH[2], 0, SPRITE_WIDTH[3], SPRITE_HEIGHT, ob);
-		}
-		else if (step < STEP_PER_PIC * 4){
-			g.drawImage(imag, x1, y1, x2, y2, SPRITE_WIDTH[3], 0, SPRITE_WIDTH[4], SPRITE_HEIGHT, ob);
-		}
-		else if (step < STEP_PER_PIC * 5){
-			g.drawImage(imag, x1, y1, x2, y2, SPRITE_WIDTH[4], 0, SPRITE_WIDTH[5], SPRITE_HEIGHT, ob);
-		}
-		else if (step >= STEP_PER_PIC * 5){
-			g.drawImage(imag, x1, y1, x2, y2, SPRITE_WIDTH[5], 0, SPRITE_WIDTH[6], SPRITE_HEIGHT, ob);
-		}
 	}
 
 	///Get the height
