@@ -10,10 +10,10 @@ import javax.imageio.ImageIO;
 public class MovingBrick extends Sprite{
 	
 	private final String Path =  System.getProperty("user.dir") + "\\image\\";
-	public static final int UP = 1001;
-	public static final int DOWN = 1002;
-	public static final int LEFT = 1003;
-	public static final int RIGHT = 1004;
+	public static final int UP = 2;
+	public static final int DOWN = 3;
+	public static final int LEFT = 4;
+	public static final int RIGHT = 5;
 	
 	private int kind;
 	private int colSize;
