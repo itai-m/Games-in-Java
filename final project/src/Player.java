@@ -167,9 +167,14 @@ public class Player extends Sprite{
 		return (int) (getPosition().getY() / (getBoardHeight() / row));
 	}
 	
+	public void setColAndRow(int col, int row){
+		this.col = col;
+		this.row = row;
+	}
+	
 	///Change the appearance of the player
 	public void ChangeAppearance(){
-		if (imageNum >= NUMBER_OF_PLAYER_IMGAES){
+		if (imageNum >= NUMBER_OF_PLAYER_IMGAES - 1){
 			imageNum = 0;
 		}
 		else{

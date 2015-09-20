@@ -141,7 +141,7 @@ public class GamePanel extends JPanel implements ActionListener , Runnable{
   				game.resetLevel();
   				break;
   			case KeyEvent.VK_A:
-  				game.resetLevel();
+  				game.changePlayerAppearance();
   				break;
   			case KeyEvent.VK_ESCAPE:
   				//TODO: end the game

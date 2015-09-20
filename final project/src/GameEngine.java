@@ -28,6 +28,7 @@ public class GameEngine {
 	///Constructors
 	public GameEngine(int boardWidth, int boardHeight){
 		level = START_LEVEL;
+		player = new Player(0,0, 1, 1, boardWidth, boardHeight);
 		initLevel(level, boardWidth, boardHeight);
 		sound = new Sound();
 	}
@@ -35,7 +36,8 @@ public class GameEngine {
 	///Initialization the levels
 	private void initLevel(int level, int boardWidth, int boardHeight){
 		board = new Board(boardWidth, boardHeight, level);
-		player = new Player((int)((boardWidth / board.getCol()) * 1.5), boardHeight - (boardHeight / board.getRow()) * (5/3), board.getCol(), board.getRow(), boardWidth, boardHeight);
+		player.setPosition(new Vector2f((int)((board.getBoardWidth() / board.getCol()) * 1.5), board.getBoardHeight() - (board.getBoardHeight() / board.getRow()) * (5/3)));
+		player.setColAndRow(board.getCol(), board.getRow());
 		shots = new LinkedList<Shot>();
 		explosions = new LinkedList<Explosion>();
 	}
@@ -245,8 +247,10 @@ public class GameEngine {
 	public void resetLevel(){
 		board.loadMap(level);
 		player.setPosition(new Vector2f((int)((board.getBoardWidth() / board.getCol()) * 1.5), board.getBoardHeight() - (board.getBoardHeight() / board.getRow()) * (5/3)));
-		//initLevel(level,board.getBoardWidth(), board.getBoardHeight());
 	}
 	
-	
+	///Change the appearance of the player
+	public void changePlayerAppearance(){
+		player.ChangeAppearance();
+	}
 }
