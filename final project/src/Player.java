@@ -20,7 +20,7 @@ public class Player extends Sprite{
 	private final int SPRITE_COLS = 4;
 	private final int FALL_SPEED = 15;
 	private final double PROPORCEN_TO_BAORD = 1.5;
-	private final int NUMBER_OF_PLAYER_IMGAES = 2;
+	private final int NUMBER_OF_PLAYER_IMGAES = 5;
 
 	private int height;
 	private int width;
