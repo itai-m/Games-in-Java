@@ -228,6 +228,9 @@ public class Board {
 	
 	///Set the board height and width
 	public void setBoardSize(int boardWidth, int boardHeight){
+		if ((row == 0) || (col == 0)){
+			return;
+		}
 		this.boardHeight = boardHeight;
 		this.boardWidth = boardWidth;
 		this.rowSize = boardHeight / row;
