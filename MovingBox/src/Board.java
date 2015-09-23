@@ -228,9 +228,6 @@ public class Board {
 	
 	///Set the board height and width
 	public void setBoardSize(int boardWidth, int boardHeight){
-		if ((row == 0) || (col == 0)){
-			return;
-		}
 		this.boardHeight = boardHeight;
 		this.boardWidth = boardWidth;
 		this.rowSize = boardHeight / row;
@@ -326,6 +323,9 @@ public class Board {
 	
 	///Get the tile id by a point
 	public int getTileByPoint(int x, int y){
+		if ((colSize == 0) || (rowSize == 0)){
+			return -1;
+		}
 		int col = x / colSize;
 		int row = y / rowSize;
 		row = checkRow(row);
