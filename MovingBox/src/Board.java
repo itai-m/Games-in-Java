@@ -41,6 +41,7 @@ public class Board {
 	
 	///Constructor
 	public Board(int boardWidth, int boardHeight, int maplevel){
+		MovingBrick.initImages();
 		loadMap(maplevel);
 		backgrounds = new Image[MAX_LEVEL];
 		this.boardHeight = boardHeight;

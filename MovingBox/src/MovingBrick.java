@@ -9,7 +9,7 @@ import javax.imageio.ImageIO;
 
 public class MovingBrick extends Sprite{
 	
-	private final String Path =  System.getProperty("user.dir") + "\\image\\";
+	private final static String Path =  System.getProperty("user.dir") + "\\image\\";
 	public static final int UP = 2;
 	public static final int DOWN = 3;
 	public static final int LEFT = 4;
@@ -18,13 +18,15 @@ public class MovingBrick extends Sprite{
 	private int kind;
 	private int colSize;
 	private int rowSize;
-	private BufferedImage image;
+	private static BufferedImage imageUp;
+	private static BufferedImage imageDown;
+	private static BufferedImage imageLeft;
+	private static BufferedImage imageRight;
 	
 	///Default constructor
 	public MovingBrick(){
 		super();
 		kind = 0;
-		initImages(0);
 	}
 	
 	///Constructors
@@ -49,11 +51,10 @@ public class MovingBrick extends Sprite{
 		default:
 			break;
 		}
-		initImages(kind);
 	}
 	
 	///Initialization the images
-	private void initImages(int kind){
+	public static void initImages(){
 		BufferedImage tempBrikcImage = null;
 		BufferedImage tempArrowImage = null;
 		try {
@@ -62,25 +63,30 @@ public class MovingBrick extends Sprite{
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		image = new BufferedImage(tempBrikcImage.getWidth(), tempBrikcImage.getHeight(), BufferedImage.TYPE_INT_ARGB);
-		Graphics2D g2d = image.createGraphics();
+		///Load the right box
+		imageRight = new BufferedImage(tempBrikcImage.getWidth(), tempBrikcImage.getHeight(), BufferedImage.TYPE_INT_ARGB);
+		Graphics2D g2d = imageRight.createGraphics();
+		g2d.drawImage(tempBrikcImage, 0, 0, null);
+		g2d.drawImage(tempArrowImage, tempBrikcImage.getWidth() / 4, tempBrikcImage.getHeight() / 4, tempBrikcImage.getWidth() / 2, tempBrikcImage.getHeight() / 2, null);
 		
-		switch (kind) {
-		case UP:
-			tempArrowImage = rotateImage(tempArrowImage, 270);
-			break;
-		case DOWN:
-			tempArrowImage = rotateImage(tempArrowImage, 90);
-			break;
-		case LEFT:
-			tempArrowImage = rotateImage(tempArrowImage, 180);
-			break;
-		case RIGHT:
-			tempArrowImage = rotateImage(tempArrowImage, 0);
-			break;
-		default:
-			break;
-		}
+		//Load the down box
+		tempArrowImage = rotateImage(tempArrowImage, 90);
+		imageDown = new BufferedImage(tempBrikcImage.getWidth(), tempBrikcImage.getHeight(), BufferedImage.TYPE_INT_ARGB);
+		g2d = imageDown.createGraphics();
+		g2d.drawImage(tempBrikcImage, 0, 0, null);
+		g2d.drawImage(tempArrowImage, tempBrikcImage.getWidth() / 4, tempBrikcImage.getHeight() / 4, tempBrikcImage.getWidth() / 2, tempBrikcImage.getHeight() / 2, null);
+		
+		//Load the left box
+		tempArrowImage = rotateImage(tempArrowImage, 90);
+		imageLeft = new BufferedImage(tempBrikcImage.getWidth(), tempBrikcImage.getHeight(), BufferedImage.TYPE_INT_ARGB);
+		g2d = imageLeft.createGraphics();
+		g2d.drawImage(tempBrikcImage, 0, 0, null);
+		g2d.drawImage(tempArrowImage, tempBrikcImage.getWidth() / 4, tempBrikcImage.getHeight() / 4, tempBrikcImage.getWidth() / 2, tempBrikcImage.getHeight() / 2, null);
+		
+		//Load the down box
+		tempArrowImage = rotateImage(tempArrowImage, 90);
+		imageUp = new BufferedImage(tempBrikcImage.getWidth(), tempBrikcImage.getHeight(), BufferedImage.TYPE_INT_ARGB);
+		g2d = imageUp.createGraphics();
 		g2d.drawImage(tempBrikcImage, 0, 0, null);
 		g2d.drawImage(tempArrowImage, tempBrikcImage.getWidth() / 4, tempBrikcImage.getHeight() / 4, tempBrikcImage.getWidth() / 2, tempBrikcImage.getHeight() / 2, null);
 	}
@@ -99,7 +105,23 @@ public class MovingBrick extends Sprite{
 	
 	///Draw the brick
 	public void draw(Graphics2D g, ImageObserver ob){
-		g.drawImage(image, (int)getPosition().getX() * colSize, (int)getPosition().getY() * rowSize, colSize, rowSize, ob);
+		switch (kind) {
+		case UP:
+			g.drawImage(imageUp, (int)getPosition().getX() * colSize, (int)getPosition().getY() * rowSize, colSize, rowSize, ob);
+			break;
+		case DOWN:
+			g.drawImage(imageDown, (int)getPosition().getX() * colSize, (int)getPosition().getY() * rowSize, colSize, rowSize, ob);
+			break;
+		case LEFT:
+			g.drawImage(imageLeft, (int)getPosition().getX() * colSize, (int)getPosition().getY() * rowSize, colSize, rowSize, ob);
+			break;
+		case RIGHT:
+			g.drawImage(imageRight, (int)getPosition().getX() * colSize, (int)getPosition().getY() * rowSize, colSize, rowSize, ob);
+			break;
+		default:
+			break;
+		}
+		//g.drawImage(image, (int)getPosition().getX() * colSize, (int)getPosition().getY() * rowSize, colSize, rowSize, ob);
 	}
 	
 	

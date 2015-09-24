@@ -36,7 +36,6 @@ public class GameEngine {
 	
 	///Initialization the levels
 	private void initLevel(int level, int boardWidth, int boardHeight){
-		//board = new Board(boardWidth, boardHeight, level);
 		board.loadMap(level);
 		player.setPosition(new Vector2f((int)((board.getBoardWidth() / board.getCol()) * 1.5), board.getBoardHeight() - (board.getBoardHeight() / board.getRow()) * (5/3)));
 		player.setColAndRow(board.getCol(), board.getRow());

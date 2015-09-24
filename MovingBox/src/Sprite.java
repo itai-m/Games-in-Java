@@ -152,7 +152,7 @@ public class Sprite {
 	}
 	
 	///Rotate the image of the sprite
-	public BufferedImage rotateImage(BufferedImage img, int angle)
+	public static BufferedImage rotateImage(BufferedImage img, int angle)
     {
         BufferedImage res = new BufferedImage(img.getWidth(), img.getHeight(), BufferedImage.TYPE_INT_ARGB);
         Graphics2D g2d = res.createGraphics();
