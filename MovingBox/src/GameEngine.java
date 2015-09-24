@@ -5,7 +5,7 @@ import java.util.LinkedList;
 public class GameEngine {
 	
 	private final int START_LEVEL = 0 ;
-	private final int FINAL_LEVEL = 4;
+	private final int FINAL_LEVEL = Board.MAX_LEVEL;
 
 	private Board board;
 	private Player player;
@@ -29,13 +29,15 @@ public class GameEngine {
 	public GameEngine(int boardWidth, int boardHeight){
 		level = START_LEVEL;
 		player = new Player(0,0, 1, 1, boardWidth, boardHeight);
+		board = new Board(boardWidth, boardHeight, level);
 		initLevel(level, boardWidth, boardHeight);
 		sound = new Sound();
 	}
 	
 	///Initialization the levels
 	private void initLevel(int level, int boardWidth, int boardHeight){
-		board = new Board(boardWidth, boardHeight, level);
+		//board = new Board(boardWidth, boardHeight, level);
+		board.loadMap(level);
 		player.setPosition(new Vector2f((int)((board.getBoardWidth() / board.getCol()) * 1.5), board.getBoardHeight() - (board.getBoardHeight() / board.getRow()) * (5/3)));
 		player.setColAndRow(board.getCol(), board.getRow());
 		shots = new LinkedList<Shot>();
@@ -82,7 +84,7 @@ public class GameEngine {
 	
 	///Draw the game
 	public void draw(Graphics2D g, ImageObserver ob){
-		board.draw(g, ob);
+		board.draw(g, ob, level);
 		for (int i = 0; i < shots.size() ; i++){
 			shots.get(i).draw(g, ob);
 		}

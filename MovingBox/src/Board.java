@@ -7,7 +7,7 @@ import java.util.LinkedList;
 
 public class Board {
 
-	private final String PATH =  System.getProperty("user.dir") + "\\image\\Board\\";
+	private final static String PATH =  System.getProperty("user.dir") + "\\image\\Board\\";
 	public final static int EMPTY_TILE = 0;
 	public final static int NONE_MOVING_TILE = 1;
 	public final static int MB_UP = MovingBrick.UP;
@@ -16,6 +16,7 @@ public class Board {
 	public final static int MB_RIGHT = MovingBrick.RIGHT;
 	public final static int DOOR = 9;
 	public final static int ERROR = -1;
+	public final static int MAX_LEVEL = 4;
 	
 	private final int INIT_SIZE = 10;
 	private int[][] tiles;
@@ -28,24 +29,25 @@ public class Board {
 	private int rowSize;
 	private int colSize;
 	private static Image brick1 = null;
-	private Image background = null;
+	private static Image[] backgrounds = null;
 	private static Image door = null;
 	
 	///Default constructor
 	public Board(){
 		tiles = new int[INIT_SIZE][INIT_SIZE];
-		initImag(0);
+		initImags();
 		bricks = new LinkedList<MovingBrick>();
 	}
 	
 	///Constructor
 	public Board(int boardWidth, int boardHeight, int maplevel){
 		loadMap(maplevel);
+		backgrounds = new Image[MAX_LEVEL];
 		this.boardHeight = boardHeight;
 		this.boardWidth = boardWidth;
 		this.rowSize = boardHeight / row;
 		this.colSize = boardWidth / col;
-		initImag(maplevel);
+		initImags();
 	}
 	
 	///Load a map from the list
@@ -74,27 +76,11 @@ public class Board {
 	}
 	
 	///Initialization the images
-	private void initImag(int level){
-		switch (level) {
-		case 0:
-			background  = Toolkit.getDefaultToolkit().getImage(PATH + "background.png");
-			
-			break;
-		case 1:
-			background  = Toolkit.getDefaultToolkit().getImage(PATH + "background1.jpg");
-			break;
-		case 2:
-			background  = Toolkit.getDefaultToolkit().getImage(PATH + "background2.jpg");
-			break;
-		case 3:
-			background  = Toolkit.getDefaultToolkit().getImage(PATH + "background3.jpg");
-			break;
-		case 4:
-			background  = Toolkit.getDefaultToolkit().getImage(PATH + "background4.jpg");
-			break;
-		default:
-			break;
-		}
+	private static void initImags(){
+			backgrounds[0]  = Toolkit.getDefaultToolkit().getImage(PATH + "background.png");
+			for (int i = 0; i < MAX_LEVEL ; i++){
+				backgrounds[i]  = Toolkit.getDefaultToolkit().getImage(PATH + "background1.jpg");
+			}
 		brick1 = Toolkit.getDefaultToolkit().getImage(PATH + "b1.jpg");
 		door  = Toolkit.getDefaultToolkit().getImage(PATH + "door.png");
 	}
@@ -209,8 +195,8 @@ public class Board {
 	}
 	
 	///Draw the board
-	public void draw(Graphics2D g, ImageObserver ob){
-		g.drawImage(background, 0, 0, boardWidth, boardHeight, ob);
+	public void draw(Graphics2D g, ImageObserver ob, int level){
+		g.drawImage(backgrounds[level], 0, 0, boardWidth, boardHeight, ob);
 		for (int i = 0; i < tiles.length ; i++){
 			for (int j = 0 ; j < tiles[i].length ; j++){
 				if (tiles[i][j] == NONE_MOVING_TILE) {
