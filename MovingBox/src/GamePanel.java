@@ -141,6 +141,9 @@ public class GamePanel extends JPanel implements ActionListener , Runnable{
   			if (e.getKeyCode() == KeyEvent.VK_A){
   				game.changePlayerAppearance();
   			}
+  			if (e.getKeyCode() == KeyEvent.VK_S){
+  				game.changeMute();
+  			}
   			if (e.getKeyCode() == KeyEvent.VK_ESCAPE){
   				//TODO: end the game
   			}

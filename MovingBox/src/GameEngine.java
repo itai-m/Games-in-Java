@@ -259,4 +259,9 @@ public class GameEngine {
 	public void changePlayerAppearance(){
 		player.ChangeAppearance();
 	}
+	
+	///Change the mute
+	public void changeMute(){
+		sound.changeMute();
+	}
 }
