@@ -7,6 +7,7 @@ public class GameEngine {
 	private final int START_LEVEL = 0 ;
 	private final int FINAL_LEVEL = Board.MAX_LEVEL;
 
+	private final int SOUND_SYMBOL_DIV = 15;
 	private Board board;
 	private Player player;
 	private LinkedList<Shot> shots;
@@ -90,6 +91,7 @@ public class GameEngine {
 		for (int i = 0; i < explosions.size() ; i++){
 			explosions.get(i).draw(g, ob);
 		}
+		sound.draw(g, ob, board.getBoardWidth() / SOUND_SYMBOL_DIV, board.getBoardHeight() / SOUND_SYMBOL_DIV);
 		player.draw(g, ob);
 	}
 	

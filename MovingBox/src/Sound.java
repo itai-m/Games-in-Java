@@ -1,17 +1,25 @@
+import java.awt.Graphics2D;
+import java.awt.Image;
+import java.awt.Toolkit;
+import java.awt.image.ImageObserver;
+import java.lang.invoke.MutableCallSite;
 
 public class Sound extends Thread{
 
-	private final String PATH =  System.getProperty("user.dir") + "\\audio\\";
+	private final String SOUND_PATH =  System.getProperty("user.dir") + "\\audio\\";
+	private final String IMAGES_PATH =  System.getProperty("user.dir") + "\\image\\";
 	
 	private AudioPlayer audio;
 	private boolean mute;
+	private Image muteImage;
+	private Image noMuteImage;
 	
 	///Constructor
 	public Sound(){
 		mute = false;
 		audio = new AudioPlayer();
 		initSound();
-		
+		initImages();
 	}
 	
 	///Initialization the sound files
@@ -19,10 +27,16 @@ public class Sound extends Thread{
 		
 	}
 	
+	///Initialization the images files
+	private void initImages(){
+		muteImage = Toolkit.getDefaultToolkit().getImage(IMAGES_PATH + "SoundOff.png");
+		noMuteImage = Toolkit.getDefaultToolkit().getImage(IMAGES_PATH + "SoundOn.png");
+	}
+	
 	///Play the shot sound
 	public void shotSound(){
 		if (!mute){
-			audio.play(PATH + "Laser.wav");
+			audio.play(SOUND_PATH + "Laser.wav");
 		}
 	}
 	
@@ -40,4 +54,14 @@ public class Sound extends Thread{
 	public boolean isMute() {
 		return mute;
 	}
+	
+	public void draw(Graphics2D g, ImageObserver ob,int width, int height){
+		if (mute){
+			g.drawImage(muteImage, 0, 0, width, height, ob);
+		}
+		else{
+			g.drawImage(noMuteImage, 0, 0, width, height, ob);
+		}
+	}
+	
 }
