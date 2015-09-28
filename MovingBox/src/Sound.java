@@ -16,6 +16,7 @@ public class Sound extends Thread{
 	
 	///Constructor
 	public Sound(){
+		super();
 		mute = false;
 		audio = new AudioPlayer();
 		initSound();
@@ -55,6 +56,7 @@ public class Sound extends Thread{
 		return mute;
 	}
 	
+	///Draw the sound symbol
 	public void draw(Graphics2D g, ImageObserver ob,int width, int height){
 		if (mute){
 			g.drawImage(muteImage, 0, 0, width, height, ob);
@@ -64,4 +66,8 @@ public class Sound extends Thread{
 		}
 	}
 	
+	///Run the Thread
+	public void run() {
+		super.run(); 
+	}
 }

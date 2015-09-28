@@ -33,6 +33,7 @@ public class GameEngine {
 		board = new Board(boardWidth, boardHeight, level);
 		initLevel(level, boardWidth, boardHeight);
 		sound = new Sound();
+		sound.start();
 	}
 	
 	///Initialization the levels
