@@ -79,7 +79,7 @@ public class Board {
 	///Initialization the images
 	private static void initImags(){
 			backgrounds[0]  = Toolkit.getDefaultToolkit().getImage(PATH + "background.png");
-			for (int i = 0; i < MAX_LEVEL ; i++){
+			for (int i = 1; i < MAX_LEVEL ; i++){
 				backgrounds[i]  = Toolkit.getDefaultToolkit().getImage(PATH + "background1.jpg");
 			}
 		brick1 = Toolkit.getDefaultToolkit().getImage(PATH + "b1.jpg");
