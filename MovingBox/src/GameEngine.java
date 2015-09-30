@@ -14,6 +14,7 @@ public class GameEngine {
 	private int level;
 	private Sound sound;
 	private LinkedList<Explosion> explosions;
+	private Time time;
 
 	
 	///Default constructor
@@ -28,6 +29,7 @@ public class GameEngine {
 	
 	///Constructors
 	public GameEngine(int boardWidth, int boardHeight){
+		time = new Time();
 		level = START_LEVEL;
 		player = new Player(0,0, 1, 1, boardWidth, boardHeight);
 		board = new Board(boardWidth, boardHeight, level);
@@ -93,6 +95,7 @@ public class GameEngine {
 			explosions.get(i).draw(g, ob);
 		}
 		sound.draw(g, ob, board.getBoardWidth() / SOUND_SYMBOL_DIV, board.getBoardHeight() / SOUND_SYMBOL_DIV);
+		time.drawTime(g, board.getBoardWidth());
 		player.draw(g, ob);
 	}
 	
@@ -247,7 +250,8 @@ public class GameEngine {
 			//TODO: win mag
 			System.out.println("player win");
 		}
-		else{	
+		else{
+			time.reset();
 			initLevel(level, board.getBoardWidth(), board.getBoardHeight());
 		}
 	}
@@ -256,6 +260,7 @@ public class GameEngine {
 	public void resetLevel(){
 		board.loadMap(level);
 		player.setPosition(new Vector2f((int)((board.getBoardWidth() / board.getCol()) * 1.5), board.getBoardHeight() - (board.getBoardHeight() / board.getRow()) * (5/3)));
+		time.reset();
 	}
 	
 	///Change the appearance of the player

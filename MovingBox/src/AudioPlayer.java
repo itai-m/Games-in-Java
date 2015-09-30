@@ -56,7 +56,7 @@ public class AudioPlayer
 
             AudioInputStream audioInputStream = null;
             try
-            {
+            { 
                     audioInputStream = AudioSystem.getAudioInputStream(soundFile);
             }
             catch (Exception e)
