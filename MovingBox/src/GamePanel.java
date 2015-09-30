@@ -41,7 +41,6 @@ public class GamePanel extends JPanel implements ActionListener , Runnable{
         g.drawImage(dbImg, 0, 0, this);
 	}
 	
-	@Override
 	public void run() {
 		long before, diff, sleepTime;
         before = System.currentTimeMillis();
@@ -95,7 +94,6 @@ public class GamePanel extends JPanel implements ActionListener , Runnable{
         }
     }
 		
-	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		// TODO Auto-generated method stub
 		
