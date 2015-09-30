@@ -51,9 +51,9 @@ public class AudioPlayer
             }	
         }
       
-	public void play(String fileName)
+	public void play(File soundFile)
 	{
-            File soundFile = new File(fileName);
+
             AudioInputStream audioInputStream = null;
             try
             {

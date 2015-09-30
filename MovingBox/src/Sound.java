@@ -2,6 +2,7 @@ import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.image.ImageObserver;
+import java.io.File;
 import java.lang.invoke.MutableCallSite;
 
 public class Sound extends Thread{
@@ -13,6 +14,7 @@ public class Sound extends Thread{
 	private boolean mute;
 	private Image muteImage;
 	private Image noMuteImage;
+	private File shotFile;
 	
 	///Constructor
 	public Sound(){
@@ -25,7 +27,7 @@ public class Sound extends Thread{
 	
 	///Initialization the sound files
 	private void initSound(){
-		
+        shotFile = new File(SOUND_PATH + "Laser.wav");
 	}
 	
 	///Initialization the images files
@@ -37,14 +39,10 @@ public class Sound extends Thread{
 	///Play the shot sound
 	public void shotSound(){
 		if (!mute){
-			audio.play(SOUND_PATH + "Laser.wav");
+			audio.play(shotFile);
 		}
 	}
 	
-	///Initialization one sound file
-	private void initFile(){
-		
-	}
 	
 	///Change the status of the mute
 	public void changeMute(){
