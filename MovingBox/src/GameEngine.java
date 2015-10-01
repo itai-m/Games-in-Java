@@ -40,6 +40,7 @@ public class GameEngine {
 		sound = new Sound();
 		sound.start();
 		scoreBoard = new ScoreBoard(SCORE_BOARD_SIZE);
+		scoreBoard.add("test", new Time(545645));
 	}
 	
 	///Initialization the levels

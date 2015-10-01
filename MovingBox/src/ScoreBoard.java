@@ -15,11 +15,14 @@ public class ScoreBoard {
 	public ScoreBoard(int size) {
 		names = new String[size];
 		times = new Time[size];
+		for (int i = 0; i < times.length ; i++){
+			times[i] = new Time(0);
+		}
 	}
 	
-	///Add a new name to the to the score board
+	///Add a new name to the to the score board, return true if he add to the list otherwise false
 	public boolean add(String name, Time time){
-		if (time.isBigger(times[times.length - 1])){
+		if (!time.isBigger(times[times.length - 1])){
 			return false;
 		}
 		else{
@@ -35,7 +38,7 @@ public class ScoreBoard {
 	
 	///Insert to the score board
 	private void insertOne(String name, Time time, int index){
-		if (index < times.length){
+		if (index < times.length - 1){
 			insertOne(names[index + 1], times[index + 1], index + 1);
 			names[index] = name;
 			times[index] = new Time(time);
@@ -56,11 +59,16 @@ public class ScoreBoard {
 		toRetrun += "|  Name  |  Time  |\n";
 		toRetrun += "-------------------\n";
 		for (int i = 0; i < names.length ; i++){
-			if (names[i] == null){
+			if (times[i].getTime() == 0){
 				toRetrun +=  "|Empty   |        |\n" ; 
 			}
 			else{
-				toRetrun += "|" + names[i].substring(0, 8) + "|" + times[i] + "|\n"; 
+				if (names[i].length() > 8){
+					toRetrun += "|" + names[i].substring(0, 8) + "|" + times[i] + "|\n";
+				}
+				else{
+					toRetrun += "|" + names[i] + "|" + times[i] + "|\n";
+				}
 			}
 		}
 		toRetrun += "-------------------\n";
