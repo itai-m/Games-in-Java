@@ -4,6 +4,7 @@ import java.util.LinkedList;
 
 public class GameEngine {
 	
+	private final int SCORE_BOARD_SIZE = 10;
 	private final int START_LEVEL = 0 ;
 	private final int FINAL_LEVEL = Board.MAX_LEVEL;
 
@@ -15,6 +16,7 @@ public class GameEngine {
 	private Sound sound;
 	private LinkedList<Explosion> explosions;
 	private Time time;
+	private ScoreBoard scoreBoard;
 
 	
 	///Default constructor
@@ -25,6 +27,7 @@ public class GameEngine {
 		explosions = new LinkedList<Explosion>();
 		level = 0;
 		sound = new Sound();
+		scoreBoard = new ScoreBoard();
 	}
 	
 	///Constructors
@@ -36,6 +39,7 @@ public class GameEngine {
 		initLevel(level, boardWidth, boardHeight);
 		sound = new Sound();
 		sound.start();
+		scoreBoard = new ScoreBoard(SCORE_BOARD_SIZE);
 	}
 	
 	///Initialization the levels
@@ -45,6 +49,7 @@ public class GameEngine {
 		player.setColAndRow(board.getCol(), board.getRow());
 		shots = new LinkedList<Shot>();
 		explosions = new LinkedList<Explosion>();
+		System.out.println(scoreBoard);
 	}
 	
 	///Update the game

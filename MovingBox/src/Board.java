@@ -137,7 +137,7 @@ public class Board {
 		tiles = tilesExa.clone();
 	}
 		
-	///Load map number 1
+	///Load map number 4
 	private void loadMap4(){
 		this.col = 13;
 		this.row = 10;
