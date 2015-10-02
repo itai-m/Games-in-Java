@@ -22,12 +22,12 @@ public class ScoreBoard {
 	
 	///Add a new name to the to the score board, return true if he add to the list otherwise false
 	public boolean add(String name, Time time){
-		if (!time.isBigger(times[times.length - 1])){
+		if ((time.isBigger(times[times.length - 1]) && (!(times[times.length - 1].getTime() == 0)))){
 			return false;
 		}
 		else{
 			for (int i = 0 ; i < times.length ; i++ ){
-				if (time.isBigger(times[i])){
+				if ((!time.isBigger(times[i])) || (times[i].getTime() == 0)){
 					insertOne(name, time, i);
 					return true;
 				}
@@ -39,7 +39,7 @@ public class ScoreBoard {
 	///Insert to the score board
 	private void insertOne(String name, Time time, int index){
 		if (index < times.length - 1){
-			insertOne(names[index + 1], times[index + 1], index + 1);
+			insertOne(names[index], times[index], index + 1);
 			names[index] = name;
 			times[index] = new Time(time);
 		}
@@ -67,11 +67,15 @@ public class ScoreBoard {
 					toRetrun += "|" + names[i].substring(0, 8) + "|" + times[i] + "|\n";
 				}
 				else{
-					toRetrun += "|" + names[i] + "|" + times[i] + "|\n";
+					toRetrun += "|" + padRight(names[i],8) + "|" + times[i] + "|\n";
 				}
 			}
 		}
 		toRetrun += "-------------------\n";
 		return toRetrun;
+	}
+	
+	public static String padRight(String s, int n) {
+	    return String.format("%1$-" + n + "s", s);
 	}
 }
