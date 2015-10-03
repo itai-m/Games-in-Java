@@ -106,6 +106,7 @@ public class GameEngine {
 		sound.draw(g, ob, board.getBoardWidth() / SOUND_SYMBOL_DIV, board.getBoardHeight() / SOUND_SYMBOL_DIV);
 		time.drawTime(g, board.getBoardWidth());
 		player.draw(g, ob);
+		scoreBoard.draw(g, board.getBoardWidth(), board.getBoardHeight());
 	}
 	
 	///Move the player to the right

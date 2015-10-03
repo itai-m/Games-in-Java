@@ -1,3 +1,6 @@
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Graphics;
 
 public class ScoreBoard {
 
@@ -75,7 +78,16 @@ public class ScoreBoard {
 		return toRetrun;
 	}
 	
-	public static String padRight(String s, int n) {
+	///Draw the score board
+	public void draw(Graphics g, int boardWidth, int boardHeight){
+		String msg = this.toString();
+        g.setFont(new Font("Arial", Font.PLAIN, 30));
+        g.setColor(Color.WHITE);
+        g.drawString(msg, boardWidth/2 - msg.length() , 100);
+	}
+	
+	///Pad a string with n spaces to the right
+	private static String padRight(String s, int n) {
 	    return String.format("%1$-" + n + "s", s);
 	}
 }
