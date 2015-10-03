@@ -4,6 +4,10 @@ import java.awt.Graphics;
 
 public class ScoreBoard {
 
+	private final int MAX_NAME_SIZE = 8;
+	private final int TIME_STRING_SIZE = 8;
+	private final int LINE_SIZE = MAX_NAME_SIZE + TIME_STRING_SIZE + 4;
+	
 	private String[] names;
 	private Time[] times;
 	
@@ -81,9 +85,13 @@ public class ScoreBoard {
 	///Draw the score board
 	public void draw(Graphics g, int boardWidth, int boardHeight){
 		String msg = this.toString();
-        g.setFont(new Font("Arial", Font.PLAIN, 30));
+        g.setFont(new Font("Consolas", Font.PLAIN, 30));
         g.setColor(Color.WHITE);
-        g.drawString(msg, boardWidth/2 - msg.length() , 100);
+        int drawHeight = boardHeight / 2 - (times.length / 2 + 1) * 30;  
+        for (int i = 0; i < times.length + 4; i++){
+        	String tempMsg = msg.substring(i * LINE_SIZE, (i + 1) * LINE_SIZE );
+        	g.drawString(tempMsg, boardWidth/2 - tempMsg.length() * 8 , drawHeight + i * 30);
+        }
 	}
 	
 	///Pad a string with n spaces to the right
