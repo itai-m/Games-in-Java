@@ -17,6 +17,7 @@ public class GameEngine {
 	private LinkedList<Explosion> explosions;
 	private Time time;
 	private ScoreBoard scoreBoard;
+	private boolean showScoreBoard;
 
 	
 	///Default constructor
@@ -28,6 +29,7 @@ public class GameEngine {
 		level = 0;
 		sound = new Sound();
 		scoreBoard = new ScoreBoard();
+		showScoreBoard = false;
 	}
 	
 	///Constructors
@@ -40,6 +42,7 @@ public class GameEngine {
 		sound = new Sound();
 		sound.start();
 		scoreBoard = new ScoreBoard(SCORE_BOARD_SIZE);
+		showScoreBoard = false;
 		scoreBoard.add("test", new Time(545645));
 		scoreBoard.add("test2", new Time(4555));
 		scoreBoard.add("test", new Time(444444));
@@ -53,7 +56,6 @@ public class GameEngine {
 		player.setColAndRow(board.getCol(), board.getRow());
 		shots = new LinkedList<Shot>();
 		explosions = new LinkedList<Explosion>();
-		System.out.println(scoreBoard);
 	}
 	
 	///Update the game
@@ -106,7 +108,9 @@ public class GameEngine {
 		sound.draw(g, ob, board.getBoardWidth() / SOUND_SYMBOL_DIV, board.getBoardHeight() / SOUND_SYMBOL_DIV);
 		time.drawTime(g, board.getBoardWidth());
 		player.draw(g, ob);
-		scoreBoard.draw(g, board.getBoardWidth(), board.getBoardHeight());
+		if (showScoreBoard){
+			scoreBoard.draw(g, board.getBoardWidth(), board.getBoardHeight());
+		}
 	}
 	
 	///Move the player to the right
@@ -281,5 +285,10 @@ public class GameEngine {
 	///Change the mute
 	public void changeMute(){
 		sound.changeMute();
+	}
+	
+	///Change the score board visibility
+	public void changeSBVisible(){
+		showScoreBoard = !showScoreBoard;
 	}
 }

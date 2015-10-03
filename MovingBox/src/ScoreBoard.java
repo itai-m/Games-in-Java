@@ -87,7 +87,8 @@ public class ScoreBoard {
 		String msg = this.toString();
         g.setFont(new Font("Consolas", Font.PLAIN, 30));
         g.setColor(Color.WHITE);
-        int drawHeight = boardHeight / 2 - (times.length / 2 + 1) * 30;  
+        int drawHeight = boardHeight / 2 - (times.length / 2 + 1) * 30; 
+        //g.drawRoundRect(drawHeight, boardWidth, times.length * 30, LINE_SIZE, 30, 30);
         for (int i = 0; i < times.length + 4; i++){
         	String tempMsg = msg.substring(i * LINE_SIZE, (i + 1) * LINE_SIZE );
         	g.drawString(tempMsg, boardWidth/2 - tempMsg.length() * 8 , drawHeight + i * 30);
