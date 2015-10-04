@@ -9,7 +9,8 @@ import javax.imageio.ImageIO;
 
 public class MovingBrick extends Sprite{
 	
-	private final static String Path =  System.getProperty("user.dir") + "\\image\\";
+	private static final String WIN_PATH =  System.getProperty("user.dir") + "\\image\\";
+	private static final String LINUX_PATH =  System.getProperty("user.dir") + "/image/";
 	public static final int UP = 2;
 	public static final int DOWN = 3;
 	public static final int LEFT = 4;
@@ -55,11 +56,19 @@ public class MovingBrick extends Sprite{
 	
 	///Initialization the images
 	public static void initImages(){
+		String path = "";
+		if ("Linux".equals(System.getProperty("os.name"))){
+			path = LINUX_PATH;
+		}
+		else{
+			path = WIN_PATH;
+		}
 		BufferedImage tempBrikcImage = null;
 		BufferedImage tempArrowImage = null;
+		System.out.println(path);
 		try {
-			tempBrikcImage = ImageIO.read( new File( Path + "woodenBrikc.jpg" ) );
-			tempArrowImage = ImageIO.read( new File( Path + "BlueArrow.png" ) );
+			tempBrikcImage = ImageIO.read( new File( path + "woodenBrikc.jpg" ) );
+			tempArrowImage = ImageIO.read( new File( path + "BlueArrow.png" ) );
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
