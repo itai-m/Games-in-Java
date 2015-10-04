@@ -7,6 +7,7 @@ public class ScoreBoard {
 	private final int MAX_NAME_SIZE = 8;
 	private final int TIME_STRING_SIZE = 8;
 	private final int LINE_SIZE = MAX_NAME_SIZE + TIME_STRING_SIZE + 4;
+	private final int FONT_SIZE = 30;
 	
 	private String[] names;
 	private Time[] times;
@@ -85,13 +86,16 @@ public class ScoreBoard {
 	///Draw the score board
 	public void draw(Graphics g, int boardWidth, int boardHeight){
 		String msg = this.toString();
-        g.setFont(new Font("Consolas", Font.PLAIN, 30));
-        g.setColor(Color.WHITE);
-        int drawHeight = boardHeight / 2 - (times.length / 2 + 1) * 30; 
-        //g.drawRoundRect(drawHeight, boardWidth, times.length * 30, LINE_SIZE, 30, 30);
+		int drawHeight = boardHeight / 2 - (times.length / 2 + 1) * FONT_SIZE;
+		
+        g.setColor(Color.CYAN); 
+        g.fillRoundRect(boardWidth/2 - (LINE_SIZE * 9), drawHeight - FONT_SIZE, LINE_SIZE * 18, (times.length + 4) * FONT_SIZE, 30, 30);
+        
+        g.setFont(new Font("Consolas", Font.PLAIN, FONT_SIZE));
+        g.setColor(Color.BLACK);
         for (int i = 0; i < times.length + 4; i++){
         	String tempMsg = msg.substring(i * LINE_SIZE, (i + 1) * LINE_SIZE );
-        	g.drawString(tempMsg, boardWidth/2 - tempMsg.length() * 8 , drawHeight + i * 30);
+        	g.drawString(tempMsg, boardWidth/2 - tempMsg.length() * 8 , drawHeight + i * FONT_SIZE);
         }
 	}
 	
