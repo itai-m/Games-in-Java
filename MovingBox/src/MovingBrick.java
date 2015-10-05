@@ -65,7 +65,6 @@ public class MovingBrick extends Sprite{
 		}
 		BufferedImage tempBrikcImage = null;
 		BufferedImage tempArrowImage = null;
-		System.out.println(path);
 		try {
 			tempBrikcImage = ImageIO.read( new File( path + "woodenBrikc.jpg" ) );
 			tempArrowImage = ImageIO.read( new File( path + "BlueArrow.png" ) );

@@ -7,7 +7,8 @@ import java.util.LinkedList;
 
 public class Board {
 
-	private final static String PATH =  System.getProperty("user.dir") + "\\image\\Board\\";
+	private final static String WIN_PATH =  System.getProperty("user.dir") + "\\image\\Board\\";
+	private final static String LINUX_PATH =  System.getProperty("user.dir") + "/image/Board/";
 	public final static int EMPTY_TILE = 0;
 	public final static int NONE_MOVING_TILE = 1;
 	public final static int MB_UP = MovingBrick.UP;
@@ -78,12 +79,19 @@ public class Board {
 	
 	///Initialization the images
 	private static void initImags(){
-			backgrounds[0]  = Toolkit.getDefaultToolkit().getImage(PATH + "background.png");
-			for (int i = 1; i < MAX_LEVEL ; i++){
-				backgrounds[i]  = Toolkit.getDefaultToolkit().getImage(PATH + "background1.jpg");
-			}
-		brick1 = Toolkit.getDefaultToolkit().getImage(PATH + "b1.jpg");
-		door  = Toolkit.getDefaultToolkit().getImage(PATH + "door.png");
+		String path = "";
+		if (System.getProperty("os.name").equals("Linux")){
+			path = LINUX_PATH;
+		}
+		else{
+			path = WIN_PATH;
+		}
+		backgrounds[0]  = Toolkit.getDefaultToolkit().getImage(path + "background.png");
+		for (int i = 1; i < MAX_LEVEL ; i++){
+			backgrounds[i]  = Toolkit.getDefaultToolkit().getImage(path + "background1.jpg");
+		}
+		brick1 = Toolkit.getDefaultToolkit().getImage(path + "b1.jpg");
+		door  = Toolkit.getDefaultToolkit().getImage(path + "door.png");
 	}
 	
 	///Load map number 1

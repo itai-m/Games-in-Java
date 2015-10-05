@@ -34,7 +34,6 @@ public class GameEngine {
 	
 	///Constructors
 	public GameEngine(int boardWidth, int boardHeight){
-		System.out.println(System.getProperty("os.name"));
 		time = new Time();
 		level = START_LEVEL;
 		player = new Player(0,0, 1, 1, boardWidth, boardHeight);
