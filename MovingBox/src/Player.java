@@ -5,7 +5,8 @@ import java.awt.image.ImageObserver;
 
 public class Player extends Sprite{
 	
-	private final String PATH =  System.getProperty("user.dir") + "\\image\\Player\\";
+	private final String WIN_PATH =  System.getProperty("user.dir") + "\\image\\Player\\";
+	private final String LINUX_PATH =  System.getProperty("user.dir") + "/image/Player/";
 	private final static int SPEED = 5;
 	private final int LEFT = 1;
 	private final int RIGHT = 2;
@@ -48,9 +49,16 @@ public class Player extends Sprite{
 	
 	///Initialization the images
 	private void initImages(){
+		String path = "";
+		if (System.getProperty("os.name").equals("Linux")){
+			path = LINUX_PATH;
+		}
+		else{
+			path = WIN_PATH;
+		}
 		players = new Image[NUMBER_OF_PLAYER_IMGAES];
 		for (int i = 0 ; i < NUMBER_OF_PLAYER_IMGAES ; i++){
-			players[i] = Toolkit.getDefaultToolkit().getImage(PATH + "player" + i + ".png");
+			players[i] = Toolkit.getDefaultToolkit().getImage(path + "player" + i + ".png");
 		}
 	}
 
