@@ -8,7 +8,8 @@ import javax.imageio.ImageIO;
 
 public class Shot extends Sprite{
 
-	private final String PATH =  System.getProperty("user.dir") + "\\image\\";
+	private final String WIN_PATH =  System.getProperty("user.dir") + "\\image\\";
+	private final String LINUX_PATH =  System.getProperty("user.dir") + "/image/";
 	private final static int SPEED = 10;
 	private final int[] SPRITE_WIDTH = {0, 50, 95, 145, 224, 307, 374};
 	private final int STEP_PER_PIC = 14;
@@ -35,12 +36,19 @@ public class Shot extends Sprite{
 	
 	///Initialization the images
 	private void initImages(){
+		String path = "";
+		if (System.getProperty("os.name").equals("Linux")){
+			path = LINUX_PATH;
+		}
+		else{
+			path = WIN_PATH;
+		}
 		try {
 			if (getDirection().getY() != 0){
-				imag = ImageIO.read( new File( PATH + "shot2.png" ) );
+				imag = ImageIO.read( new File( path + "shot2.png" ) );
 			}
 			else{
-				imag = ImageIO.read( new File( PATH + "shot.png" ) );
+				imag = ImageIO.read( new File( path + "shot.png" ) );
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
