@@ -3,12 +3,14 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.image.ImageObserver;
 import java.io.File;
-import java.lang.invoke.MutableCallSite;
+
 
 public class Sound extends Thread{
 
-	private final String SOUND_PATH =  System.getProperty("user.dir") + "\\audio\\";
-	private final String IMAGES_PATH =  System.getProperty("user.dir") + "\\image\\";
+	private final String WIN_SOUND_PATH =  System.getProperty("user.dir") + "\\audio\\";
+	private final String WIN_IMAGES_PATH =  System.getProperty("user.dir") + "\\image\\";
+	private final String LINUX_SOUND_PATH =  System.getProperty("user.dir") + "/audio/";
+	private final String LINUX_IMAGES_PATH =  System.getProperty("user.dir") + "/image/";
 	
 	private AudioPlayer audio;
 	private boolean mute;
@@ -27,13 +29,27 @@ public class Sound extends Thread{
 	
 	///Initialization the sound files
 	private void initSound(){
-        shotFile = new File(SOUND_PATH + "Laser.wav");
+		String path = "";
+		if (System.getProperty("os.name").equals("Linux")){
+			path = LINUX_SOUND_PATH;
+		}
+		else{
+			path = WIN_SOUND_PATH;
+		}
+        shotFile = new File(path + "Laser.wav");
 	}
 	
 	///Initialization the images files
 	private void initImages(){
-		muteImage = Toolkit.getDefaultToolkit().getImage(IMAGES_PATH + "SoundOff.png");
-		noMuteImage = Toolkit.getDefaultToolkit().getImage(IMAGES_PATH + "SoundOn.png");
+		String path = "";
+		if (System.getProperty("os.name").equals("Linux")){
+			path = LINUX_IMAGES_PATH;
+		}
+		else{
+			path = WIN_IMAGES_PATH;
+		}
+		muteImage = Toolkit.getDefaultToolkit().getImage(path + "SoundOff.png");
+		noMuteImage = Toolkit.getDefaultToolkit().getImage(path + "SoundOn.png");
 	}
 	
 	///Play the shot sound
