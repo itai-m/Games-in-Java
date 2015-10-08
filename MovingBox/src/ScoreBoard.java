@@ -94,13 +94,25 @@ public class ScoreBoard {
         g.setFont(new Font("Consolas", Font.PLAIN, FONT_SIZE));
         g.setColor(Color.BLACK);
         for (int i = 0; i < times.length + 4; i++){
-        	String tempMsg = msg.substring(i * LINE_SIZE, (i + 1) * LINE_SIZE );
+        	String tempMsg = msg.substring(i * LINE_SIZE, (i + 1) * LINE_SIZE  - LINE_SIZE / 2 - 1);
+        	String tempMsg2 = msg.substring((i + 1) * LINE_SIZE  - LINE_SIZE / 2, (i + 1) * LINE_SIZE);
         	g.drawString(tempMsg, boardWidth/2 - tempMsg.length() * 8 , drawHeight + i * FONT_SIZE);
+        	g.drawString(tempMsg2, boardWidth/2 , drawHeight + i * FONT_SIZE);
         }
 	}
 	
 	///Pad a string with n spaces to the right
 	private static String padRight(String s, int n) {
 	    return String.format("%1$-" + n + "s", s);
+	}
+	
+	///Draw a string with pictures
+	private void drawString(String srt, int x, int y, int width, int height, Graphics g){
+		
+	}
+	
+	///Draw a letter with picture
+	private void drawLetter(char letter, int x, int y, int width, int height, Graphics g){
+		
 	}
 }
