@@ -104,11 +104,14 @@ public class ScoreBoard {
 	///Draw the score board
 	public void draw(Graphics g, int boardWidth, int boardHeight){
 		String msg = this.toString();
-		int xStart = 0;////I WAS HERE
+		int xStart = boardWidth / 4;
+		int yStart = boardHeight / 4;
+		int width = boardWidth / 2;
+		int height = boardHeight / 20;
 		//drawString("  Name | Time  ", boardWidth / 4, boardHeight / 4, boardWidth / 2, boardHeight / 2, g);
 		for (int i = 0 ; i < times.length ; i++){
-			String tempMsg = msg.substring(i * LINE_SIZE, (i + 1) * LINE_SIZE  - LINE_SIZE);
-			drawString(tempMsg, x, y, width, height, g);
+			String tempMsg = msg.substring(i * LINE_SIZE, (i + 1) * LINE_SIZE );
+			drawString(tempMsg, xStart, yStart + height * i, width, height, g);
 		}
 	}
 	
@@ -120,6 +123,10 @@ public class ScoreBoard {
 	///Draw a string with pictures
 	private void drawString(String str, int x, int y, int width, int height, Graphics g){
 		int strSize = str.length();
+		if (strSize == 0){
+			return;
+		}
+		System.out.println("str: " + str + " size: " + strSize);
 		int letterSize = width / strSize;
 		for (int i = 0; i < strSize ; i ++){
 			drawLetter(str.charAt(i), x + i * letterSize, y, letterSize, height, g);
@@ -132,5 +139,6 @@ public class ScoreBoard {
 		g.setColor(new Color((int)letter,(int)letter,(int)letter));
 		g.fillRect(x, y, width, height);
 		//////////////
+		//TODO: need to find font
 	}
 }
