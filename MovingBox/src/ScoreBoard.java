@@ -83,8 +83,8 @@ public class ScoreBoard {
 		return toRetrun;
 	}
 	
-	///Draw the score board
-	public void draw(Graphics g, int boardWidth, int boardHeight){
+	///Draw the score board (old function)
+	public void drawOld(Graphics g, int boardWidth, int boardHeight){
 		String msg = this.toString();
 		int drawHeight = boardHeight / 2 - (times.length / 2 + 1) * FONT_SIZE;
 		
@@ -101,18 +101,36 @@ public class ScoreBoard {
         }
 	}
 	
+	///Draw the score board
+	public void draw(Graphics g, int boardWidth, int boardHeight){
+		String msg = this.toString();
+		int xStart = 0;////I WAS HERE
+		//drawString("  Name | Time  ", boardWidth / 4, boardHeight / 4, boardWidth / 2, boardHeight / 2, g);
+		for (int i = 0 ; i < times.length ; i++){
+			String tempMsg = msg.substring(i * LINE_SIZE, (i + 1) * LINE_SIZE  - LINE_SIZE);
+			drawString(tempMsg, x, y, width, height, g);
+		}
+	}
+	
 	///Pad a string with n spaces to the right
 	private static String padRight(String s, int n) {
 	    return String.format("%1$-" + n + "s", s);
 	}
 	
 	///Draw a string with pictures
-	private void drawString(String srt, int x, int y, int width, int height, Graphics g){
-		
+	private void drawString(String str, int x, int y, int width, int height, Graphics g){
+		int strSize = str.length();
+		int letterSize = width / strSize;
+		for (int i = 0; i < strSize ; i ++){
+			drawLetter(str.charAt(i), x + i * letterSize, y, letterSize, height, g);
+		}
 	}
 	
 	///Draw a letter with picture
 	private void drawLetter(char letter, int x, int y, int width, int height, Graphics g){
-		
+		///For Test///
+		g.setColor(new Color((int)letter,(int)letter,(int)letter));
+		g.fillRect(x, y, width, height);
+		//////////////
 	}
 }
