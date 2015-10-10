@@ -126,7 +126,6 @@ public class ScoreBoard {
 		if (strSize == 0){
 			return;
 		}
-		System.out.println("str: " + str + " size: " + strSize);
 		int letterSize = width / strSize;
 		for (int i = 0; i < strSize ; i ++){
 			drawLetter(str.charAt(i), x + i * letterSize, y, letterSize, height, g);

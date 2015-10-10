@@ -22,6 +22,7 @@ public class GameEngine {
 	
 	///Default constructor
 	public GameEngine(){
+		Font.init();
 		board = new Board();
 		player = new Player(Main.initializedWidth/9, Main.initializedHight/9, 10, 10, Main.initializedWidth, Main.initializedHight);
 		shots = new LinkedList<Shot>();
@@ -34,6 +35,7 @@ public class GameEngine {
 	
 	///Constructors
 	public GameEngine(int boardWidth, int boardHeight){
+		Font.init();
 		time = new Time();
 		level = START_LEVEL;
 		player = new Player(0,0, 1, 1, boardWidth, boardHeight);
