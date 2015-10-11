@@ -1,5 +1,4 @@
 import java.awt.Color;
-import java.awt.Font;
 import java.awt.Graphics;
 
 public class ScoreBoard {
@@ -91,7 +90,7 @@ public class ScoreBoard {
         g.setColor(Color.CYAN); 
         g.fillRoundRect(boardWidth/2 - (LINE_SIZE * 9), drawHeight - FONT_SIZE, LINE_SIZE * 18, (times.length + 4) * FONT_SIZE, 30, 30);
         
-        g.setFont(new Font("Consolas", Font.PLAIN, FONT_SIZE));
+        //g.setFont(new Font("Consolas", Font.PLAIN, FONT_SIZE));
         g.setColor(Color.BLACK);
         for (int i = 0; i < times.length + 4; i++){
         	String tempMsg = msg.substring(i * LINE_SIZE, (i + 1) * LINE_SIZE  - LINE_SIZE / 2 - 1);
@@ -135,8 +134,9 @@ public class ScoreBoard {
 	///Draw a letter with picture
 	private void drawLetter(char letter, int x, int y, int width, int height, Graphics g){
 		///For Test///
+		Font.drawLetter(letter, x, y, width, height, g);
 		g.setColor(new Color((int)letter,(int)letter,(int)letter));
-		g.fillRect(x, y, width, height);
+		//g.fillRect(x, y, width, height);
 		//////////////
 		//TODO: need to find font
 	}
