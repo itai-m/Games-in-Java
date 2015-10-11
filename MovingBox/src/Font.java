@@ -7,9 +7,9 @@ public class Font {
 	private final static String WIN_PATH =  System.getProperty("user.dir") + "\\image\\";
 	private final static String LINUX_PATH =  System.getProperty("user.dir") + "/image/";
 	private final static int FONT_WIDTH = 32;
-	private final static int FONT_HEIGHT = 48;
-	private final static int HASKII_CAP_DIFF = 32;
-	private final static int HASKII_NUM_0 = 48;
+	private final static int FONT_HEIGHT = 32;
+	private final static int HASKII_CAP_DIFF = 'a' - 'A';
+	private final static int HASKII_NUM_0 = '0';
 	
 	private static Image img;
 	
@@ -30,46 +30,17 @@ public class Font {
 		if (('A' <= letter) && ('Z' >= letter)){
 			letter += HASKII_CAP_DIFF;
 		}
-		switch (letter){
-		case 'a':
-			drawPartOfPic(0,0,x,y,width,height,g);
-			break;
-		case 'b':
-			drawPartOfPic(0,1,x,y,width,height,g);
-			break;
-		case 'c':
-			drawPartOfPic(0,2,x,y,width,height,g);
-			break;
-		case 'd':
-			drawPartOfPic(0,3,x,y,width,height,g);
-			break;
-		case 'e':
-			drawPartOfPic(0,4,x,y,width,height,g);
-			break;
-		case 'f':
-			drawPartOfPic(0,5,x,y,width,height,g);
-			break;
-		case 'g':
-			drawPartOfPic(0,6,x,y,width,height,g);
-			break;
-		case 'h':
-			drawPartOfPic(0,7,x,y,width,height,g);
-			break;
-		case 'i':
-			drawPartOfPic(0,8,x,y,width,height,g);
-			break;
-		case 'j':
-			drawPartOfPic(0,9,x,y,width,height,g);
-			break;
-		case 'k':
-			drawPartOfPic(0,0,x,y,width,height,g);
-			break;
-		case 'l':
-			drawPartOfPic(0,0,x,y,width,height,g);
-			break;
-		case 'm':
-			drawPartOfPic(0,0,x,y,width,height,g);
-			break;
+		if (('a' <= letter) && ('z' >= letter)){
+			int col = (letter - 'a') / 10;
+			int row = (letter - 'a') % 10;
+			drawPartOfPic(col, row, x, y, width, height, g);
+		}
+		else if (('0' <= letter) && ('9' >= letter)){
+			int row = letter - HASKII_NUM_0;
+			drawPartOfPic(3, row, x, y, width, height, g);
+		}
+		else{
+			//TODO: need to do for symbol
 		}
 	}
 	

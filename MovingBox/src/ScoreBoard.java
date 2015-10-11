@@ -107,6 +107,10 @@ public class ScoreBoard {
 		int yStart = boardHeight / 4;
 		int width = boardWidth / 2;
 		int height = boardHeight / 20;
+		
+		 g.setColor(Color.CYAN); 
+	     g.fillRoundRect(xStart, yStart, width, height * 10, 30, 30);
+	        
 		//drawString("  Name | Time  ", boardWidth / 4, boardHeight / 4, boardWidth / 2, boardHeight / 2, g);
 		for (int i = 0 ; i < times.length ; i++){
 			String tempMsg = msg.substring(i * LINE_SIZE, (i + 1) * LINE_SIZE );
@@ -135,7 +139,7 @@ public class ScoreBoard {
 	private void drawLetter(char letter, int x, int y, int width, int height, Graphics g){
 		///For Test///
 		Font.drawLetter(letter, x, y, width, height, g);
-		g.setColor(new Color((int)letter,(int)letter,(int)letter));
+		//g.setColor(new Color((int)letter,(int)letter,(int)letter));
 		//g.fillRect(x, y, width, height);
 		//////////////
 		//TODO: need to find font
