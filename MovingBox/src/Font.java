@@ -40,7 +40,22 @@ public class Font {
 			drawPartOfPic(3, row, x, y, width, height, g);
 		}
 		else{
-			//TODO: need to do for symbol
+			switch (letter) {
+			case ':':
+				drawPartOfPic(4, 0, x, y, width, height, g);
+				break;
+			case '|':
+				drawPartOfPic(4, 3, x, y, width, height, g);
+				break;
+			case '-':
+				drawPartOfPic(4, 1, x, y, width, height, g);
+				break;
+			case '+':
+				drawPartOfPic(4, 4, x, y, width, height, g);
+				break;
+			default:
+				break;
+			}
 		}
 	}
 	
