@@ -155,14 +155,12 @@ public class Player extends Sprite{
 	
 	///Set the board width and height
 	public void setBoardSize(int boardWidth, int boardHeight){
-		int widthDelta = getBoardWidth() - boardWidth;
-		int heighthDelta = getBoardHeight() - boardHeight;
-		widthDelta /= col / PROPORCEN_TO_BAORD ;
-		heighthDelta /= row / PROPORCEN_TO_BAORD ;
-		setPosition(new Vector2f(getPosition().getX() - widthDelta, getPosition().getY() - heighthDelta));
+		float widthDelta = (float)boardWidth /(float)getBoardWidth();
+		float heighthDelta = (float)boardHeight / (float)getBoardHeight();
+		setPosition(new Vector2f(getPosition().getX() * widthDelta, getPosition().getY() * heighthDelta));
 		super.setBoardSize(boardWidth, boardHeight);
-		this.height = (int) (boardHeight / (row * PROPORCEN_TO_BAORD));
-		this.width = (int) (boardWidth / (col * PROPORCEN_TO_BAORD));
+		this.height = (int) (boardHeight / (col * PROPORCEN_TO_BAORD));
+		this.width = (int) (boardWidth / (row * PROPORCEN_TO_BAORD));
 	}
 	
 	///Get the location by col
