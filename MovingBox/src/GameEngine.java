@@ -5,7 +5,7 @@ import java.util.LinkedList;
 public class GameEngine {
 	
 	private final int SCORE_BOARD_SIZE = 10;
-	private final int START_LEVEL = 0 ;
+	private final int START_LEVEL = 3 ;
 	private final int FINAL_LEVEL = Board.MAX_LEVEL;
 
 	private final int SOUND_SYMBOL_DIV = 15;
