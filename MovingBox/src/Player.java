@@ -7,7 +7,7 @@ public class Player extends Sprite{
 	
 	private final String WIN_PATH =  System.getProperty("user.dir") + "\\image\\Player\\";
 	private final String LINUX_PATH =  System.getProperty("user.dir") + "/image/Player/";
-	private final static int SPEED = 5;
+	private final static int SPEED = 10;
 	private final int LEFT = 1;
 	private final int RIGHT = 2;
 	private final int UP = 3;
