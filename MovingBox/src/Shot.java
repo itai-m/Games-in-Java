@@ -15,10 +15,11 @@ public class Shot extends Sprite{
 	private final int STEP_PER_PIC = 14;
 	private final int SPRITE_HEIGHT = 48;
 	private final int MAX_STEP = STEP_PER_PIC * 8;
+	private final double RATIO_TO_THE_BOARD = 0.05;
 	
 	private BufferedImage imag;
-	private int height;
-	private int width;
+	private double height;
+	private double width;
 	private int step;
 	
 	public Shot(){
@@ -26,10 +27,10 @@ public class Shot extends Sprite{
 		initImages();
 	}
 	
-	public Shot(float posX, float posY, float dirX, float dirY, int width, int height, int boardWidth, int boardHeight){
+	public Shot(float posX, float posY, float dirX, float dirY, int boardWidth, int boardHeight){
 		super(posX, posY, dirX, dirY, SPEED, boardWidth, boardHeight);
-		this.height = height;
-		this.width = width;
+		this.height =  (boardHeight * RATIO_TO_THE_BOARD);
+		this.width =  (boardWidth * RATIO_TO_THE_BOARD);
 		step = 0;
 		initImages();
 	}
@@ -135,22 +136,22 @@ public class Shot extends Sprite{
 	}
 
 	///Get the height
-	public int getHeight() {
+	public double getHeight() {
 		return height;
 	}
 
 	///Set the height
-	public void setHeight(int height) {
+	public void setHeight(double height) {
 		this.height = height;
 	}
 
 	///Get the width
-	public int getWidth() {
+	public double getWidth() {
 		return width;
 	}
 
 	///Set the width
-	public void setWidth(int width) {
+	public void setWidth(double width) {
 		this.width = width;
 	}
 	
@@ -163,5 +164,7 @@ public class Shot extends Sprite{
 	///Resizing the board size
 	public void setBoardSize(int boardWidth, int boardHeight){
 		super.setBoardSize(boardWidth, boardHeight);
+		this.height =  (boardHeight * RATIO_TO_THE_BOARD);
+		this.width =  (boardWidth * RATIO_TO_THE_BOARD);
 	}
 }
