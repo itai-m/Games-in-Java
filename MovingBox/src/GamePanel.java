@@ -28,7 +28,7 @@ public class GamePanel extends JPanel implements ActionListener , Runnable{
 		game = new GameEngine( Main.initializedWidth, Main.initializedHight);
 		running = true;
 		
-		///Initializing the listener.
+		//Initializing the listener.
 		keyboardListener = new Listener();
 		addKeyListener(keyboardListener);
 		setFocusable(true);

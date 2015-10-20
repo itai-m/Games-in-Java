@@ -13,6 +13,7 @@ public class AudioPlayer
 	private static final int EXTERNAL_BUFFER_SIZE = 128000;
         public static final int ONCE = 1, LOOP = 2;
 	
+        ///Play the sound multiple times
         public void playMultiple(String fName, int nLoopCount)
         {
             Clip clip = null;
@@ -51,8 +52,9 @@ public class AudioPlayer
             }	
         }
       
-	public void play(File soundFile)
-	{
+        ///Play the sound one time
+        public void play(File soundFile)
+        {
 
             AudioInputStream audioInputStream = null;
             try
