@@ -41,6 +41,7 @@ public class GamePanel extends JPanel implements ActionListener , Runnable{
         g.drawImage(dbImg, 0, 0, this);
 	}
 	
+	///Run the game
 	public void run() {
 		long before, diff, sleepTime;
         before = System.currentTimeMillis();
@@ -99,7 +100,7 @@ public class GamePanel extends JPanel implements ActionListener , Runnable{
 		
 	}
 	
-	// only start the animation once the JPanel has been added to the JFrame
+	/// only start the animation once
     public void addNotify()
     { 
         super.addNotify();   // creates the peer

@@ -122,19 +122,19 @@ public class GameEngine {
 			player.move();
 	}
 	
-	//Move the player to the up
+	///Move the player to the up
 	public void MoveUp(){
 		player.turnUp();
 	}
 		
-	//Move the player to the left
+	///Move the player to the left
 	public void MoveLeft(){
 		player.turnLeft();
 		if (checkMoveLeft())
 			player.move();
 	}
 	
-	//Move the player to the down
+	///Move the player to the down
 	public void MoveDown(){
 		player.turnDown();
 	}

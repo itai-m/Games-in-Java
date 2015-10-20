@@ -6,6 +6,7 @@ public class Main {
 	
     public static void main(String[] args)
     {
+		///create and the JFrame that contains the GamePanel
         JFrame frame = new JFrame("MovingBox");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(initializedWidth, initializedHight);

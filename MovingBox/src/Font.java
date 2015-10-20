@@ -59,6 +59,7 @@ public class Font {
 		}
 	}
 	
+	//Draw just a part form the full picture
 	private static void drawPartOfPic(int col, int row, int x, int y, int width, int height, Graphics g){
 		g.drawImage(img, x, y, x + width, y + height, FONT_WIDTH * row, FONT_HEIGHT * col, FONT_WIDTH * (row + 1), FONT_HEIGHT * (col + 1), null);
 	}

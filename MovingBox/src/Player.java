@@ -173,6 +173,7 @@ public class Player extends Sprite{
 		return (int) (getPosition().getY() / (getBoardHeight() / row));
 	}
 	
+	///Set the col and the row together
 	public void setColAndRow(int col, int row){
 		this.col = col;
 		this.row = row;

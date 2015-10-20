@@ -71,7 +71,7 @@ public class MovingBrick extends Sprite{
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		///Load the right box
+		//Load the right box
 		imageRight = new BufferedImage(tempBrikcImage.getWidth(), tempBrikcImage.getHeight(), BufferedImage.TYPE_INT_ARGB);
 		Graphics2D g2d = imageRight.createGraphics();
 		g2d.drawImage(tempBrikcImage, 0, 0, null);
@@ -129,7 +129,6 @@ public class MovingBrick extends Sprite{
 		default:
 			break;
 		}
-		//g.drawImage(image, (int)getPosition().getX() * colSize, (int)getPosition().getY() * rowSize, colSize, rowSize, ob);
 	}
 	
 	

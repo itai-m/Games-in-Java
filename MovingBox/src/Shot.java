@@ -22,11 +22,12 @@ public class Shot extends Sprite{
 	private double width;
 	private int step;
 	
+	///Default constructor
 	public Shot(){
 		super();
 		initImages();
 	}
-	
+	///Constructor
 	public Shot(float posX, float posY, float dirX, float dirY, int boardWidth, int boardHeight){
 		super(posX, posY, dirX, dirY, SPEED, boardWidth, boardHeight);
 		this.height =  (boardHeight * RATIO_TO_THE_BOARD);
