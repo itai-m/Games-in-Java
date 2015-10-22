@@ -5,7 +5,7 @@ import java.util.LinkedList;
 public class GameEngine {
 	
 	private final int SCORE_BOARD_SIZE = 10;
-	private final int START_LEVEL = 0 ;
+	private final int START_LEVEL = 2 ;
 	private final int FINAL_LEVEL = Board.MAX_LEVEL;
 
 	private final int SOUND_SYMBOL_DIV = 15;
@@ -262,7 +262,7 @@ public class GameEngine {
 	///Player win the level
 	private void leverWon(){
 		level++;
-		if (level >= FINAL_LEVEL + 1){
+		if (level > FINAL_LEVEL ){
 			//TODO: win mag
 			System.out.println("player win");
 		}
