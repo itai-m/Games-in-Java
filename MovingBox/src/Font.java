@@ -63,4 +63,16 @@ public class Font {
 	private static void drawPartOfPic(int col, int row, int x, int y, int width, int height, Graphics g){
 		g.drawImage(img, x, y, x + width, y + height, FONT_WIDTH * row, FONT_HEIGHT * col, FONT_WIDTH * (row + 1), FONT_HEIGHT * (col + 1), null);
 	}
+	
+	///Draw a full string
+	public static void drawString(String msg, int x, int y, int width, int height, Graphics g ){
+		int strSize = msg.length();
+		if (strSize == 0){
+			return;
+		}
+		int letterSize = width / strSize;
+		for (int i = 0; i < strSize ; i ++){
+			Font.drawLetter(msg.charAt(i), x + i * letterSize, y, letterSize, height, g);
+		}
+	}
 }
