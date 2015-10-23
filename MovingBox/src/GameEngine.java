@@ -5,8 +5,9 @@ import java.util.LinkedList;
 public class GameEngine {
 	
 	private final int SCORE_BOARD_SIZE = 10;
-	private final int START_LEVEL = 2 ;
+	private final int START_LEVEL = 3 ;
 	private final int FINAL_LEVEL = Board.MAX_LEVEL;
+	private final String WIN_MSG = "Congratulations you won!!!";
 
 	private final int SOUND_SYMBOL_DIV = 15;
 	private Board board;
@@ -18,6 +19,8 @@ public class GameEngine {
 	private Time time;
 	private ScoreBoard scoreBoard;
 	private boolean showScoreBoard;
+	private MessageBoard msgBoard;
+	private boolean playerWon;
 
 	
 	///Default constructor
@@ -31,6 +34,8 @@ public class GameEngine {
 		sound = new Sound();
 		scoreBoard = new ScoreBoard();
 		showScoreBoard = false;
+		msgBoard = new MessageBoard(WIN_MSG);
+		playerWon = false;
 	}
 	
 	///Constructors
@@ -41,6 +46,8 @@ public class GameEngine {
 		player = new Player(0,0, 1, 1, boardWidth, boardHeight);
 		board = new Board(boardWidth, boardHeight, level);
 		initLevel(level, boardWidth, boardHeight);
+		msgBoard = new MessageBoard(WIN_MSG);
+		playerWon = true;
 		sound = new Sound();
 		sound.start();
 		scoreBoard = new ScoreBoard(SCORE_BOARD_SIZE);
@@ -100,18 +107,23 @@ public class GameEngine {
 	
 	///Draw the game
 	public void draw(Graphics2D g, ImageObserver ob){
-		board.draw(g, ob, level);
-		for (int i = 0; i < shots.size() ; i++){
-			shots.get(i).draw(g, ob);
+		if (playerWon){
+			msgBoard.draw(g, ob, getBoardWidth(), getBoardHeight());
 		}
-		for (int i = 0; i < explosions.size() ; i++){
-			explosions.get(i).draw(g, ob);
-		}
-		sound.draw(g, ob, board.getBoardWidth() / SOUND_SYMBOL_DIV, board.getBoardHeight() / SOUND_SYMBOL_DIV);
-		time.drawTime(g, board.getBoardWidth());
-		player.draw(g, ob);
-		if (showScoreBoard){
-			scoreBoard.draw(g, board.getBoardWidth(), board.getBoardHeight());
+		else{
+			board.draw(g, ob, level);
+			for (int i = 0; i < shots.size() ; i++){
+				shots.get(i).draw(g, ob);
+			}
+			for (int i = 0; i < explosions.size() ; i++){
+				explosions.get(i).draw(g, ob);
+			}
+			sound.draw(g, ob, board.getBoardWidth() / SOUND_SYMBOL_DIV, board.getBoardHeight() / SOUND_SYMBOL_DIV);
+			time.drawTime(g, board.getBoardWidth());
+			player.draw(g, ob);
+			if (showScoreBoard){
+				scoreBoard.draw(g, board.getBoardWidth(), board.getBoardHeight());
+			}
 		}
 	}
 	
@@ -262,9 +274,8 @@ public class GameEngine {
 	///Player win the level
 	private void leverWon(){
 		level++;
-		if (level > FINAL_LEVEL ){
-			//TODO: win mag
-			System.out.println("player win");
+		if (level >= FINAL_LEVEL ){
+			playerWon = true;
 		}
 		else{
 			time.reset();

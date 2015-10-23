@@ -17,7 +17,7 @@ public class Board {
 	public final static int MB_RIGHT = MovingBrick.RIGHT;
 	public final static int DOOR = 9;
 	public final static int ERROR = -1;
-	public final static int MAX_LEVEL = 3;
+	public final static int MAX_LEVEL = 4;
 	
 	private final int INIT_SIZE = 10;
 	private int[][] tiles;
