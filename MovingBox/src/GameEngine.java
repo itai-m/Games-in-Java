@@ -47,7 +47,7 @@ public class GameEngine {
 		board = new Board(boardWidth, boardHeight, level);
 		initLevel(level, boardWidth, boardHeight);
 		msgBoard = new MessageBoard(WIN_MSG);
-		playerWon = true;
+		playerWon = false;
 		sound = new Sound();
 		sound.start();
 		scoreBoard = new ScoreBoard(SCORE_BOARD_SIZE);

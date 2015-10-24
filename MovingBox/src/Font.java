@@ -37,7 +37,7 @@ public class Font {
 		}
 		else if (('0' <= letter) && ('9' >= letter)){
 			int row = letter - HASKII_NUM_0;
-			drawPartOfPic(3, row, x, y, width, height, g);
+			drawPartOfPic(5, row, x, y, width, height, g);
 		}
 		else{
 			switch (letter) {
