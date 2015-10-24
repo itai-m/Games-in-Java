@@ -53,6 +53,9 @@ public class Font {
 			case '+':
 				drawPartOfPic(4, 4, x, y, width, height, g);
 				break;
+			case '!':
+				drawPartOfPic(4, 5, x, y, width, height, g);
+				break;
 			default:
 				break;
 			}
