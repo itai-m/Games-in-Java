@@ -18,7 +18,7 @@ public class MessageBoard {
 
 	///Draw the message board
 	public void draw(Graphics2D g, ImageObserver ob, int width, int height){
-		 g.setColor(Color.WHITE); 
+		 g.setColor(Color.DARK_GRAY); 
 	     g.fillRect(0, 0, width, height);
 	     Font.drawString(msg, width/10, height/3, (int)((double)width * (double)(0.9)), (int)((double)height * (double)( 0.3)), g);
 	}

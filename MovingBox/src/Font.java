@@ -6,8 +6,8 @@ public class Font {
 	
 	private final static String WIN_PATH =  System.getProperty("user.dir") + "\\image\\";
 	private final static String LINUX_PATH =  System.getProperty("user.dir") + "/image/";
-	private final static int FONT_WIDTH = 32;
-	private final static int FONT_HEIGHT = 32;
+	private final static int FONT_WIDTH = 61;
+	private final static int FONT_HEIGHT = 52;
 	private final static int HASKII_CAP_DIFF = 'a' - 'A';
 	private final static int HASKII_NUM_0 = '0';
 	
@@ -31,8 +31,8 @@ public class Font {
 			letter += HASKII_CAP_DIFF;
 		}
 		if (('a' <= letter) && ('z' >= letter)){
-			int col = (letter - 'a') / 10;
-			int row = (letter - 'a') % 10;
+			int col = (letter - 'a') / 25;
+			int row = (letter - 'a') % 25;
 			drawPartOfPic(col, row, x, y, width, height, g);
 		}
 		else if (('0' <= letter) && ('9' >= letter)){
