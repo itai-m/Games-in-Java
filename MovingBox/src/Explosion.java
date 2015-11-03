@@ -5,11 +5,6 @@ import java.awt.image.ImageObserver;
 
 public class Explosion extends Sprite{
 	
-	private final String WIN_PATH =  System.getProperty("user.dir") + "\\image\\";
-	private final String LINUX_PATH =  System.getProperty("user.dir") + "/image/";
-	private final String WIN_DIR = "\\";
-	private final String LINUX_DIR = "/";
-	
 	private final int SPRITE_WIDTH = 64;
 	private final int SPRITE_HEIGHT = 64;
 	private final int NUMBER_OF_COL = 4;
@@ -36,14 +31,7 @@ public class Explosion extends Sprite{
 	
 	///Initialization the images
 	private void initImages(){
-		String path = "";
-		if (System.getProperty("os.name").equals("Linux")){
-			path = LINUX_PATH + TemplateHandler.getTemplate() + LINUX_DIR;
-		}
-		else{
-			path = WIN_PATH + TemplateHandler.getTemplate() + WIN_DIR;
-		}
-		image = Toolkit.getDefaultToolkit().getImage(path + "explosion.png");
+		image = Toolkit.getDefaultToolkit().getImage(TemplateHandler.getPath() + "explosion.png");
 	}
 
 	///Set the board width and height

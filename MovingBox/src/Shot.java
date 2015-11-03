@@ -7,11 +7,6 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 public class Shot extends Sprite{
-
-	private final static String WIN_PATH =  System.getProperty("user.dir") + "\\image\\";
-	private final static String LINUX_PATH =  System.getProperty("user.dir") + "/image/";
-	private final static String WIN_DIR = "\\";
-	private final static String LINUX_DIR = "/";
 	
 	private final static int SPEED = 10;
 	private final int[] SPRITE_WIDTH = {0, 50, 95, 145, 224, 307, 374};
@@ -41,19 +36,12 @@ public class Shot extends Sprite{
 	
 	///Initialization the images
 	private void initImages(){
-		String path = "";
-		if (System.getProperty("os.name").equals("Linux")){
-			path = LINUX_PATH + TemplateHandler.getTemplate() + LINUX_DIR;
-		}
-		else{
-			path = WIN_PATH + TemplateHandler.getTemplate() + WIN_DIR;
-		}
 		try {
 			if (getDirection().getY() != 0){
-				imag = ImageIO.read( new File( path + "shot2.png" ) );
+				imag = ImageIO.read( new File( TemplateHandler.getPath() + "shot2.png" ) );
 			}
 			else{
-				imag = ImageIO.read( new File( path + "shot.png" ) );
+				imag = ImageIO.read( new File( TemplateHandler.getPath() + "shot.png" ) );
 			}
 		} catch (IOException e) {
 			e.printStackTrace();

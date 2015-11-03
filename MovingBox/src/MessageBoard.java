@@ -6,11 +6,7 @@ import java.awt.image.ImageObserver;
 
 public class MessageBoard {
 
-	
-	private final static String WIN_PATH =  System.getProperty("user.dir") + "\\image\\";
-	private final static String LINUX_PATH =  System.getProperty("user.dir") + "/image/";
-	private final static String WIN_DIR = "\\";
-	private final static String LINUX_DIR = "/";
+
 	
 	private String msg;
 	private static Image img;
@@ -29,14 +25,7 @@ public class MessageBoard {
 	
 	///Initialization the picture
 	private static void init(){
-		String path = "";
-		if (System.getProperty("os.name").equals("Linux")){
-			path = LINUX_PATH + TemplateHandler.getTemplate() + LINUX_DIR;
-		}
-		else{
-			path = WIN_PATH + TemplateHandler.getTemplate() + WIN_DIR;
-		}
-		img  = Toolkit.getDefaultToolkit().getImage(path + "winbackground.jpg");
+		img  = Toolkit.getDefaultToolkit().getImage(TemplateHandler.getPath() + "winbackground.jpg");
 	}
 
 	///Draw the message board

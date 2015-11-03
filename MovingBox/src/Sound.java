@@ -10,11 +10,6 @@ public class Sound extends Thread{
 	private final String WIN_SOUND_PATH =  System.getProperty("user.dir") + "\\audio\\";
 	private final String LINUX_SOUND_PATH =  System.getProperty("user.dir") + "/audio/";
 	
-	private final String WIN_IMAGES_PATH =  System.getProperty("user.dir") + "\\image\\";
-	private final String LINUX_IMAGES_PATH =  System.getProperty("user.dir") + "/image/";
-	private final static String WIN_DIR = "\\";
-	private final static String LINUX_DIR = "/";
-	
 	private AudioPlayer audio;
 	private boolean mute;
 	private Image muteImage;
@@ -44,15 +39,8 @@ public class Sound extends Thread{
 	
 	///Initialization the images files
 	private void initImages(){
-		String path = "";
-		if (System.getProperty("os.name").equals("Linux")){
-			path = LINUX_IMAGES_PATH + TemplateHandler.getTemplate() + LINUX_DIR;;
-		}
-		else{
-			path = WIN_IMAGES_PATH + TemplateHandler.getTemplate() + WIN_DIR;;
-		}
-		muteImage = Toolkit.getDefaultToolkit().getImage(path + "SoundOff.png");
-		noMuteImage = Toolkit.getDefaultToolkit().getImage(path + "SoundOn.png");
+		muteImage = Toolkit.getDefaultToolkit().getImage(TemplateHandler.getPath() + "SoundOff.png");
+		noMuteImage = Toolkit.getDefaultToolkit().getImage(TemplateHandler.getPath() + "SoundOn.png");
 	}
 	
 	///Play the shot sound

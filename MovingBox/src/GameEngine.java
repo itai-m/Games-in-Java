@@ -25,6 +25,7 @@ public class GameEngine {
 	
 	///Default constructor
 	public GameEngine(){
+		TemplateHandler.initPath();
 		Font.init();
 		board = new Board();
 		player = new Player(Main.initializedWidth/9, Main.initializedHight/9, 10, 10, Main.initializedWidth, Main.initializedHight);
@@ -40,6 +41,7 @@ public class GameEngine {
 	
 	///Constructors
 	public GameEngine(int boardWidth, int boardHeight){
+		TemplateHandler.initPath();
 		Font.init();
 		time = new Time();
 		level = START_LEVEL;

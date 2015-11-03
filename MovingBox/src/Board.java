@@ -7,10 +7,8 @@ import java.util.LinkedList;
 
 public class Board {
 
-	private final static String WIN_PATH =  System.getProperty("user.dir") + "\\image\\";
-	private final static String LINUX_PATH =  System.getProperty("user.dir") + "/image/";
-	private final static String WIN_DIR =  "\\Board\\";
-	private final static String LINUX_DIR =  "/Board/";
+	private final static String WIN_DIR =  "Board\\";
+	private final static String LINUX_DIR =  "Board/";
 	
 	public final static int EMPTY_TILE = 0;
 	public final static int NONE_MOVING_TILE = 1;
@@ -87,10 +85,10 @@ public class Board {
 	private static void initImags(){
 		String path = "";
 		if (System.getProperty("os.name").equals("Linux")){
-			path = LINUX_PATH + TemplateHandler.getTemplate() + LINUX_DIR;
+			path = TemplateHandler.getPath() + LINUX_DIR;
 		}
 		else{
-			path = WIN_PATH + TemplateHandler.getTemplate() + WIN_DIR;
+			path = TemplateHandler.getPath() + WIN_DIR;
 		}
 		backgrounds[0]  = Toolkit.getDefaultToolkit().getImage(path + "background.png");
 		for (int i = 1; i < MAX_LEVEL ; i++){
