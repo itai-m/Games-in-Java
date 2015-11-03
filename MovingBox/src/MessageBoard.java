@@ -9,6 +9,8 @@ public class MessageBoard {
 	
 	private final static String WIN_PATH =  System.getProperty("user.dir") + "\\image\\";
 	private final static String LINUX_PATH =  System.getProperty("user.dir") + "/image/";
+	private final static String WIN_DIR = "\\";
+	private final static String LINUX_DIR = "/";
 	
 	private String msg;
 	private static Image img;
@@ -29,10 +31,10 @@ public class MessageBoard {
 	private static void init(){
 		String path = "";
 		if (System.getProperty("os.name").equals("Linux")){
-			path = LINUX_PATH;
+			path = LINUX_PATH + TemplateHandler.getTemplate() + LINUX_DIR;
 		}
 		else{
-			path = WIN_PATH;
+			path = WIN_PATH + TemplateHandler.getTemplate() + WIN_DIR;
 		}
 		img  = Toolkit.getDefaultToolkit().getImage(path + "winbackground.jpg");
 	}

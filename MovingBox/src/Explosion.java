@@ -7,6 +7,9 @@ public class Explosion extends Sprite{
 	
 	private final String WIN_PATH =  System.getProperty("user.dir") + "\\image\\";
 	private final String LINUX_PATH =  System.getProperty("user.dir") + "/image/";
+	private final String WIN_DIR = "\\image\\";
+	private final String LINUX_DIR = "/image/";
+	
 	private final int SPRITE_WIDTH = 64;
 	private final int SPRITE_HEIGHT = 64;
 	private final int NUMBER_OF_COL = 4;
@@ -35,10 +38,10 @@ public class Explosion extends Sprite{
 	private void initImages(){
 		String path = "";
 		if (System.getProperty("os.name").equals("Linux")){
-			path = LINUX_PATH;
+			path = LINUX_PATH + TemplateHandler.getTemplate() + LINUX_DIR;
 		}
 		else{
-			path = WIN_PATH;
+			path = WIN_PATH + TemplateHandler.getTemplate() + WIN_DIR;
 		}
 		image = Toolkit.getDefaultToolkit().getImage(path + "explosion.png");
 	}

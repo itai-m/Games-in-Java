@@ -6,6 +6,9 @@ public class Font {
 	
 	private final static String WIN_PATH =  System.getProperty("user.dir") + "\\image\\";
 	private final static String LINUX_PATH =  System.getProperty("user.dir") + "/image/";
+	private final static String WIN_DIR =  "\\";
+	private final static String LINUX_DIR =  "/";
+	
 	private final static int FONT_WIDTH = 61;
 	private final static int FONT_HEIGHT = 52;
 	private final static int HASKII_CAP_DIFF = 'a' - 'A';
@@ -17,10 +20,10 @@ public class Font {
 	public static void init(){
 		String path = "";
 		if (System.getProperty("os.name").equals("Linux")){
-			path = LINUX_PATH;
+			path = LINUX_PATH + TemplateHandler.getTemplate() + LINUX_DIR;
 		}
 		else{
-			path = WIN_PATH;
+			path = WIN_PATH + TemplateHandler.getTemplate() + WIN_DIR;
 		}
 		img  = Toolkit.getDefaultToolkit().getImage(path + "font.png");
 	}

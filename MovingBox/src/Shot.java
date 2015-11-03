@@ -8,8 +8,11 @@ import javax.imageio.ImageIO;
 
 public class Shot extends Sprite{
 
-	private final String WIN_PATH =  System.getProperty("user.dir") + "\\image\\";
-	private final String LINUX_PATH =  System.getProperty("user.dir") + "/image/";
+	private final static String WIN_PATH =  System.getProperty("user.dir") + "\\image\\";
+	private final static String LINUX_PATH =  System.getProperty("user.dir") + "/image/";
+	private final static String WIN_DIR = "\\";
+	private final static String LINUX_DIR = "/";
+	
 	private final static int SPEED = 10;
 	private final int[] SPRITE_WIDTH = {0, 50, 95, 145, 224, 307, 374};
 	private final int STEP_PER_PIC = 14;
@@ -40,10 +43,10 @@ public class Shot extends Sprite{
 	private void initImages(){
 		String path = "";
 		if (System.getProperty("os.name").equals("Linux")){
-			path = LINUX_PATH;
+			path = LINUX_PATH + TemplateHandler.getTemplate() + LINUX_DIR;
 		}
 		else{
-			path = WIN_PATH;
+			path = WIN_PATH + TemplateHandler.getTemplate() + WIN_DIR;
 		}
 		try {
 			if (getDirection().getY() != 0){

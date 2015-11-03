@@ -11,6 +11,9 @@ public class MovingBrick extends Sprite{
 	
 	private static final String WIN_PATH =  System.getProperty("user.dir") + "\\image\\";
 	private static final String LINUX_PATH =  System.getProperty("user.dir") + "/image/";
+	private static final String WIN_DIR =  "\\";
+	private static final String LINUX_DIR = "/";
+	
 	public static final int UP = 2;
 	public static final int DOWN = 3;
 	public static final int LEFT = 4;
@@ -57,17 +60,17 @@ public class MovingBrick extends Sprite{
 	///Initialization the images
 	public static void initImages(){
 		String path = "";
-		if ("Linux".equals(System.getProperty("os.name"))){
-			path = LINUX_PATH;
+		if (System.getProperty("os.name").equals("Linux")){
+			path = LINUX_PATH + TemplateHandler.getTemplate() + LINUX_DIR;
 		}
 		else{
-			path = WIN_PATH;
+			path = WIN_PATH + TemplateHandler.getTemplate() + WIN_DIR;
 		}
 		BufferedImage tempBrikcImage = null;
 		BufferedImage tempArrowImage = null;
 		try {
-			tempBrikcImage = ImageIO.read( new File( path + "woodenBrikc.jpg" ) );
-			tempArrowImage = ImageIO.read( new File( path + "BlueArrow.png" ) );
+			tempBrikcImage = ImageIO.read( new File( path + "brikc.jpg" ) );
+			tempArrowImage = ImageIO.read( new File( path + "arrow.png" ) );
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
