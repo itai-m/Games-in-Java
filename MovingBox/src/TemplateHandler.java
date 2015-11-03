@@ -2,6 +2,7 @@
 public class TemplateHandler {
 
 	public static int template = 1;
+	public static int maxTemplate = 1;
 	
 	
 	///Set template level
@@ -16,6 +17,11 @@ public class TemplateHandler {
 	
 	///Increase by one the template level
 	public static void incTemplate(){
-		template++;
+		template = (template + 1) % maxTemplate;
+	}
+	
+	///Check how much directory in the image directory
+	public static void checkTemplateAmunt(){
+		
 	}
 }

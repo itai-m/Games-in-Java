@@ -96,7 +96,7 @@ public class Board {
 		for (int i = 1; i < MAX_LEVEL ; i++){
 			backgrounds[i]  = Toolkit.getDefaultToolkit().getImage(path + "background" + i + ".jpg");
 		}
-		brick1 = Toolkit.getDefaultToolkit().getImage(path + "b1.jpg");
+		brick1 = Toolkit.getDefaultToolkit().getImage(path + "b1.png");
 		door  = Toolkit.getDefaultToolkit().getImage(path + "door.png");
 	}
 	

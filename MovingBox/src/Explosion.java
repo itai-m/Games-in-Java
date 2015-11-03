@@ -7,8 +7,8 @@ public class Explosion extends Sprite{
 	
 	private final String WIN_PATH =  System.getProperty("user.dir") + "\\image\\";
 	private final String LINUX_PATH =  System.getProperty("user.dir") + "/image/";
-	private final String WIN_DIR = "\\image\\";
-	private final String LINUX_DIR = "/image/";
+	private final String WIN_DIR = "\\";
+	private final String LINUX_DIR = "/";
 	
 	private final int SPRITE_WIDTH = 64;
 	private final int SPRITE_HEIGHT = 64;

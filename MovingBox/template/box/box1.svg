@@ -15,7 +15,10 @@
    id="svg2"
    version="1.1"
    inkscape:version="0.91 r13725"
-   sodipodi:docname="box1.svg">
+   sodipodi:docname="box1.svg"
+   inkscape:export-filename="C:\Users\Itai\workspace\Games-in-Java\MovingBox\template\box\box1.png"
+   inkscape:export-xdpi="90"
+   inkscape:export-ydpi="90">
   <defs
      id="defs4">
     <inkscape:path-effect
@@ -47,7 +50,7 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="2.9991204"
-     inkscape:cx="574.20294"
+     inkscape:cx="564.53344"
      inkscape:cy="579.93966"
      inkscape:document-units="px"
      inkscape:current-layer="layer2"
@@ -68,7 +71,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
