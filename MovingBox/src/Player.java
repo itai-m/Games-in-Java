@@ -10,7 +10,7 @@ public class Player extends Sprite{
 	private final String WIN_DIR =  "\\Player\\";
 	private final String LINUX_DIR =  "/Player/";
 	
-	private final static int SPEED = 10;
+	private final static int SPEED_RELATIONS = 10;
 	private final int LEFT = 1;
 	private final int RIGHT = 2;
 	private final int UP = 3;
@@ -22,7 +22,6 @@ public class Player extends Sprite{
 	private final int SPRITE_LEFT_ROW = 1;
 	private final int SPRITE_RIGHT_ROW = 2;
 	private final int SPRITE_COLS = 4;
-	private final int FALL_SPEED = 15;
 	private final double PROPORCEN_TO_BAORD = 1.5;
 	private final int NUMBER_OF_PLAYER_IMGAES = 5;
 
@@ -32,6 +31,7 @@ public class Player extends Sprite{
 	private Image[] players;
 	private int step;
 	private int imageNum;
+	private int fallSpeed;
 	
 	private int row;
 	private int col;
@@ -39,7 +39,7 @@ public class Player extends Sprite{
 	
 	///Constructor
 	public Player(int x, int y, int col, int row, int boardWidth, int boardHeight){
-		super(x, y, 0, 1, SPEED, boardWidth, boardHeight);
+		super(x, y, 0, 1, (boardWidth / col ) / SPEED_RELATIONS, boardWidth, boardHeight);
 		this.col = col;
 		this.row = row;
 		this.height = (int) (boardHeight / (row * PROPORCEN_TO_BAORD));
@@ -47,6 +47,7 @@ public class Player extends Sprite{
 		turnTo = DOWN;
 		step = 0;
 		imageNum = 0;
+		fallSpeed = (boardHeight / row) / SPEED_RELATIONS * 4;
 		initImages();
 	}
 	
@@ -145,15 +146,15 @@ public class Player extends Sprite{
 	///Move the player down (falling)
 	public void fall(){
 		float x = getPosition().getX();
-		float y = getPosition().getY() + FALL_SPEED;
+		float y = getPosition().getY() + fallSpeed;
 		if (y > getBoardHeight())
 			y = 0;
 		setPosition(new Vector2f(x,y));
 	}
 
 	///Get the fall speeding
-	public int getFALL_SPEED() {
-		return FALL_SPEED;
+	public int getFallSpeed() {
+		return fallSpeed;
 	}
 	
 	///Set the board width and height
@@ -164,6 +165,8 @@ public class Player extends Sprite{
 		super.setBoardSize(boardWidth, boardHeight);
 		this.height = (int) (boardHeight / (col * PROPORCEN_TO_BAORD));
 		this.width = (int) (boardWidth / (row * PROPORCEN_TO_BAORD));
+		super.setSpeed((boardWidth / col ) / SPEED_RELATIONS);
+		fallSpeed = ((boardHeight / row) / SPEED_RELATIONS) * 4;
 	}
 	
 	///Get the location by col

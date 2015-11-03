@@ -163,15 +163,15 @@ public class GameEngine {
 	
 	///Check if the player need to fall
 	private void playerFalling(){
-		int playerRow = (int)((player.getPosition().getY() + player.getHeight() / 2 + player.getFALL_SPEED()) / board.getRowSize());
+		int playerRow = (int)((player.getPosition().getY() + player.getHeight() / 2 + player.getFallSpeed()) / board.getRowSize());
 		playerRow = board.checkRow(playerRow);
 		
-		int tile1 = board.getTileByPoint((int)(player.getPosition().getX() - player.getWidth() / 4),(int)(player.getPosition().getY() + player.getHeight() / 2 + player.getFALL_SPEED()));
-		int tile2 = board.getTileByPoint((int)(player.getPosition().getX() + player.getWidth() / 4),(int)(player.getPosition().getY() + player.getHeight() / 2 + player.getFALL_SPEED()));
+		int tile1 = board.getTileByPoint((int)(player.getPosition().getX() - player.getWidth() / 4),(int)(player.getPosition().getY() + player.getHeight() / 2 + player.getFallSpeed() - 1));
+		int tile2 = board.getTileByPoint((int)(player.getPosition().getX() + player.getWidth() / 4),(int)(player.getPosition().getY() + player.getHeight() / 2 + player.getFallSpeed() - 1));
 
 		if ((tile1 == Board.DOOR) || (tile2 == Board.DOOR)){
 			leverWon();
-			player.fall();
+			//player.fall();
 		}
 		else if ((tile1 == Board.EMPTY_TILE) && (tile2 == Board.EMPTY_TILE)){
 			player.fall();
@@ -179,7 +179,7 @@ public class GameEngine {
 		else if (playerRow == Board.EMPTY_TILE){
 			player.setPosition(new Vector2f(player.getPosition().getX(), board.getBoardHeight() - player.getHeight() / 2 ));
 		}
-		else if (playerRow * board.getRowSize() < player.getPosition().getY() + player.getHeight() / 2 + player.getFALL_SPEED()){
+		else if (playerRow * board.getRowSize() < player.getPosition().getY() + player.getHeight() / 2 + player.getFallSpeed()){
 			player.setPosition(new Vector2f(player.getPosition().getX(), playerRow * board.getRowSize() - player.getHeight() / 2 ));
 		}
 		
