@@ -1,7 +1,7 @@
 
 public class TemplateHandler {
 
-	public static int template = 0;
+	public static int template = 1;
 	
 	
 	///Set template level

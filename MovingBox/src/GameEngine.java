@@ -5,7 +5,7 @@ import java.util.LinkedList;
 public class GameEngine {
 	
 	private final int SCORE_BOARD_SIZE = 10;
-	private final int START_LEVEL = 4 ;
+	private final int START_LEVEL = 5 ;
 	private final int FINAL_LEVEL = Board.MAX_LEVEL;
 	private final String WIN_MSG = "Congratulations you won!!!";
 
