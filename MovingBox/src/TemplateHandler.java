@@ -1,6 +1,6 @@
 import java.io.File;
 import java.io.FilenameFilter;
-import java.util.Arrays;
+
 
 public class TemplateHandler {
 
@@ -44,7 +44,8 @@ public class TemplateHandler {
 			  }
 		  }
 		});
-		maxTemplate = directories.length;
+		if (directories != null)
+			maxTemplate = directories.length;
 	}
 	
 	///Initialization the path of the game
