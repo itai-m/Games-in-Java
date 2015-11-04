@@ -43,7 +43,7 @@ public class Board {
 	
 	///Constructor
 	public Board(int boardWidth, int boardHeight, int maplevel){
-		MovingBrick.initImages();
+		
 		loadMap(maplevel);
 		backgrounds = new Image[MAX_LEVEL];
 		this.boardHeight = boardHeight;
@@ -82,7 +82,8 @@ public class Board {
 	}
 	
 	///Initialization the images
-	private static void initImags(){
+	public static void initImags(){
+		MovingBrick.initImages();
 		String path = "";
 		if (System.getProperty("os.name").equals("Linux")){
 			path = TemplateHandler.getPath() + LINUX_DIR;

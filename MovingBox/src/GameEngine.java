@@ -306,4 +306,12 @@ public class GameEngine {
 	public void changeSBVisible(){
 		showScoreBoard = !showScoreBoard;
 	}
+	
+	///Change the template
+	public void changeTemplate(){
+		TemplateHandler.incTemplate();
+		TemplateHandler.initPath();
+		Board.initImags();
+		player.initImages();
+	}
 }

@@ -146,6 +146,9 @@ public class GamePanel extends JPanel implements ActionListener , Runnable{
   			if (e.getKeyCode() == KeyEvent.VK_Q){
   				game.changeSBVisible();
   			}
+  			if (e.getKeyCode() == KeyEvent.VK_T){
+  				game.changeTemplate();
+  			}
   			if (e.getKeyCode() == KeyEvent.VK_ESCAPE){
   				//TODO: end the game
   			}
