@@ -40,8 +40,8 @@ public class Player extends Sprite{
 		super(x, y, 0, 1, (boardWidth / col ) / SPEED_RELATIONS, boardWidth, boardHeight);
 		this.col = col;
 		this.row = row;
-		this.height = (int) (boardHeight / (row * PROPORCEN_TO_BAORD));
-		this.width = (int) (boardWidth / (col * PROPORCEN_TO_BAORD));
+		this.height = (int) (boardHeight / (row / PROPORCEN_TO_BAORD));
+		this.width = (int) (boardWidth / (col / PROPORCEN_TO_BAORD));
 		turnTo = DOWN;
 		step = 0;
 		imageNum = 0;
@@ -161,8 +161,8 @@ public class Player extends Sprite{
 		float heighthDelta = (float)boardHeight / (float)getBoardHeight();
 		setPosition(new Vector2f(getPosition().getX() * widthDelta, getPosition().getY() * heighthDelta));
 		super.setBoardSize(boardWidth, boardHeight);
-		this.height = (int) (boardHeight / (col * PROPORCEN_TO_BAORD));
-		this.width = (int) (boardWidth / (row * PROPORCEN_TO_BAORD));
+		this.height = (int) (boardHeight / col / PROPORCEN_TO_BAORD);
+		this.width = (int) (boardWidth / row / PROPORCEN_TO_BAORD);
 		super.setSpeed((boardWidth / col ) / SPEED_RELATIONS);
 		fallSpeed = ((boardHeight / row) / SPEED_RELATIONS) * 4;
 	}

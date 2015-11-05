@@ -28,7 +28,7 @@ public class GameEngine {
 		TemplateHandler.initPath();
 		Font.init();
 		board = new Board();
-		player = new Player(Main.initializedWidth/9, Main.initializedHight/9, 10, 10, Main.initializedWidth, Main.initializedHight);
+		player = new Player(Main.initializedWidth/9, Main.initializedHight/9, board.getCol(), board.getRow(), Main.initializedWidth, Main.initializedHight);
 		shots = new LinkedList<Shot>();
 		explosions = new LinkedList<Explosion>();
 		level = 0;
@@ -45,8 +45,8 @@ public class GameEngine {
 		Font.init();
 		time = new Time();
 		level = START_LEVEL;
-		player = new Player(0,0, 1, 1, boardWidth, boardHeight);
 		board = new Board(boardWidth, boardHeight, level);
+		player = new Player(0,0, 1, 1, boardWidth, boardHeight);
 		initLevel(level, boardWidth, boardHeight);
 		msgBoard = new MessageBoard(WIN_MSG);
 		playerWon = false;

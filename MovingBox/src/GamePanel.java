@@ -1,9 +1,12 @@
 
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentEvent;
+import java.awt.event.ComponentListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
@@ -16,6 +19,9 @@ public class GamePanel extends JPanel implements ActionListener , Runnable{
 
 	private static final int PERIOD = 40;
 	
+	private static final int MIN_WIDTH = 200;
+	private static final int MIN_HEIGHT = 200;
+	
 	private GameEngine game;
 	private Listener keyboardListener;
 	private boolean running;
@@ -27,17 +33,40 @@ public class GamePanel extends JPanel implements ActionListener , Runnable{
 	public GamePanel(){
 		game = new GameEngine( Main.initializedWidth, Main.initializedHight);
 		running = true;
-		
+		setMaximumSize(new Dimension(MIN_WIDTH, MIN_HEIGHT));
 		//Initializing the listener.
 		keyboardListener = new Listener();
 		addKeyListener(keyboardListener);
 		setFocusable(true);
+		
+		this.addComponentListener(new ComponentListener() {
+			
+			public void componentShown(ComponentEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			///Do when resize the game
+			public void componentResized(ComponentEvent e) {
+				game.setBoardSize(getWidth(), getHeight());
+				
+			}
+			
+			public void componentMoved(ComponentEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			public void componentHidden(ComponentEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
 	}
 	
+	///Paint the game
 	public void paintComponent(Graphics g){
 		super.paintComponent(g);
-		game.setBoardSize(getWidth(), getHeight());
-        //gameRender();
         g.drawImage(dbImg, 0, 0, this);
 	}
 	
