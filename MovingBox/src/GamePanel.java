@@ -1,5 +1,4 @@
 
-import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -19,9 +18,6 @@ public class GamePanel extends JPanel implements ActionListener , Runnable{
 
 	private static final int PERIOD = 40;
 	
-	private static final int MIN_WIDTH = 200;
-	private static final int MIN_HEIGHT = 200;
-	
 	private GameEngine game;
 	private Listener keyboardListener;
 	private boolean running;
@@ -33,7 +29,7 @@ public class GamePanel extends JPanel implements ActionListener , Runnable{
 	public GamePanel(){
 		game = new GameEngine( Main.initializedWidth, Main.initializedHight);
 		running = true;
-		setMaximumSize(new Dimension(MIN_WIDTH, MIN_HEIGHT));
+		
 		//Initializing the listener.
 		keyboardListener = new Listener();
 		addKeyListener(keyboardListener);

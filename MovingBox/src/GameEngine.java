@@ -47,11 +47,17 @@ public class GameEngine {
 		level = START_LEVEL;
 		board = new Board(boardWidth, boardHeight, level);
 		player = new Player(0,0, 1, 1, boardWidth, boardHeight);
+		shots = new LinkedList<Shot>();
+		explosions = new LinkedList<Explosion>();
 		initLevel(level, boardWidth, boardHeight);
+		
 		msgBoard = new MessageBoard(WIN_MSG);
 		playerWon = false;
+		
 		sound = new Sound();
 		sound.start();
+		
+		
 		scoreBoard = new ScoreBoard(SCORE_BOARD_SIZE);
 		showScoreBoard = false;
 		scoreBoard.add("test", new Time(545645));
@@ -65,8 +71,9 @@ public class GameEngine {
 		board.loadMap(level);
 		player.setPosition(new Vector2f((int)((board.getBoardWidth() / board.getCol()) * 1.5), board.getBoardHeight() - (board.getBoardHeight() / board.getRow()) * (5/3)));
 		player.setColAndRow(board.getCol(), board.getRow());
-		shots = new LinkedList<Shot>();
-		explosions = new LinkedList<Explosion>();
+		setBoardSize(boardWidth, boardHeight);
+		clearShotsAndExplosion();
+		time.reset();
 	}
 	
 	///Update the game
@@ -280,7 +287,6 @@ public class GameEngine {
 			playerWon = true;
 		}
 		else{
-			time.reset();
 			initLevel(level, board.getBoardWidth(), board.getBoardHeight());
 		}
 	}
@@ -289,7 +295,14 @@ public class GameEngine {
 	public void resetLevel(){
 		board.loadMap(level);
 		player.setPosition(new Vector2f((int)((board.getBoardWidth() / board.getCol()) * 1.5), board.getBoardHeight() - (board.getBoardHeight() / board.getRow()) * (5/3)));
+		clearShotsAndExplosion();
 		time.reset();
+	}
+	
+	///Clear all the shots
+	private void clearShotsAndExplosion(){
+			shots.clear();
+			explosions.clear();
 	}
 	
 	///Change the appearance of the player
